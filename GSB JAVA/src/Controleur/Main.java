@@ -1,12 +1,12 @@
 package Controleur;
 
-import Vue.V_GsbFrame;
+import Vue.V_login;
 
 public class Main {
 
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		V_GsbFrame start = new V_GsbFrame();
+		V_login start = new V_login();
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.swing.border.TitledBorder;
  *@version 1.0
  */
 @SuppressWarnings("serial")
-public class V_login extends JPanel implements ActionListener {
+public class V_login extends JFrame implements ActionListener {
 		
 		private JLabel imgLogo;
 		private JLabel lblTitre;
@@ -22,6 +22,7 @@ public class V_login extends JPanel implements ActionListener {
 		private JButton bntEffacer;
 		private Color bgColor;
 		private JPanel panelForm;
+		private JPanel formulaire;
 		private JLabel espace;
 		
 		/**
@@ -29,6 +30,17 @@ public class V_login extends JPanel implements ActionListener {
 		 */
 		public V_login(){
 			
+		    //TITRE DE LA FENETRE
+		    this.setTitle("");
+		    //TAILLE DE LA FENETRE
+		    this.setSize(800, 600);
+		    // LA FENETRE DOIT SE FERMER QUAND ON CLIQUE SUR LA CROIX ROUGE
+		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    //CENTRE LA FENETRE
+		    this.setLocationRelativeTo(null);
+		  
+		    this.setResizable(false);
+		    
 			//logo
 			this.imgLogo = new JLabel(new ImageIcon("images/test.png"));
 		
@@ -45,6 +57,10 @@ public class V_login extends JPanel implements ActionListener {
 			this.panelForm = new JPanel();
 			this.panelForm.setPreferredSize(new Dimension(300,140));
 			this.panelForm.setBorder(new TitledBorder("Connexion"));
+			
+			this.formulaire = new JPanel();
+			this.formulaire.add(panelForm);
+			
 			
 			//label identifiant
 			this.lblId = new JLabel("Identifiant :");
@@ -69,12 +85,13 @@ public class V_login extends JPanel implements ActionListener {
 			//AJOUT COULEUR DE FOND DES PANELS
 			this.bgColor = Color.decode("#00CED1");
 			this.setBackground(bgColor);
+			this.formulaire.setBackground(bgColor);
 			this.panelForm.setBackground(bgColor);
 			
-			//AJOUT DES COMPPOSANTS DANS LE PANEL
+			//AJOUT DES COMPPOSANTS DANS LA FENETRE
 			this.add(this.imgLogo);
 			this.add(this.lblTitre);
-			
+
 			//AJOUT DES COMPOSANTS DANS LE FORMULAIRE
 			this.panelForm.add(this.lblId);
 			this.panelForm.add(this.jtfId);
@@ -85,11 +102,14 @@ public class V_login extends JPanel implements ActionListener {
 			this.panelForm.add(this.bntEffacer);
 			
 			//AJOUT DU FORMULAIRE DANS LE PANEL
-			this.add(panelForm);
+			this.getContentPane().add(this.formulaire);
+			this.setVisible(true);
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null,"test","test",JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
+			V_accueil v = new V_accueil();
+			v.setVisible(true);
 		}
 }
