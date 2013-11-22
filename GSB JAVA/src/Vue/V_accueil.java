@@ -15,8 +15,8 @@ public class V_accueil extends JFrame {
 	private JMenu consulter ;
 	private JMenuItem FicheVisiteur;
 	private JMenuItem ToutesLesFiches;
-	private JMenu validation ;
-	private JMenu suivi ;
+	private JMenuItem validation ;
+	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
 	private V_ficheFrais ficheFrais;
 	private Image icone ;
@@ -57,9 +57,9 @@ public class V_accueil extends JFrame {
 		this.menu = new JMenuBar();
 		
 		//MENU
-		this.consulter = new JMenu("Consulter");
-		this.validation = new JMenu("Validation");
-		this.suivi = new JMenu("Suivi");
+		this.consulter = new JMenu("Fiche");
+		this.validation = new JMenuItem("Validation");
+		this.suivi = new JMenuItem("Suivi");
 		
 		//ITEMS
 		this.deconnexion = new JMenuItem("Deconnexion");
@@ -68,8 +68,10 @@ public class V_accueil extends JFrame {
 		
 		//Label visiteur
 	
-		this.nomVisiteur= new JLabel("Visiteur : "+V_login.getJtfId().getText(),JLabel.CENTER);
-		
+		this.nomVisiteur= new JLabel("<html>"+
+										"<h1 style=\"font-family:Comic Sans MS\">"+
+											"Visiteur : "+V_login.getJtfId().getText()+
+										"</h1>",JLabel.CENTER);
 		//AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		this.setJMenuBar(menu);
 	
@@ -79,11 +81,11 @@ public class V_accueil extends JFrame {
 		//AJOUT DES ITEMS DANS LE MENU "consulter"
 		this.consulter.add(FicheVisiteur);
 		this.consulter.add(ToutesLesFiches);
+		this.consulter.add(validation);
+		this.consulter.add(suivi);
 		this.consulter.add(deconnexion);
 		
-		//AJOUT DU MENU "validation&suivi" DANS le "JMenuBar->menu"
-		this.menu.add(validation);
-		this.menu.add(suivi);
+
 		
 		this.panAccueil.add(nomVisiteur);
 		
