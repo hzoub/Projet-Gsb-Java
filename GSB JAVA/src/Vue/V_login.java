@@ -16,8 +16,9 @@ public class V_login extends JFrame implements ActionListener {
 		private JLabel lblTitre;
 		private JLabel lblId;
 		private JLabel lblMdp;
-		private JTextField jtfId;
-		private JTextField jtfMdp;
+		private static JTextField jtfId;
+		private JPasswordField jtfMdp;
+	
 		private JButton btnValider;
 		private JButton bntEffacer;
 		private Color bgColor;
@@ -25,7 +26,7 @@ public class V_login extends JFrame implements ActionListener {
 		private JPanel formulaire;
 		private JLabel espace;
 		private Image icone ;
-		
+		private String nomVisiteur;
 		/**
 		 * Constructeur
 		 */
@@ -74,7 +75,7 @@ public class V_login extends JFrame implements ActionListener {
 			
 			//label mot de passe
 			this.lblMdp = new JLabel("Mot de passe :");
-			this.jtfMdp = new JTextField(15);
+			this.jtfMdp = new JPasswordField(15);
 			
 			//Espace entre les labels est les bouttons
 			this.espace = new JLabel();
@@ -107,9 +108,18 @@ public class V_login extends JFrame implements ActionListener {
 			this.panelForm.add(this.btnValider);
 			this.panelForm.add(this.bntEffacer);
 			
+			
+			
 			//AJOUT DU FORMULAIRE DANS LE PANEL
 			this.getContentPane().add(this.formulaire);
 			this.setVisible(true);
+		}
+
+		/**
+		 * @return l'identifiant du visiteur
+		 */
+		public static JTextField getJtfId() {
+			return jtfId;
 		}
 
 		@Override

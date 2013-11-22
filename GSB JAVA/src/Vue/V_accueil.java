@@ -20,6 +20,10 @@ public class V_accueil extends JFrame {
 	private JMenuItem deconnexion ;
 	private V_ficheFrais ficheFrais;
 	private Image icone ;
+	private JLabel nomVisiteur;
+	private JPanel panAccueil;
+	private Color bgColor;
+	
 	/**
 	* Constructeur..
 	* */
@@ -42,7 +46,13 @@ public class V_accueil extends JFrame {
 		 */
 		this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
 		this.setIconImage(icone);
-
+		
+		this.bgColor = Color.decode("#77aadd");
+		
+		
+		this.panAccueil = new JPanel();
+		this.panAccueil.setBackground(bgColor);
+		
 		//MENU BAR
 		this.menu = new JMenuBar();
 		
@@ -55,6 +65,10 @@ public class V_accueil extends JFrame {
 		this.deconnexion = new JMenuItem("Deconnexion");
 		this.FicheVisiteur = new JMenuItem("Consulter");
 		this.ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
+		
+		//Label visiteur
+	
+		this.nomVisiteur= new JLabel("Visiteur : "+V_login.getJtfId().getText(),JLabel.CENTER);
 		
 		//AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		this.setJMenuBar(menu);
@@ -71,7 +85,9 @@ public class V_accueil extends JFrame {
 		this.menu.add(validation);
 		this.menu.add(suivi);
 		
+		this.panAccueil.add(nomVisiteur);
 		
+		this.getContentPane().add(panAccueil);
 		//PANEL FICHE FRAIS
 		this.ficheFrais = new V_ficheFrais();
 		
