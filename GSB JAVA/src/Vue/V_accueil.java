@@ -44,7 +44,7 @@ public class V_accueil extends JFrame {
 		 * ICONE DE l'application
 		 * @author Zoubert hanem
 		 */
-		this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
+		this.icone = Toolkit.getDefaultToolkit().getImage("images/logo.png");
 		this.setIconImage(icone);
 		
 		this.bgColor = Color.decode("#77aadd");

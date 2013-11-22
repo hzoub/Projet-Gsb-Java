@@ -46,11 +46,11 @@ public class V_login extends JFrame implements ActionListener {
 		    /**
 			 * ICONE DE l'application
 			 */
-			this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
+			this.icone = Toolkit.getDefaultToolkit().getImage("images/logo.png");
 			this.setIconImage(icone);
 			
 			//logo
-			this.imgLogo = new JLabel(new ImageIcon("images/test.png"));
+			this.imgLogo = new JLabel(new ImageIcon("images/logo.png"));
 		
 
 			//titre
