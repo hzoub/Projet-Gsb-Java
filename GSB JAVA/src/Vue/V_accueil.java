@@ -18,7 +18,7 @@ public class V_accueil extends JFrame {
 	private JMenuItem validation ;
 	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
-	private V_choixVisiteur ficheFrais;
+	private V_choixVisiteur choixVis;
 	private Image icone ;
 	private JLabel nomVisiteur;
 	private JPanel panAccueil;
@@ -93,8 +93,8 @@ public class V_accueil extends JFrame {
 		
 		this.getContentPane().add(panAccueil);
 		//PANEL FICHE FRAIS
-		this.ficheFrais = new V_choixVisiteur();
-		this.ficheFrais.getBtnValider().addActionListener(new ActionListener() {
+		this.choixVis = new V_choixVisiteur();
+		this.choixVis.getBtnValider().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -112,7 +112,7 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setContentPane(ficheFrais);
+				setContentPane(choixVis);
 				setVisible(true);
 			}
 		});	

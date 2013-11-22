@@ -11,7 +11,7 @@ import Modele.*;
  * @author Zoubert hanem
  *
  */
-@SuppressWarnings("serial")
+
 public class V_choixVisiteur extends JPanel {
 	
 	private JLabel lblTitre;
@@ -23,7 +23,7 @@ public class V_choixVisiteur extends JPanel {
 	private Color bgColor;
 	private JButton btnValider;
 	private JLabel espace;
-	private String nonVisiteur;
+
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -52,7 +52,6 @@ public class V_choixVisiteur extends JPanel {
 		
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
-		this.choixVisiteur.addItem("");
 		for (int i = 0; i < Modele.getLesVisiteur().size(); i++) {
 			Visiteur visiteur = Modele.getLesVisiteur().get(i);
 			
@@ -105,8 +104,7 @@ public class V_choixVisiteur extends JPanel {
 		 * @return le visiteur
 		 */
 		public String getChoixVisiteur() {
-			this.nonVisiteur =  choixVisiteur.getSelectedItem().toString();  
-			return this.nonVisiteur;
+			return	choixVisiteur.getSelectedItem().toString();  
 		}
 		/**
 		 * @return le boutton "Valider"
