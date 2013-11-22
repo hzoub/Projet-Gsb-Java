@@ -32,14 +32,14 @@ public class V_login extends JFrame implements ActionListener {
 		public V_login(){
 			
 		    //TITRE DE LA FENETRE
-		    this.setTitle("");
+		    this.setTitle("Laboratoire Galaxy-Swiss Bourdin : Gestion des Fiches visiteurs");
 		    //TAILLE DE LA FENETRE
 		    this.setSize(800, 600);
 		    // LA FENETRE DOIT SE FERMER QUAND ON CLIQUE SUR LA CROIX ROUGE
 		    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		    //CENTRE LA FENETRE
 		    this.setLocationRelativeTo(null);
-		  
+		    //EMPECHER LA REMDIMENSION DE LA FENTRE
 		    this.setResizable(false);
 		    
 		    /**
@@ -76,7 +76,7 @@ public class V_login extends JFrame implements ActionListener {
 			this.lblMdp = new JLabel("Mot de passe :");
 			this.jtfMdp = new JTextField(15);
 			
-			//Espace entre label est les bouttons
+			//Espace entre les labels est les bouttons
 			this.espace = new JLabel();
 			this.espace.setPreferredSize(new Dimension(220,15));
 			

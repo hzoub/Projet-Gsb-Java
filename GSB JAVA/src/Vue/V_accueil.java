@@ -4,11 +4,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 /**
- * 
  * @author Aguiar Folaké
  *@version 1.0
  */
-
+@SuppressWarnings("serial")
 public class V_accueil extends JFrame {
 	
 	

@@ -1,6 +1,7 @@
 package Vue;
 import java.awt.*;
 import java.sql.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 /**
@@ -19,7 +20,7 @@ public class V_ficheFrais extends JPanel {
 	private JPanel panelForm;
 	private Color bgColor;
 	private JButton btnValider;
-	
+	private JLabel espace;
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -58,6 +59,10 @@ public class V_ficheFrais extends JPanel {
 		this.choixMois = new JComboBox<Date>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
+		//Espace entre les labels est les bouttons
+		this.espace = new JLabel();
+		this.espace.setPreferredSize(new Dimension(220,15));
+		
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
 		
@@ -69,6 +74,9 @@ public class V_ficheFrais extends JPanel {
 		this.panelForm.add(choixVisiteur);
 		this.panelForm.add(lblChoixMois);
 		this.panelForm.add(choixMois);
+		
+		this.panelForm.add(espace);
+		
 		this.panelForm.add(btnValider);
 		
 		//AJOUT DU FORMULAIRE DANS LE PANEL
