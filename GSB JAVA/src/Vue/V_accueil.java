@@ -1,6 +1,7 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 /**
  * 
@@ -18,7 +19,7 @@ public class V_accueil extends JFrame  implements ActionListener {
 	private JMenu validation ;
 	private JMenu suivi ;
 	private JMenu deconnexion ;
-
+	private V_ficheFrais ficheFrais;
 
 	/**
 	* Constructeur..
@@ -48,19 +49,29 @@ public class V_accueil extends JFrame  implements ActionListener {
 		this.setJMenuBar(menu);
 	
 		this.menu.add(consulter);
-		this.menu.add(FicheVisiteur);
-		this.menu.add(ToutesLesFiches);
+		this.consulter.add(FicheVisiteur);
+		this.consulter.add(ToutesLesFiches);
 		this.menu.add(validation);
 		this.menu.add(suivi);
 		this.menu.add(deconnexion);
 		
+		//PANEL FICHE FRAIS
+		this.ficheFrais = new V_ficheFrais();
 		
-		// this.setVisible(true);
+		//ACTION ITEM "FicheVisiteur"
+		this.FicheVisiteur.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setContentPane(ficheFrais);
+				setVisible(true);
+			}
+		});
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 

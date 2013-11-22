@@ -59,9 +59,7 @@ public class V_login extends JFrame implements ActionListener {
 			this.panelForm.setBorder(new TitledBorder("Connexion"));
 			
 			this.formulaire = new JPanel();
-			this.formulaire.add(panelForm);
-			
-			
+	
 			//label identifiant
 			this.lblId = new JLabel("Identifiant :");
 			this.lblId.setPreferredSize(new Dimension(80,10));
@@ -89,9 +87,10 @@ public class V_login extends JFrame implements ActionListener {
 			this.panelForm.setBackground(bgColor);
 			
 			//AJOUT DES COMPPOSANTS DANS LA FENETRE
-			this.add(this.imgLogo);
-			this.add(this.lblTitre);
-
+			this.formulaire.add(this.imgLogo);
+			this.formulaire.add(this.lblTitre);
+			this.formulaire.add(this.panelForm);
+			
 			//AJOUT DES COMPOSANTS DANS LE FORMULAIRE
 			this.panelForm.add(this.lblId);
 			this.panelForm.add(this.jtfId);
