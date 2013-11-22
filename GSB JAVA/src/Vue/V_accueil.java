@@ -9,7 +9,7 @@ import javax.swing.*;
  *@version 1.0
  */
 
-public class V_accueil extends JFrame  implements ActionListener {
+public class V_accueil extends JFrame {
 	
 	
 	private JMenuBar menu;
@@ -18,7 +18,7 @@ public class V_accueil extends JFrame  implements ActionListener {
 	private JMenuItem ToutesLesFiches;
 	private JMenu validation ;
 	private JMenu suivi ;
-	private JMenu deconnexion ;
+	private JMenuItem deconnexion ;
 	private V_ficheFrais ficheFrais;
 	private Image icone ;
 	/**
@@ -39,32 +39,48 @@ public class V_accueil extends JFrame  implements ActionListener {
 
 	    /**
 		 * ICONE DE l'application
+		 * @author Zoubert hanem
 		 */
 		this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
 		this.setIconImage(icone);
 
-		menu = new JMenuBar();
-		consulter = new JMenu("Consulter");
-		validation = new JMenu("Validation");
-		suivi = new JMenu("Suivi");
-		deconnexion = new JMenu("Deconnexion");
+		//MENU BAR
+		this.menu = new JMenuBar();
 		
-		FicheVisiteur = new JMenuItem("Consulter");
-		ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
+		//MENU
+		this.consulter = new JMenu("Consulter");
+		this.validation = new JMenu("Validation");
+		this.suivi = new JMenu("Suivi");
 		
+		//ITEMS
+		this.deconnexion = new JMenuItem("Deconnexion");
+		this.FicheVisiteur = new JMenuItem("Consulter");
+		this.ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
+		
+		//AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		this.setJMenuBar(menu);
 	
+		//AJOUT DU MENU "consulter" DANS le "JMenuBar->menu"
 		this.menu.add(consulter);
+		
+		//AJOUT DES ITEMS DANS LE MENU "consulter"
 		this.consulter.add(FicheVisiteur);
 		this.consulter.add(ToutesLesFiches);
+		this.consulter.add(deconnexion);
+		
+		//AJOUT DU MENU "validation&suivi" DANS le "JMenuBar->menu"
 		this.menu.add(validation);
 		this.menu.add(suivi);
-		this.menu.add(deconnexion);
+		
 		
 		//PANEL FICHE FRAIS
 		this.ficheFrais = new V_ficheFrais();
 		
-		//ACTION ITEM "FicheVisiteur"
+		/**
+		 * ACTION ITEM "FicheVisiteu"
+		 * Cette action permet d'ouvrir le panel "ficheFrais"
+		 * @author Zoubert hanem
+		 */
 		this.FicheVisiteur.addActionListener(new ActionListener() {
 			
 			@Override
@@ -73,11 +89,6 @@ public class V_accueil extends JFrame  implements ActionListener {
 				setVisible(true);
 			}
 		});
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
 		
 	}
 

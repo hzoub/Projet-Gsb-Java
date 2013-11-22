@@ -25,7 +25,7 @@ public class V_ficheFrais extends JPanel {
 	 */
 	public V_ficheFrais(){
 		
-		//COULEUR ARRIERE-PLAN
+		//COULEUR ARRIERE-PLAN DU PANEL
 		this.bgColor = Color.decode("#00CED1");
 		this.setBackground(bgColor);
 		
