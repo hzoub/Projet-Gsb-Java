@@ -117,7 +117,6 @@ public class V_login extends JFrame implements ActionListener {
 			this.dispose();
 			V_accueil v = new V_accueil();
 			v.setBackground(Color.red);
-			
 			v.setVisible(true);
 		}
 }
