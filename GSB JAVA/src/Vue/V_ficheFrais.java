@@ -1,4 +1,5 @@
 package Vue;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +7,8 @@ import java.sql.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import Modele.*;
 /**
  * 
  * @author Zoubert hanem
@@ -51,6 +54,12 @@ public class V_ficheFrais extends JPanel {
 		
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
+		for (int i = 0; i < Modele.getLesVisiteur().size(); i++) {
+			Visiteur visiteur = Modele.getLesVisiteur().get(i);
+			
+			this.choixVisiteur.addItem(visiteur.getNom());
+		}
+		
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
