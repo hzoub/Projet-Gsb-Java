@@ -5,6 +5,7 @@ public class Modele {
 	/**
 	 * Fonction qui permet la connexion à la base de données
 	 * @return connexion
+	 * @author Zoubert hanem
 	 */
 	public static Connection dbconnect(){
 		Connection connexion = null;
@@ -20,23 +21,40 @@ public class Modele {
 		return connexion;
 	 }
 	
-	/**
-	 * Fonction qui renvoie les contacts
-	 * @return rs
-	 */
-	public static  ResultSet getFicheFrais() {
-		ResultSet rs = null;
-		try {
-			 
-			PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM contact ORDER BY numero");
-			rs = st.executeQuery(); 
-			
-		} catch (SQLException e) {
-			System.out.println(e);
+		/**
+		 * Retourne les mois pour lesquel un visiteur a une fiche de frais
+		 * @return un  ResultSet
+		 * @author Zoubert hanem
+		 * */
+		
+		public static  ResultSet getLesMoisDisponibles() {
+			ResultSet rs = null;
+			try {
+				 
+				PreparedStatement st = dbconnect().prepareStatement("SELECT fichefrais.mois AS mois "
+																	+"FROM  fichefrais "
+																	+ "ORDER BY fichefrais.mois desc");
+				rs = st.executeQuery(); 
+				
+			} catch (SQLException e) {
+				System.out.println(e);
+			}
+			return rs ;
 		}
 		
-	
-		return rs ;
-	}
-	
+		/**
+		 * Fonction qui renvoie tout les visiteur médicale
+		 * @return rs
+		 * @author Zoubert hanem
+		 */
+		public static  ResultSet getContact() {
+			ResultSet rs = null;
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
+				rs = st.executeQuery(); 	
+			} catch (SQLException e) {
+				System.out.println(e);
+			}
+			return rs ;
+		}
 }
