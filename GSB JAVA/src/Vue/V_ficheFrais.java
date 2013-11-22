@@ -1,5 +1,7 @@
 package Vue;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 import javax.swing.*;
@@ -65,6 +67,13 @@ public class V_ficheFrais extends JPanel {
 		
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
+		this.btnValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
