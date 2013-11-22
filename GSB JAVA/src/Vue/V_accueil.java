@@ -36,14 +36,15 @@ public class V_accueil extends JFrame  implements ActionListener {
 	    this.setLocationRelativeTo(null);
 	  
 	    this.setResizable(false);
-		
+
+
 		menu = new JMenuBar();
 		consulter = new JMenu("Consulter");
 		validation = new JMenu("Validation");
 		suivi = new JMenu("Suivi");
 		deconnexion = new JMenu("Deconnexion");
 		
-		FicheVisiteur = new JMenuItem("Fiche Visiteur");
+		FicheVisiteur = new JMenuItem("Consulter");
 		ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
 		
 		this.setJMenuBar(menu);

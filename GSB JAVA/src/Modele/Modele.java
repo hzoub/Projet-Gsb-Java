@@ -20,5 +20,23 @@ public class Modele {
 		return connexion;
 	 }
 	
+	/**
+	 * Fonction qui renvoie les contacts
+	 * @return rs
+	 */
+	public static  ResultSet getFicheFrais() {
+		ResultSet rs = null;
+		try {
+			 
+			PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM contact ORDER BY numero");
+			rs = st.executeQuery(); 
+			
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+	
+		return rs ;
+	}
 	
 }
