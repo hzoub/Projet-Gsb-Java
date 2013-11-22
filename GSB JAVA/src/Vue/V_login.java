@@ -88,7 +88,7 @@ public class V_login extends JFrame implements ActionListener {
 			this.btnValider.addActionListener(this);
 			
 			//AJOUT COULEUR DE FOND DES PANELS
-			this.bgColor = Color.decode("#00CED1");
+			this.bgColor = Color.decode("#77aadd");
 			this.setBackground(bgColor);
 			this.formulaire.setBackground(bgColor);
 			this.panelForm.setBackground(bgColor);
