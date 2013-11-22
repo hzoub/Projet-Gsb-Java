@@ -20,7 +20,7 @@ public class V_accueil extends JFrame  implements ActionListener {
 	private JMenu suivi ;
 	private JMenu deconnexion ;
 	private V_ficheFrais ficheFrais;
-
+	private Image icone ;
 	/**
 	* Constructeur..
 	* */
@@ -37,6 +37,11 @@ public class V_accueil extends JFrame  implements ActionListener {
 	  
 	    this.setResizable(false);
 
+	    /**
+		 * ICONE DE l'application
+		 */
+		this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
+		this.setIconImage(icone);
 
 		menu = new JMenuBar();
 		consulter = new JMenu("Consulter");

@@ -24,6 +24,7 @@ public class V_login extends JFrame implements ActionListener {
 		private JPanel panelForm;
 		private JPanel formulaire;
 		private JLabel espace;
+		private Image icone ;
 		
 		/**
 		 * Constructeur
@@ -41,6 +42,12 @@ public class V_login extends JFrame implements ActionListener {
 		  
 		    this.setResizable(false);
 		    
+		    /**
+			 * ICONE DE l'application
+			 */
+			this.icone = Toolkit.getDefaultToolkit().getImage("images/test.png");
+			this.setIconImage(icone);
+			
 			//logo
 			this.imgLogo = new JLabel(new ImageIcon("images/test.png"));
 		
