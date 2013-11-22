@@ -45,7 +45,7 @@ public class Modele {
 				
 					lesVisiteurs.add(new Visiteur(id,nom,prenom));
 				}
-				
+				st.close();
 			}
 			    
 		    catch (SQLException e) {

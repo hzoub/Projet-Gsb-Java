@@ -1,21 +1,18 @@
 package Vue;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
 import Modele.*;
+
 /**
  * 
  * @author Zoubert hanem
  *
  */
 @SuppressWarnings("serial")
-public class V_ficheFrais extends JPanel {
+public class V_choixVisiteur extends JPanel {
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
@@ -26,10 +23,11 @@ public class V_ficheFrais extends JPanel {
 	private Color bgColor;
 	private JButton btnValider;
 	private JLabel espace;
+	private String nonVisiteur;
 	/**
 	 * Constructeur V_ficheFrais
 	 */
-	public V_ficheFrais(){
+	public V_choixVisiteur(){
 		
 		//COULEUR ARRIERE-PLAN DU PANEL
 		this.bgColor = Color.decode("#77aadd");
@@ -54,10 +52,12 @@ public class V_ficheFrais extends JPanel {
 		
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
+		this.choixVisiteur.addItem("");
 		for (int i = 0; i < Modele.getLesVisiteur().size(); i++) {
 			Visiteur visiteur = Modele.getLesVisiteur().get(i);
 			
 			this.choixVisiteur.addItem(visiteur.getNom());
+			
 		}
 		
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
@@ -76,6 +76,7 @@ public class V_ficheFrais extends JPanel {
 		
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
+		
 		this.btnValider.addActionListener(new ActionListener() {
 			
 			@Override
@@ -100,4 +101,17 @@ public class V_ficheFrais extends JPanel {
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
 	}
+		/**
+		 * @return le visiteur
+		 */
+		public String getChoixVisiteur() {
+			this.nonVisiteur =  choixVisiteur.getSelectedItem().toString();  
+			return this.nonVisiteur;
+		}
+		/**
+		 * @return le boutton "Valider"
+		 */
+		public JButton getBtnValider() {
+			return btnValider;
+		}
 }

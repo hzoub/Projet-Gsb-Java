@@ -18,12 +18,12 @@ public class V_accueil extends JFrame {
 	private JMenuItem validation ;
 	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
-	private V_ficheFrais ficheFrais;
+	private V_choixVisiteur ficheFrais;
 	private Image icone ;
 	private JLabel nomVisiteur;
 	private JPanel panAccueil;
 	private Color bgColor;
-	
+	private V_etatFrais fiche;
 	/**
 	* Constructeur..
 	* */
@@ -49,6 +49,8 @@ public class V_accueil extends JFrame {
 		
 		this.bgColor = Color.decode("#77aadd");
 		
+		this.fiche = new V_etatFrais();
+		this.fiche.setBackground(bgColor);
 		
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
@@ -91,7 +93,15 @@ public class V_accueil extends JFrame {
 		
 		this.getContentPane().add(panAccueil);
 		//PANEL FICHE FRAIS
-		this.ficheFrais = new V_ficheFrais();
+		this.ficheFrais = new V_choixVisiteur();
+		this.ficheFrais.getBtnValider().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(fiche);
+				setVisible(true);
+			}
+		});
 		
 		/**
 		 * ACTION ITEM "FicheVisiteu"
