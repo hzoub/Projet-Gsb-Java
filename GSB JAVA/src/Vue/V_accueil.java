@@ -92,7 +92,8 @@ public class V_accueil extends JFrame {
 		this.panAccueil.add(nomVisiteur);
 		
 		this.getContentPane().add(panAccueil);
-		//PANEL FICHE FRAIS
+		
+		//PANEL ChoixVisiteur
 		this.choixVis = new V_choixVisiteur();
 		this.choixVis.getBtnValider().addActionListener(new ActionListener() {
 			
@@ -105,7 +106,7 @@ public class V_accueil extends JFrame {
 		
 		/**
 		 * ACTION ITEM "FicheVisiteu"
-		 * Cette action permet d'ouvrir le panel "ficheFrais"
+		 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
 		 * @author Zoubert hanem
 		 */
 		this.FicheVisiteur.addActionListener(new ActionListener() {

@@ -32,8 +32,7 @@ public class Modele {
 		
 		public static ArrayList<Visiteur> getLesVisiteur(){
 			
-			ArrayList <Visiteur> lesVisiteurs = new ArrayList <Visiteur>();
-			
+			ArrayList <Visiteur> lesVisiteurs = new ArrayList <Visiteur>();		
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
 				ResultSet rs = st.executeQuery(); 
@@ -42,12 +41,10 @@ public class Modele {
 					String id= rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-				
+		
 					lesVisiteurs.add(new Visiteur(id,nom,prenom));
 				}
-			
 			}
-			    
 		    catch (SQLException e) {
 				System.out.println(e);
 			}
