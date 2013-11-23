@@ -21,33 +21,29 @@ public class Modele {
 			}
 		return connexion;
 	 }
-	
-
-		/**
-		 * @author Zoubert hanem
-		 *  Fonction qui renvoie tout les visiteur médicale
-		 * Passerelle d'arraylist contact qui permet d'insert un contact
-		 * @return lesVisiteurs
-		 */
-		
-		public static ArrayList<Visiteur> getLesVisiteur(){
 			
-			ArrayList <Visiteur> lesVisiteurs = new ArrayList <Visiteur>();		
+		/**
+		 * Fonction qui renvoie les visiteurs
+		 * @author Zoubert hanem
+		 * @return rs
+		 */
+		public static  ResultSet getLesVisiteurs() {
+			ResultSet rs = null;
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
-				ResultSet rs = st.executeQuery(); 
-				while (rs.next()) {
-					
-					String id= rs.getString("id");
-					String nom = rs.getString("nom");
-					String prenom = rs.getString("prenom");
-		
-					lesVisiteurs.add(new Visiteur(id,nom,prenom));
-				}
-			}
-		    catch (SQLException e) {
+				rs = st.executeQuery(); 	
+			} catch (SQLException e) {
 				System.out.println(e);
 			}
-			return lesVisiteurs;
-		}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return rs ;
+		}		
 }

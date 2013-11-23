@@ -49,9 +49,11 @@ public class V_accueil extends JFrame {
 		
 		this.bgColor = Color.decode("#77aadd");
 		
+		//Panel fiche frais
 		this.fiche = new V_etatFrais();
 		this.fiche.setBackground(bgColor);
 		
+		//Panel accueil
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
 		
@@ -93,17 +95,6 @@ public class V_accueil extends JFrame {
 		
 		this.getContentPane().add(panAccueil);
 		
-		//PANEL ChoixVisiteur
-		this.choixVis = new V_choixVisiteur();
-		this.choixVis.getBtnValider().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(fiche);
-				setVisible(true);
-			}
-		});
-		
 		/**
 		 * ACTION ITEM "FicheVisiteu"
 		 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
@@ -113,6 +104,7 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				choixVis = new V_choixVisiteur();
 				setContentPane(choixVis);
 				setVisible(true);
 			}

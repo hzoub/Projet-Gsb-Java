@@ -2,8 +2,10 @@ package Vue;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
 import Modele.*;
 
 /**
@@ -12,7 +14,8 @@ import Modele.*;
  *
  */
 
-public class V_choixVisiteur extends JPanel {
+@SuppressWarnings("serial")
+public class V_choixVisiteur extends JPanel{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
@@ -52,13 +55,17 @@ public class V_choixVisiteur extends JPanel {
 		
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
-		/*for (int i = 0; i < Modele.getLesVisiteur().size(); i++) {
-			Visiteur visiteur = Modele.getLesVisiteur().get(i);
-			
-			this.choixVisiteur.addItem(visiteur.getNom());
-			
-		}*/
-		
+		ResultSet rs = Modele.getLesVisiteurs();
+		 try{
+				while(rs.next()){
+					String nomVisiteur = rs.getString("login");
+					this.choixVisiteur.addItem(nomVisiteur);
+				}
+			 }
+				catch(SQLException e){
+					System.out.println(e);
+				}
+
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
@@ -76,13 +83,6 @@ public class V_choixVisiteur extends JPanel {
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
 		
-		this.btnValider.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
