@@ -2,7 +2,7 @@ package Controleur;
 
 import Vue.V_login;
 
-public class Main {
+public class C_main {
 
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
