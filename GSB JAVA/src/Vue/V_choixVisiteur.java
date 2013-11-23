@@ -15,7 +15,7 @@ import Modele.*;
  */
 
 @SuppressWarnings("serial")
-public class V_choixVisiteur extends JPanel{
+public class V_choixVisiteur extends JPanel implements ActionListener{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
@@ -82,7 +82,7 @@ public class V_choixVisiteur extends JPanel{
 		
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
-		
+		this.btnValider.addActionListener(this);
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
@@ -111,5 +111,9 @@ public class V_choixVisiteur extends JPanel{
 		 */
 		public JButton getBtnValider() {
 			return btnValider;
+		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			JOptionPane.showMessageDialog(null,this.choixVisiteur.getSelectedItem(),"Visiteur choisie",JOptionPane.INFORMATION_MESSAGE);
 		}
 }
