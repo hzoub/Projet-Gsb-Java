@@ -9,8 +9,7 @@ import javax.swing.*;
  */
 @SuppressWarnings("serial")
 public class V_accueil extends JFrame {
-	
-	
+		
 	private JMenuBar menu;
 	private JMenu consulter ;
 	private JMenuItem FicheVisiteur;
@@ -110,5 +109,4 @@ public class V_accueil extends JFrame {
 			}
 		});	
 	}
-	
 }

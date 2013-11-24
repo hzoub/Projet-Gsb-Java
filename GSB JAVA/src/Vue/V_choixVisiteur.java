@@ -13,7 +13,6 @@ import Modele.*;
  * @author Zoubert hanem
  *
  */
-
 @SuppressWarnings("serial")
 public class V_choixVisiteur extends JPanel implements ActionListener{
 	
@@ -65,7 +64,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 				catch(SQLException e){
 					System.out.println(e);
 				}
-
+		 
+		
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
