@@ -48,6 +48,9 @@ public class V_accueil extends JFrame {
 		
 		this.bgColor = Color.decode("#77aadd");
 		
+		//Panel choixVisiteur
+		this.choixVis = new V_choixVisiteur();
+		
 		//Panel fiche frais
 		this.fiche = new V_etatFrais();
 		this.fiche.setBackground(bgColor);
@@ -103,7 +106,6 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				choixVis = new V_choixVisiteur();
 				setContentPane(choixVis);
 				setVisible(true);
 			}
