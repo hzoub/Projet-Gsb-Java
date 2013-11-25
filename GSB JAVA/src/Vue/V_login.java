@@ -26,7 +26,6 @@ public class V_login extends JFrame implements ActionListener {
 		private JPanel formulaire;
 		private JLabel espace;
 		private Image icone ;
-		private String nomVisiteur;
 		/**
 		 * Constructeur
 		 */
@@ -71,7 +70,7 @@ public class V_login extends JFrame implements ActionListener {
 			//label identifiant
 			this.lblId = new JLabel("Identifiant :");
 			this.lblId.setPreferredSize(new Dimension(80,10));
-			this.jtfId = new JTextField(15);
+			jtfId = new JTextField(15);
 			
 			//label mot de passe
 			this.lblMdp = new JLabel("Mot de passe :");
@@ -101,7 +100,7 @@ public class V_login extends JFrame implements ActionListener {
 			
 			//AJOUT DES COMPOSANTS DANS LE FORMULAIRE
 			this.panelForm.add(this.lblId);
-			this.panelForm.add(this.jtfId);
+			this.panelForm.add(jtfId);
 			this.panelForm.add(this.lblMdp);
 			this.panelForm.add(this.jtfMdp);
 			this.panelForm.add(this.espace);

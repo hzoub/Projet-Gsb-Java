@@ -53,12 +53,12 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		this.lblChoixVisiteur.setPreferredSize(new Dimension(70,10));
 		
 		//Liste deroulante Visiteur
-		V_choixVisiteur.choixVisiteur = new JComboBox<String>();
+		choixVisiteur = new JComboBox<String>();
 		ResultSet rs = Modele.getLesVisiteurs();
 		 try{
 				while(rs.next()){
 					String nomVisiteur = rs.getString("login");
-					V_choixVisiteur.choixVisiteur.addItem(nomVisiteur);
+					choixVisiteur.addItem(nomVisiteur);
 				}
 			 }
 				catch(SQLException e){
@@ -66,7 +66,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 				}
 		 
 		
-		V_choixVisiteur.choixVisiteur.setPreferredSize(new Dimension(150,20));
+		choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
 		this.lblChoixMois = new JLabel("Mois :");
