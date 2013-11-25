@@ -124,8 +124,14 @@ public class V_login extends JFrame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			if(jtfId.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else{
 			this.dispose();
 			V_accueil v = new V_accueil();
 			v.setVisible(true);
+			}
 		}
 }
