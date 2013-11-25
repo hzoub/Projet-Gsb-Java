@@ -2,12 +2,9 @@ package Vue;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
 import Modele.*;
-
 /**
  * 
  * @author Zoubert hanem

@@ -123,7 +123,11 @@ public class V_login extends JFrame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			/**
+			 * Verifier si le champ identifiant est vide ou pas
+			 * si il est vide il affiche un popup si non il ouvre la fenêtre V_accueil
+			 * @author zoubert hanem
+			 */
 			if(jtfId.getText().isEmpty()){
 				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
