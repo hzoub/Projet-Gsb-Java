@@ -11,8 +11,8 @@ import javax.swing.*;
 public class V_accueil extends JFrame {
 		
 	private JMenuBar menu;
-	private JMenu consulter ;
-	private JMenuItem FicheVisiteur;
+	private JMenu fiche ;
+	private JMenuItem consulter;
 	private JMenuItem ToutesLesFiches;
 	private JMenuItem validation ;
 	private JMenuItem suivi ;
@@ -22,7 +22,7 @@ public class V_accueil extends JFrame {
 	private JLabel nomVisiteur;
 	private JPanel panAccueil;
 	private Color bgColor;
-	private V_etatFrais fiche;
+	private V_etatFrais ficheFrais;
 	/**
 	* Constructeur..
 	* */
@@ -72,8 +72,8 @@ public class V_accueil extends JFrame {
 		/*
 		 * Panel fiche frais
 		 */
-		this.fiche = new V_etatFrais();
-		this.fiche.setBackground(bgColor);
+		this.ficheFrais = new V_etatFrais();
+		this.ficheFrais.setBackground(bgColor);
 		
 		/*
 		 * Panel de l'accueil
@@ -89,7 +89,7 @@ public class V_accueil extends JFrame {
 		/*
 		 * MENU
 		 */
-		this.consulter = new JMenu("Fiche");
+		this.fiche = new JMenu("Fiche");
 		this.validation = new JMenuItem("Validation");
 		this.suivi = new JMenuItem("Suivi");
 		
@@ -97,7 +97,7 @@ public class V_accueil extends JFrame {
 		 * ITEMS
 		 */
 		this.deconnexion = new JMenuItem("Deconnexion");
-		this.FicheVisiteur = new JMenuItem("Consulter");
+		this.consulter = new JMenuItem("Consulter");
 		this.ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
 		
 		/*
@@ -113,16 +113,16 @@ public class V_accueil extends JFrame {
 		this.setJMenuBar(menu);
 	
 		//AJOUT DU MENU "consulter" DANS le "JMenuBar->menu"
-		this.menu.add(consulter);
+		this.menu.add(fiche);
 		
 		/*
-		 * AJOUT DES ITEMS DANS LE MENU "consulter"
+		 * AJOUT DES ITEMS DANS LE MENU "fiche"
 		 */
-		this.consulter.add(FicheVisiteur);
-		this.consulter.add(ToutesLesFiches);
-		this.consulter.add(validation);
-		this.consulter.add(suivi);
-		this.consulter.add(deconnexion);
+		this.fiche.add(consulter);
+		this.fiche.add(ToutesLesFiches);
+		this.fiche.add(validation);
+		this.fiche.add(suivi);
+		this.fiche.add(deconnexion);
 		
 
 		/*
@@ -135,12 +135,20 @@ public class V_accueil extends JFrame {
 		 */
 		this.getContentPane().add(panAccueil);
 		
+		V_choixVisiteur.getBtnValider().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(ficheFrais);
+				setVisible(true);
+			}
+		});
 		/**
 		 * ACTION ITEM "FicheVisiteur"
 		 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
 		 * @author Zoubert hanem
 		 */
-		this.FicheVisiteur.addActionListener(new ActionListener() {
+		this.consulter.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

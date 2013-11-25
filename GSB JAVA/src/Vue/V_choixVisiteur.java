@@ -18,12 +18,12 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
-	private JComboBox<String>choixVisiteur;
+	private static JComboBox<String>choixVisiteur;
 	private JLabel lblChoixMois;
 	private JComboBox<Date>choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
-	private JButton btnValider;
+	private static JButton btnValider;
 	private JLabel espace;
 
 	/**
@@ -82,7 +82,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		//BOUTTON VALIDER
 		this.btnValider = new JButton("Valider");
-		this.btnValider.addActionListener(this);
+		
+		//this.btnValider.addActionListener(this);
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
@@ -103,17 +104,17 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		/**
 		 * @return le visiteur
 		 */
-		public String getChoixVisiteur() {
+		public static String getChoixVisiteur() {
 			return	choixVisiteur.getSelectedItem().toString();  
 		}
 		/**
 		 * @return le boutton "Valider"
 		 */
-		public JButton getBtnValider() {
+		public static JButton getBtnValider() {
 			return btnValider;
 		}
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			JOptionPane.showMessageDialog(null,this.choixVisiteur.getSelectedItem(),"Visiteur choisie",JOptionPane.INFORMATION_MESSAGE);
+			
 		}
 }

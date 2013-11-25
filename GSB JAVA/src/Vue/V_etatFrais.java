@@ -6,12 +6,10 @@ import javax.swing.*;
 public class V_etatFrais extends JPanel{
 	
 		private JLabel visiteur;
-		private V_choixVisiteur choix;
 		
 	public V_etatFrais(){
 		
-		this.choix = new V_choixVisiteur();
-		this.visiteur = new JLabel("Fiche frais de "+choix.getChoixVisiteur());
+		this.visiteur = new JLabel("Fiche frais de "+V_choixVisiteur.getChoixVisiteur());
 		this.add(visiteur);
 	}
 }
