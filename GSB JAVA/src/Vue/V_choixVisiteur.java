@@ -51,7 +51,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		//Liste deroulante Visiteur
 		choixVisiteur = new JComboBox<String>();
-		/*ResultSet rs = Modele.getLesVisiteurs();
+		ResultSet rs = Modele.getLesVisiteurs();
 		 try{
 				while(rs.next()){
 					String nomVisiteur = rs.getString("login");
@@ -60,7 +60,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 			 }
 				catch(SQLException e){
 					System.out.println(e);
-				}*/
+				}
 		 
 		
 		choixVisiteur.setPreferredSize(new Dimension(150,20));

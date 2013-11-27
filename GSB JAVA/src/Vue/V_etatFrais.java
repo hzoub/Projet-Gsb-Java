@@ -9,8 +9,7 @@ public class V_etatFrais extends JPanel{
 		
 	public V_etatFrais(){
 		
-		//+V_choixVisiteur.getChoixVisiteur()
-		this.visiteur = new JLabel("Fiche frais de ");
+		this.visiteur = new JLabel("Fiche frais de "+V_choixVisiteur.getChoixVisiteur());
 		this.add(visiteur);
 	}
 }

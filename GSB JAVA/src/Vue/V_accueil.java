@@ -23,6 +23,7 @@ public class V_accueil extends JFrame {
 	private JPanel panAccueil;
 	private Color bgColor;
 	private V_etatFrais ficheFrais;
+
 	/**
 	* Constructeur..
 	* */
@@ -124,7 +125,7 @@ public class V_accueil extends JFrame {
 		this.fiche.add(suivi);
 		this.fiche.add(deconnexion);
 		
-
+		
 		/*
 		 * Ajout du label nomVisiteur dans le panel "paneAccueil"
 		 */
@@ -135,6 +136,11 @@ public class V_accueil extends JFrame {
 		 */
 		this.getContentPane().add(panAccueil);
 		
+		/**
+		 * ACTION boutton "BtnValider" de la classe V_choixVisiteur
+		 * Cette action permet d'ouvrir le panel "ficheFrais"
+		 * @author Zoubert hanem
+		 */
 		V_choixVisiteur.getBtnValider().addActionListener(new ActionListener() {
 			
 			@Override
@@ -158,6 +164,21 @@ public class V_accueil extends JFrame {
 				setContentPane(choixVis);
 				setVisible(true);
 			}
-		});	
+		});
+		
+		/**
+		 * ACTION ITEM "deconnexion"
+		 * Cette action permet de deconecter
+		 * @author Zoubert hanem
+		 */
+		this.deconnexion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				V_login log = new  V_login();
+				log.setVisible(true);
+			}
+		});
 	}
 }
