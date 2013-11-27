@@ -175,7 +175,9 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				//fermer la premiere fenêtre 
 				dispose();
+				
 				V_login log = new  V_login();
 				log.setVisible(true);
 			}
