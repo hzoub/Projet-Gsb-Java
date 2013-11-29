@@ -32,7 +32,7 @@ public class Modele {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
 				lesVisiteurs = st.executeQuery(); 	
 			} catch (SQLException e) {
-				System.out.println(e);
+				System.out.println(e);//aaa
 			}
 			finally{
 				   try{
