@@ -119,7 +119,7 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 			this.panelForm.add(this.btnValider);
 			this.panelForm.add(this.btnEffacer);
 			
-			this.addKeyListener(this);
+			this.formulaire.addKeyListener(this);
 			
 			//AJOUT DU FORMULAIRE DANS LE PANEL
 			this.getContentPane().add(this.formulaire);
@@ -164,19 +164,15 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 		
 		@Override
 		public void keyPressed(KeyEvent e) {
-			System.out.println("test1");
-
+			System.out.println(e.getKeyCode());
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			System.out.println("test2");
-			
+			System.out.println(e.getKeyCode());
 		}
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
 		}
 }

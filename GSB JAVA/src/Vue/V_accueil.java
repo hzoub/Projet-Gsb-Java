@@ -74,7 +74,7 @@ public class V_accueil extends JFrame {
 		/*
 		 * Panel fiche frais
 		 */
-		this.ficheFrais = new V_etatFrais();
+		this.ficheFrais = new V_etatFrais(null);
 		this.ficheFrais.setBackground(bgColor);
 		
 		/*

@@ -2,7 +2,13 @@ package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Modele.Etat;
+import Modele.Modele;
+import Modele.Visiteur;
 /**
  * 
  * @author Zoubert hanem
@@ -22,7 +28,7 @@ public class V_etatFrais extends JPanel{
 		private JPanel panStatut;
 		private Color bgColor;
 		
-	public V_etatFrais(){
+	public V_etatFrais(Visiteur visiteur){
 		
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(300,50));
@@ -53,8 +59,11 @@ public class V_etatFrais extends JPanel{
 			"</h2>");
 	
 		this.listeStatut = new JComboBox<String>();
-		this.listeStatut.addItem("test");
 		
+		for(int i=0; i<Modele.getLesEtats().size();i++){
+			Etat etat = Modele.getLesEtats().get(i);
+			this.listeStatut.addItem(etat.getlibelle());
+		}
 		
 		
 		this.elementFofaitises = new JLabel("<html>"+

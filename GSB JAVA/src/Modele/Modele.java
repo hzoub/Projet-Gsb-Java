@@ -108,5 +108,40 @@ public class Modele {
 				   }
 				 }
 			return lesVisiteurs ;
-		}		
+		}	
+		
+		/**
+		 * Fonction qui renvoie les etats
+		 * @author Zoubert hanem
+		 * @return lesEtats
+		 * 
+		 */
+		public static  ArrayList<Etat> getLesEtats() {
+			
+		ArrayList<Etat> lesEtats = new ArrayList<Etat>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat");
+				ResultSet rs = st.executeQuery(); 	
+				while(rs.next()){
+				
+				String libelle = rs.getString("libelle");
+				
+				lesEtats.add(new Etat(libelle));
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesEtats ;
+		}
 }
