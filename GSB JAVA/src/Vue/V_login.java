@@ -48,8 +48,7 @@ public class V_login extends JFrame implements ActionListener {
 		    /**
 			 * ICONE DE l'application
 			 */
-			this.icone = Toolkit.getDefaultToolkit().getImage("images/logo.png");
-			this.setIconImage(icone);
+			this.setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 			
 			//logo
 			this.imgLogo = new JLabel(new ImageIcon("images/logo.png"));
