@@ -18,7 +18,6 @@ public class V_accueil extends JFrame {
 	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
 	private V_choixVisiteur choixVis;
-	private Image icone ;
 	private JLabel nomVisiteur;
 	private JPanel panAccueil;
 	private Color bgColor;
@@ -56,11 +55,7 @@ public class V_accueil extends JFrame {
 		 * ICONE DE l'application
 		 * @author Zoubert hanem
 		 */
-		this.icone = Toolkit.getDefaultToolkit().getImage("images/logo.png");
-		/*
-		 * Ajout de l'icone dans la fenêtre
-		 */
-		this.setIconImage(icone);
+	    this.setIconImage(new ImageIcon(getClass().getResource("/logo.png")).getImage());
 		
 		/*
 		 * Couleur arriere-plan de la fenetre

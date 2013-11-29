@@ -81,22 +81,16 @@ public class Modele {
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT id, nom, prenom FROM visiteur WHERE comptable=0 ORDER BY id");
 				ResultSet rs = st.executeQuery(); 
-				
 				while(rs.next()){
-					
 					String id = rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					lesVisiteurs.add(new Visiteur(id, nom, prenom));
-					
+					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
 				}
-				
 			} 
-			
 			catch (SQLException e) {
 				System.out.println(e);
 			}
-			
 			finally{
 				
 				   try{
@@ -112,6 +106,7 @@ public class Modele {
 		
 		/**
 		 * 
+		 * @author Zoubert hanem
 		 * @param idVisiteur
 		 * @return leVisiteur
 		 */
@@ -129,10 +124,8 @@ public class Modele {
 					String id = rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					leVisiteur.add(new Visiteur(id, nom, prenom));
-					
+					leVisiteur.add(new Visiteur(id, nom, prenom));	
 				}
-				
 			} 
 			catch (SQLException e) {
 				System.out.println(e);
@@ -193,7 +186,7 @@ public class Modele {
 		 */
 		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, int mois) {
 			
-		ArrayList<FraisForfait> unFraisForfait= new ArrayList<FraisForfait>();
+			ArrayList<FraisForfait> fraisForfait= new ArrayList<FraisForfait>();
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT quantite"+
@@ -204,7 +197,7 @@ public class Modele {
 				
 				while(rs.next()){
 					int qte = rs.getInt("quantite");
-					unFraisForfait.add(new FraisForfait(qte));
+					fraisForfait.add(new FraisForfait(qte));
 				}
 				
 			} 
@@ -220,6 +213,6 @@ public class Modele {
 					   e.printStackTrace();
 				   }
 				 }
-			return unFraisForfait ;
+			return fraisForfait ;
 		}
 }

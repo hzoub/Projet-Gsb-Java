@@ -1,6 +1,8 @@
 package Vue;
 import java.awt.*;
+
 import javax.swing.*;
+
 import Modele.*;
 /**
  * 
@@ -22,9 +24,15 @@ public class V_etatFrais extends JPanel{
 		private JPanel panLesForfais;
 		private Color bgColor;
 		
-//		private Object[][] donnees;
-//	    private JTable tableau;
-//	    private JScrollPane scroll;
+		private Object[][] donneesElFofaitises;
+	    private JTable tableauElFofaitises;
+	    private JScrollPane scrollElFofaitises;
+	    
+	    private Object[][] donneesDescElement;
+	    private JTable tableauDescElement;
+	    private JScrollPane scrollDescElement;
+	    
+	    private JButton bntValider;
 	    
 	public V_etatFrais(Visiteur visiteur){
 		
@@ -49,7 +57,7 @@ public class V_etatFrais extends JPanel{
 		
 		this.date = new JLabel("<html>"+
 									"<h2 style=\"font-family:Comic Sans MS\">"+
-									"Date : "+
+									"Fiche de frais du mois : "+
 								"</h2>");
 		this.date.setPreferredSize(new Dimension(700,30));
 		
@@ -70,8 +78,52 @@ public class V_etatFrais extends JPanel{
 		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
 		
+		/**TABLEAU 1**/
+		//Entete
+    	String[]entetesElFofaitises = {"Forfait Etape","Frais Kilométrique","Nuitée Hôtel","Repas Restaurant"};
+    	
+    	//Définir la taille du tableau
+    	this.donneesElFofaitises = new Object[1][entetesElFofaitises.length];
+    	
+    
+    	 this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
+  
+		for (int i=0 ; i<1 ;i++){
+		
+			
+			this.donneesElFofaitises[i][0] = "";
+			this.donneesElFofaitises[i][1] = "";
+			this.donneesElFofaitises[i][2] = "";
+		}
+		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
+		this.scrollElFofaitises.setPreferredSize(new Dimension(730, 60));
+		
+		
+		
 		this.descriptifElement = new JLabel("Descriptif des éléments hors forfait ");
 		this.descriptifElement.setPreferredSize(new Dimension(700,30));
+		
+		/**TABLEAU 2**/
+		//Entete
+    	String[]entetesDescElement = {"Date","Libellé","Montant"};
+    	
+    	//Définir la taille du tableau
+    	this.donneesDescElement = new Object[1][entetesElFofaitises.length];
+    	
+    
+    	 this.tableauDescElement = new JTable(donneesDescElement, entetesDescElement);
+  
+		for (int i=0 ; i<1 ;i++){
+		
+			
+			this.donneesDescElement[i][0] = "";
+			this.donneesDescElement[i][1] = "";
+			this.donneesDescElement[i][2] = "";
+		}
+		this.scrollDescElement = new JScrollPane(tableauDescElement);
+		this.scrollDescElement.setPreferredSize(new Dimension(730, 60));
+		
+		this.bntValider = new JButton("Valider");
 		//ajout
 		this.add(this.nomVmedicale);
 		this.add(this.date);
@@ -84,9 +136,11 @@ public class V_etatFrais extends JPanel{
 		this.add(this.panStatut);
 		
 		this.add(this.elementFofaitises);
-		
+		this.add(this.scrollElFofaitises);
 
 		
 		this.add(this.descriptifElement);
+		this.add(this.scrollDescElement);
+		this.add(this.bntValider );
 	}
 }
