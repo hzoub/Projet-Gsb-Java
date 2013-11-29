@@ -65,7 +65,7 @@ public class V_etatFrais extends JPanel{
 			Etat etat = Modele.getLesEtats().get(i);
 			
 			this.listeStatut.addItem(etat.getlibelle());
-			System.out.println(etat.getlibelle());
+		
 		}
 		
 		
