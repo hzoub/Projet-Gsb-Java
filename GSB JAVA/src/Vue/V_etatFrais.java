@@ -34,7 +34,7 @@ public class V_etatFrais extends JPanel{
 	    
 	    private JButton bntValider;
 	    
-	public V_etatFrais(Visiteur visiteur){
+	public V_etatFrais(String visiteur){
 		
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(400,50));
@@ -50,7 +50,7 @@ public class V_etatFrais extends JPanel{
 		
 		this.nomVmedicale = new JLabel(	"<html>"+
 										"<h1 style=\"font-family:Comic Sans MS\">"+
-										"Fiche visteur de"+
+										"Fiche visteur de "+visiteur+
 									"</h1>",JLabel.CENTER);
 		this.nomVmedicale.setPreferredSize(new Dimension(700,30));
 		

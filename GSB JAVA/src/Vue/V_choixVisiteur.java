@@ -92,6 +92,14 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
 	}
+	
+	/**
+	 * @return le visiteur
+	 */
+	public String getChoixVisiteur() {
+		String visiteur = choixVisiteur.getSelectedItem().toString();
+		return visiteur;
+	}
 
 		/**
 		 * @return le boutton "Valider"

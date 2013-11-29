@@ -67,11 +67,7 @@ public class V_accueil extends JFrame {
 		 */
 		this.choixVis = new V_choixVisiteur();
 		
-		/*
-		 * Panel fiche frais
-		 */
-		this.ficheFrais = new V_etatFrais(null);
-		this.ficheFrais.setBackground(bgColor);
+		
 		
 		/*
 		 * Panel de l'accueil
@@ -151,6 +147,11 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				/*
+				 * Panel fiche frais
+				 */
+				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur());
+				ficheFrais.setBackground(bgColor);
 				setContentPane(ficheFrais);
 				setVisible(true);
 			}
