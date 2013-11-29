@@ -35,7 +35,7 @@ public class Modele {
 		boolean result = false;
 		
 		try {
-			PreparedStatement st = dbconnect().prepareStatement("SELECT login, mdp FROM visiteur WHERE comptable=0");
+			PreparedStatement st = dbconnect().prepareStatement("SELECT login, mdp FROM visiteur WHERE comptable=1");
 			ResultSet rs = st.executeQuery(); 
 			
 			rs.next();
