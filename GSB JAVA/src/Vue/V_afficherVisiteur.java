@@ -3,11 +3,10 @@ import Modele.*;
 
 import javax.swing.*;
 
-
-
 import java.awt.*;
 
 
+@SuppressWarnings("serial")
 public class V_afficherVisiteur extends JPanel {
 	
 	private Object[][] donnees;

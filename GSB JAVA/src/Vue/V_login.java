@@ -12,7 +12,7 @@ import Modele.Modele;
  *@version 1.0
  */
 @SuppressWarnings("serial")
-public class V_login extends JFrame implements ActionListener, KeyListener {
+public class V_login extends JFrame implements ActionListener {
 		
 		private JLabel imgLogo;
 		private JLabel lblTitre;
@@ -43,6 +43,7 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 		    this.setLocationRelativeTo(null);
 		    //EMPECHER LA REMDIMENSION DE LA FENTRE
 		    this.setResizable(false);
+		    
 		    
 		    /**
 			 * ICONE DE l'application
@@ -91,6 +92,7 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 			
 			//ajout action boutton valider
 			this.btnValider.addActionListener(this);
+			
 			this.btnEffacer.addActionListener(new ActionListener() {
 				
 				@Override
@@ -118,8 +120,7 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 			this.panelForm.add(this.espace);
 			this.panelForm.add(this.btnValider);
 			this.panelForm.add(this.btnEffacer);
-			
-			this.formulaire.addKeyListener(this);
+	
 			
 			//AJOUT DU FORMULAIRE DANS LE PANEL
 			this.getContentPane().add(this.formulaire);
@@ -134,6 +135,7 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 			return jtfId;
 		}
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			/**
@@ -162,17 +164,5 @@ public class V_login extends JFrame implements ActionListener, KeyListener {
 			
 		}
 		
-		@Override
-		public void keyPressed(KeyEvent e) {
-			System.out.println(e.getKeyCode());
-		}
 
-		@Override
-		public void keyReleased(KeyEvent e) {
-			System.out.println(e.getKeyCode());
-		}
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-		}
 }

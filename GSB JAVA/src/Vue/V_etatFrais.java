@@ -1,14 +1,7 @@
 package Vue;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import Modele.Etat;
-import Modele.Modele;
-import Modele.Visiteur;
+import java.awt.*;
+import javax.swing.*;
+import Modele.*;
 /**
  * 
  * @author Zoubert hanem
@@ -20,18 +13,26 @@ public class V_etatFrais extends JPanel{
 		private JLabel nomVmedicale;
 		private JLabel date;
 		private JLabel statutFiche;
+		private JLabel descriptifElement;
+		
 		private JComboBox<String>listeStatut;
 		private JLabel elementFofaitises;
-		private JLabel fraisKilometrique;
-		private JLabel nuitHotel;
-		private JLabel repasRestaurant;
+		
 		private JPanel panStatut;
+		private JPanel panLesForfais;
 		private Color bgColor;
 		
+//		private Object[][] donnees;
+//	    private JTable tableau;
+//	    private JScrollPane scroll;
+	    
 	public V_etatFrais(Visiteur visiteur){
 		
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(400,50));
+		
+		this.panLesForfais = new JPanel();
+		this.panLesForfais.setBackground(bgColor);
 		
 		this.bgColor = Color.decode("#77aadd");
 		
@@ -53,10 +54,7 @@ public class V_etatFrais extends JPanel{
 		this.date.setPreferredSize(new Dimension(700,30));
 		
 		
-		this.statutFiche = new JLabel("<html>"+
-				"<h2 style=\"font-family:Comic Sans MS\">"+
-				"Statut de la fiche : "+
-			"</h2>");
+		this.statutFiche = new JLabel("Statut de la fiche : ");
 	
 		this.listeStatut = new JComboBox<String>();
 
@@ -69,11 +67,11 @@ public class V_etatFrais extends JPanel{
 		}
 		
 		
-		this.elementFofaitises = new JLabel("<html>"+
-				"<h2 style=\"font-family:Comic Sans MS\"><u>"+
-				"Eléments fofaitisés : "+
-				"</u></h2>");
+		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
+		
+		this.descriptifElement = new JLabel("Descriptif des éléments hors forfait ");
+		this.descriptifElement.setPreferredSize(new Dimension(700,30));
 		//ajout
 		this.add(this.nomVmedicale);
 		this.add(this.date);
@@ -84,8 +82,11 @@ public class V_etatFrais extends JPanel{
 		
 		//Ajout du panel "panStatut & "elementFofaitises"
 		this.add(this.panStatut);
+		
 		this.add(this.elementFofaitises);
 		
+
 		
+		this.add(this.descriptifElement);
 	}
 }

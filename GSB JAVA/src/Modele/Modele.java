@@ -111,6 +111,45 @@ public class Modele {
 		}	
 		
 		/**
+		 * 
+		 * @param idVisiteur
+		 * @return leVisiteur
+		 */
+		public static  ArrayList<Visiteur> getLeVisiteur(String idVisiteur) {
+			//Collection les visiteurs
+			ArrayList<Visiteur>leVisiteur = new ArrayList<Visiteur>();
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT id, nom, prenom FROM visiteur WHERE comptable=0 +"+
+						 											"AND id='"+idVisiteur+"'"+
+						 											"ORDER BY id");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String id = rs.getString("id");
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					leVisiteur.add(new Visiteur(id, nom, prenom));
+					
+				}
+				
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{	
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return leVisiteur ;
+		}	
+		
+		/**
 		 * Fonction qui renvoie les etats
 		 * @author Zoubert hanem
 		 * @return lesEtats
@@ -143,5 +182,44 @@ public class Modele {
 				   }
 				 }
 			return lesEtats ;
+		}
+		
+		
+		/**
+		 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+		 * @author Zoubert hanem
+		 * @return 
+		 * 
+		 */
+		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, int mois) {
+			
+		ArrayList<FraisForfait> unFraisForfait= new ArrayList<FraisForfait>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT quantite"+
+						                                             "FROM fraisforfait,lignefraisforfait"+
+																	 "WHERE fraisforfait.id = lignefraisforfait.idFraisForfait "+
+						                                             "AND idVisiteur = '"+idVisiteur+"' AND mois = '"+mois+"' ");
+				ResultSet	rs = st.executeQuery(); 	
+				
+				while(rs.next()){
+					int qte = rs.getInt("quantite");
+					unFraisForfait.add(new FraisForfait(qte));
+				}
+				
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return unFraisForfait ;
 		}
 }

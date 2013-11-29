@@ -51,6 +51,7 @@ public class V_accueil extends JFrame {
 	    */
 	    this.setResizable(false);
 
+
 	    /**
 		 * ICONE DE l'application
 		 * @author Zoubert hanem

@@ -101,8 +101,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		}
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
-			
+			System.out.println("test");
 			
 		}
 }
