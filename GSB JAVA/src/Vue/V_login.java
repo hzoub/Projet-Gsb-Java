@@ -4,13 +4,15 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
+import Modele.Modele;
 /**
  * 
  * @author zoubert hanem
  *@version 1.0
  */
 @SuppressWarnings("serial")
-public class V_login extends JFrame implements ActionListener {
+public class V_login extends JFrame implements ActionListener, KeyListener {
 		
 		private JLabel imgLogo;
 		private JLabel lblTitre;
@@ -20,7 +22,7 @@ public class V_login extends JFrame implements ActionListener {
 		private JPasswordField jtfMdp;
 	
 		private JButton btnValider;
-		private JButton bntEffacer;
+		private JButton btnEffacer;
 		private Color bgColor;
 		private JPanel panelForm;
 		private JPanel formulaire;
@@ -81,12 +83,22 @@ public class V_login extends JFrame implements ActionListener {
 			this.espace.setPreferredSize(new Dimension(220,15));
 			
 			//Bouttons
+			
 			this.btnValider = new JButton("Valider");
-			this.bntEffacer = new JButton("Effacer");
+			this.btnEffacer = new JButton("Effacer");
+			
+	
 			
 			//ajout action boutton valider
 			this.btnValider.addActionListener(this);
-			
+			this.btnEffacer.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+				jtfId.setText("");
+				jtfMdp.setText("");
+				}
+			});
 			//AJOUT COULEUR DE FOND DES PANELS
 			this.bgColor = Color.decode("#77aadd");
 			this.setBackground(bgColor);
@@ -105,15 +117,16 @@ public class V_login extends JFrame implements ActionListener {
 			this.panelForm.add(this.jtfMdp);
 			this.panelForm.add(this.espace);
 			this.panelForm.add(this.btnValider);
-			this.panelForm.add(this.bntEffacer);
+			this.panelForm.add(this.btnEffacer);
 			
-			
+			this.addKeyListener(this);
 			
 			//AJOUT DU FORMULAIRE DANS LE PANEL
 			this.getContentPane().add(this.formulaire);
 			this.setVisible(true);
 		}
 
+		  
 		/**
 		 * @return l'identifiant du visiteur
 		 */
@@ -128,13 +141,42 @@ public class V_login extends JFrame implements ActionListener {
 			 * si il est vide il affiche un popup si non il ouvre la fenêtre V_accueil
 			 * @author zoubert hanem
 			 */
+			Boolean result = Modele.Connexion(jtfId.getText(), jtfMdp.getText());
+			
 			if(jtfId.getText().isEmpty()){
 				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else if (jtfMdp.getText().isEmpty()){
+				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre mot de passe","Erreur",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			else if (result==false){
+				JOptionPane.showMessageDialog(null,"Indentifiant ou mot de passe incorrect","Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
 			else{
 				this.dispose();
 				V_accueil v = new V_accueil();
 				v.setVisible(true);
 			}
+			
+		}
+		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			System.out.println("test1");
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			System.out.println("test2");
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
 		}
 }

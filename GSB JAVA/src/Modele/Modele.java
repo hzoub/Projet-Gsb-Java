@@ -21,7 +21,51 @@ public class Modele {
 			}
 		return connexion;
 	 }
+	
+	/**
+	 * Connexion membre
+	 * @author Fraizy Brandon
+	 */
+	
+	public static boolean Connexion(String login, String mdp) {
+		//Connexion
+	
+		String mdp_2 = null;
+		
+		boolean result = false;
+		
+		try {
+			PreparedStatement st = dbconnect().prepareStatement("SELECT login, mdp FROM visiteur WHERE comptable=0");
+			ResultSet rs = st.executeQuery(); 
 			
+			rs.next();
+				
+				login = rs.getString(1);
+				mdp_2 = rs.getString(2);
+				
+				if (mdp_2.equals(mdp)){
+					
+				result=true;
+			}
+			
+		}
+				catch (SQLException e) {
+					System.out.println(e);
+				}
+				
+				finally{
+					
+					  try{
+						   //fermeture de la connexion
+						   dbconnect().close();
+					  }
+					 
+					  catch(Exception e){
+						   e.printStackTrace();
+					  }
+				}
+		return result;
+		}
 		/**
 		 * Fonction qui renvoie un ArrayList de type Visiteur
 		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
