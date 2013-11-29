@@ -15,7 +15,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
-	private static JComboBox<String>choixVisiteur;
+	private JComboBox<String>choixVisiteur;
 	private JLabel lblChoixMois;
 	private JComboBox<Date>choixMois;
 	private JPanel panelForm;
@@ -98,12 +98,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
 	}
-		/**
-		 * @return le visiteur
-		 */
-		/*public static String getChoixVisiteur() {
-			return	choixVisiteur.getSelectedItem().toString();  
-		}*/
+
 		/**
 		 * @return le boutton "Valider"
 		 */

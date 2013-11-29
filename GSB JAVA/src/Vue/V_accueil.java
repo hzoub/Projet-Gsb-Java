@@ -87,7 +87,7 @@ public class V_accueil extends JFrame {
 		 * Tableau visiteur
 		 */
 		this.listeVisiteurs = new V_afficherVisiteur();
-		
+		this.listeVisiteurs.setBackground(bgColor);
 		/*
 		 * MENU BAR
 		 */
@@ -114,6 +114,7 @@ public class V_accueil extends JFrame {
 										"<h1 style=\"font-family:Comic Sans MS\">"+
 											"Visiteur : "+V_login.getJtfId().getText()+
 										"</h1>",JLabel.CENTER);
+		this.nomVisiteur.setPreferredSize(new Dimension(700,50));
 		/*
 		 * AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		 */
