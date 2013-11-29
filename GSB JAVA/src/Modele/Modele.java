@@ -24,13 +24,13 @@ public class Modele {
 		/**
 		 * Fonction qui renvoie les visiteurs
 		 * @author Zoubert hanem
-		 * @return rs
+		 * @return lesVisiteurs
 		 */
 		public static  ResultSet getLesVisiteurs() {
-			ResultSet rs = null;
+			ResultSet lesVisiteurs = null;
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
-				rs = st.executeQuery(); 	
+				lesVisiteurs = st.executeQuery(); 	
 			} catch (SQLException e) {
 				System.out.println(e);
 			}
@@ -43,6 +43,6 @@ public class Modele {
 					   e.printStackTrace();
 				   }
 				 }
-			return rs ;
+			return lesVisiteurs ;
 		}		
 }
