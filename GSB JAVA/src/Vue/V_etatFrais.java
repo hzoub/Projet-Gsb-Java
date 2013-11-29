@@ -31,7 +31,7 @@ public class V_etatFrais extends JPanel{
 	public V_etatFrais(Visiteur visiteur){
 		
 		this.panStatut = new JPanel();
-		this.panStatut.setPreferredSize(new Dimension(300,50));
+		this.panStatut.setPreferredSize(new Dimension(400,50));
 		
 		this.bgColor = Color.decode("#77aadd");
 		
@@ -59,17 +59,20 @@ public class V_etatFrais extends JPanel{
 			"</h2>");
 	
 		this.listeStatut = new JComboBox<String>();
+
 		
 		for(int i=0; i<Modele.getLesEtats().size();i++){
 			Etat etat = Modele.getLesEtats().get(i);
+			
 			this.listeStatut.addItem(etat.getlibelle());
+			System.out.println(etat.getlibelle());
 		}
 		
 		
 		this.elementFofaitises = new JLabel("<html>"+
-				"<h2 style=\"font-family:Comic Sans MS\">"+
+				"<h2 style=\"font-family:Comic Sans MS\"><u>"+
 				"Eléments fofaitisés : "+
-			"</h2>");
+				"</u></h2>");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
 		//ajout
 		this.add(this.nomVmedicale);

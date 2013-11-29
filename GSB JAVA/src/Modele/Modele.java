@@ -126,8 +126,8 @@ public class Modele {
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				
 				lesEtats.add(new Etat(libelle));
+				
 				}
 			} 
 			catch (SQLException e) {
