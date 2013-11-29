@@ -27,7 +27,7 @@ public class V_login extends JFrame implements ActionListener {
 		private JPanel panelForm;
 		private JPanel formulaire;
 		private JLabel espace;
-		private Image icone ;
+	
 		/**
 		 * Constructeur
 		 */
