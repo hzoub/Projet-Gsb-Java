@@ -1,5 +1,6 @@
 package Modele;
 import java.sql.*;
+import java.util.ArrayList;
 public class Modele {
 		
 	/**
@@ -22,19 +23,38 @@ public class Modele {
 	 }
 			
 		/**
-		 * Fonction qui renvoie les visiteurs
+		 * Fonction qui renvoie un ArrayList de type Visiteur
+		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
 		 * @author Zoubert hanem
 		 * @return lesVisiteurs
+		 * 
 		 */
-		public static  ResultSet getLesVisiteurs() {
-			ResultSet lesVisiteurs = null;
+	
+		public static  ArrayList<Visiteur> getLesVisiteurs() {
+			//Collection les visiteurs
+			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT * FROM visiteur WHERE comptable=0 ORDER BY id");
-				lesVisiteurs = st.executeQuery(); 	
-			} catch (SQLException e) {
-				System.out.println(e);//aaa
+				PreparedStatement st = dbconnect().prepareStatement("SELECT id, nom, prenom FROM visiteur WHERE comptable=0 ORDER BY id");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String id = rs.getString("id");
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					lesVisiteurs.add(new Visiteur(id, nom, prenom));
+					
+				}
+				
+			} 
+			
+			catch (SQLException e) {
+				System.out.println(e);
 			}
+			
 			finally{
+				
 				   try{
 					   //fermeture de la connexion
 					   dbconnect().close();

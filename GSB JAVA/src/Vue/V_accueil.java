@@ -23,6 +23,7 @@ public class V_accueil extends JFrame {
 	private JPanel panAccueil;
 	private Color bgColor;
 	private V_etatFrais ficheFrais;
+	private V_afficherVisiteur listeVisiteurs;
 
 	/**
 	* Constructeur..
@@ -83,6 +84,11 @@ public class V_accueil extends JFrame {
 		this.panAccueil.setBackground(bgColor);
 		
 		/*
+		 * Tableau visiteur
+		 */
+		this.listeVisiteurs = new V_afficherVisiteur();
+		
+		/*
 		 * MENU BAR
 		 */
 		this.menu = new JMenuBar();
@@ -128,8 +134,11 @@ public class V_accueil extends JFrame {
 		
 		/*
 		 * Ajout du label nomVisiteur dans le panel "paneAccueil"
+		 * Ajout du tableau listeVisiteur dans le panel "paneAccueil"
 		 */
 		this.panAccueil.add(nomVisiteur);
+		this.panAccueil.add(listeVisiteurs);
+		
 		
 		/*
 		 * Ajout du panel "panAccueil" dans la fenêtre
