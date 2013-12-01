@@ -184,7 +184,7 @@ public class Modele {
 		 * @return 
 		 * 
 		 */
-		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, int mois) {
+		public static  ArrayList<FraisForfait> getFraisForfaitVisiteur(String idVisiteur, int mois) {
 			
 			ArrayList<FraisForfait> fraisForfait= new ArrayList<FraisForfait>();
 			
