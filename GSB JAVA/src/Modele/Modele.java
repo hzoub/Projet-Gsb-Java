@@ -179,7 +179,7 @@ public class Modele {
 		
 		
 		/**
-		 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+		 * Retourne toutes les lignes de frais au forfait d'un visiteur
 		 * @author Zoubert hanem
 		 * @return 
 		 * 
