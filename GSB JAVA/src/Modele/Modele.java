@@ -1,10 +1,12 @@
 package Modele;
 import java.sql.*;
 import java.util.ArrayList;
+
+import Vue.V_login;
 public class Modele {
 		
 	/**
-	 * Fonction qui permet la connexion ï¿½ la base de donnï¿½es
+	 * Fonction qui permet la connexion à la base de données
 	 * @return connexion
 	 * @author Zoubert hanem
 	 */
@@ -68,7 +70,7 @@ public class Modele {
 		}
 		/**
 		 * Fonction qui renvoie un ArrayList de type Visiteur
-		 * Permet d'ajouter le rï¿½sultat de la requï¿½te dans la collection <Visiteur>
+		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
 		 * @author Zoubert hanem
 		 * @return lesVisiteurs
 		 * 
@@ -230,8 +232,6 @@ public class Modele {
 				String nomC=rs.getString("nom");
 				String prenomC=rs.getString("prenom");
 				NomPrenom = nomC + prenomC;
-				
-				
 			} 
 			
 			catch (SQLException e) {

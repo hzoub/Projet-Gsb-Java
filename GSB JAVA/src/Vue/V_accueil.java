@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
+import Modele.Modele;
 /**
  * @author Aguiar Folaké
  *@version 1.0
@@ -23,6 +25,7 @@ public class V_accueil extends JFrame {
 	private Color bgColor;
 	private V_etatFrais ficheFrais;
 	private V_afficherVisiteur listeVisiteurs;
+	private JLabel lstVisiteur;
 
 	/**
 	* Constructeur..
@@ -110,7 +113,8 @@ public class V_accueil extends JFrame {
 		
 		this.lstVisiteur= new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
 		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
-		 * AJOUT DE "JMenuBar->menu" DANS LA FENETRE
+		
+		 /* AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		 */
 		this.setJMenuBar(menu);
 	
