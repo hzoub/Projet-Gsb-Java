@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Modele {
 		
 	/**
-	 * Fonction qui permet la connexion à la base de données
+	 * Fonction qui permet la connexion ï¿½ la base de donnï¿½es
 	 * @return connexion
 	 * @author Zoubert hanem
 	 */
@@ -68,7 +68,7 @@ public class Modele {
 		}
 		/**
 		 * Fonction qui renvoie un ArrayList de type Visiteur
-		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
+		 * Permet d'ajouter le rï¿½sultat de la requï¿½te dans la collection <Visiteur>
 		 * @author Zoubert hanem
 		 * @return lesVisiteurs
 		 * 
@@ -214,5 +214,40 @@ public class Modele {
 				   }
 				 }
 			return fraisForfait ;
+		}
+		/**
+		 * @author bfraizy
+		 * @return le nom et le prenom du comptable
+		 */
+		public static String getNomPrenomC(){
+			
+			String NomPrenom = null;
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT  nom, prenom FROM visiteur WHERE login ='"+V_login.getJtfId().getText()+"';");
+				ResultSet rs = st.executeQuery(); 
+				
+				String nomC=rs.getString("nom");
+				String prenomC=rs.getString("prenom");
+				NomPrenom = nomC + prenomC;
+				
+				
+			} 
+			
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			
+			return NomPrenom;
 		}
 }
