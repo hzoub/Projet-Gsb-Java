@@ -219,7 +219,7 @@ public class Modele {
 			return fraisForfait ;
 		}
 		/**
-		 * @author bfraizy
+		 * @author Fraizy Brandon
 		 * @return le nom et le prenom du comptable
 		 */
 		
