@@ -1,7 +1,10 @@
 package Modele;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import Vue.V_login;
 public class Modele {
 		
@@ -69,6 +72,7 @@ public class Modele {
 				}
 		return result;
 		}
+	
 		/**
 		 * Fonction qui renvoie un ArrayList de type Visiteur
 		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
@@ -184,7 +188,9 @@ public class Modele {
 		/**
 		 * Retourne toutes les lignes de frais au forfait d'un visiteur
 		 * @author Zoubert hanem
-		 * @return 
+		 * @param idVisiteur
+		 * @param mois
+		 * @return fraisForfait
 		 * 
 		 */
 		public static  ArrayList<FraisForfait> getFraisForfaitVisiteur(String idVisiteur, int mois) {
@@ -218,12 +224,11 @@ public class Modele {
 				 }
 			return fraisForfait ;
 		}
+		
 		/**
 		 * @author Fraizy Brandon
 		 * @return le nom et le prenom du comptable
 		 */
-		
-		
 		public static  ArrayList<Visiteur> getNomPrenomC(){
 			
 			 ArrayList<Visiteur> NomPrenom =  new ArrayList<Visiteur>();
@@ -251,8 +256,7 @@ public class Modele {
 				   catch(Exception e){
 					   e.printStackTrace();
 				   }
-				 }
-			
+				 }	
 			return NomPrenom;
 		}
 }
