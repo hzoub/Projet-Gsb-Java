@@ -10,6 +10,7 @@ public class Modele {
 	 * @return connexion
 	 * @author Zoubert hanem
 	 */
+	 
 	public static Connection dbconnect(){
 		Connection connexion = null;
 		try {
@@ -221,17 +222,21 @@ public class Modele {
 		 * @author bfraizy
 		 * @return le nom et le prenom du comptable
 		 */
-		public static String getNomPrenomC(){
+		
+		
+		public static  ArrayList<Visiteur> getNomPrenomC(){
 			
-			String NomPrenom = null;
+			 ArrayList<Visiteur> NomPrenom =  new ArrayList<Visiteur>();
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT  nom, prenom FROM visiteur WHERE login ='"+V_login.getJtfId().getText()+"';");
 				ResultSet rs = st.executeQuery(); 
-				
-				String nomC=rs.getString("nom");
-				String prenomC=rs.getString("prenom");
-				NomPrenom = nomC + prenomC;
+				while(rs.next()){	
+					
+					String nomC = rs.getString("nom");
+					String prenomC = rs.getString("prenom");
+					NomPrenom.add(new Visiteur(null, nomC, prenomC));
+				}
 			} 
 			
 			catch (SQLException e) {

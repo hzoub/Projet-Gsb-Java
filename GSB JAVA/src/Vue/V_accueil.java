@@ -1,10 +1,9 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import Modele.Modele;
+import Modele.Visiteur;
 /**
  * @author Aguiar Folaké
  *@version 1.0
@@ -25,6 +24,7 @@ public class V_accueil extends JFrame {
 	private Color bgColor;
 	private V_etatFrais ficheFrais;
 	private V_afficherVisiteur listeVisiteurs;
+	private String nom,prenom;
 	private JLabel lstVisiteur;
 
 	/**
@@ -101,17 +101,27 @@ public class V_accueil extends JFrame {
 		this.deconnexion = new JMenuItem("Deconnexion");
 		this.consulter = new JMenuItem("Consulter");
 		this.ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
+
+
+		
 		
 		/*
 		 * Label visiteur
 		 */
-	this.nomVisiteur= new JLabel("<html>"+
+
+		//Recupere le nom et le prenom du visiteur
+		for(int i =0; i<Modele.getNomPrenomC().size(); i++){
+			Visiteur comptable = Modele.getNomPrenomC().get(i); 
+			nom = comptable.getNom();
+			prenom = comptable.getPrenom();
+		}
+		this.nomVisiteur= new JLabel("<html>"+
 										"<h1 style=\"font-family:Comic Sans MS\">"+
-											"Comptable : "+ Modele.getNomPrenomC()+//V_login.getJtfId().getText()+
+											"Comptable : "+nom+" "+prenom+
 										"</h1></html>",JLabel.CENTER);
 		this.nomVisiteur.setPreferredSize(new Dimension(700,50));
 		
-		this.lstVisiteur= new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
+		this.lstVisiteur = new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
 		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
 		
 		 /* AJOUT DE "JMenuBar->menu" DANS LA FENETRE
