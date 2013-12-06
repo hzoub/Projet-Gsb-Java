@@ -102,12 +102,14 @@ public class V_accueil extends JFrame {
 		/*
 		 * Label visiteur
 		 */
-		this.nomVisiteur= new JLabel("<html>"+
+	this.nomVisiteur= new JLabel("<html>"+
 										"<h1 style=\"font-family:Comic Sans MS\">"+
-											"Visiteur : "+V_login.getJtfId().getText()+
-										"</h1>",JLabel.CENTER);
+											"Comptable : "+ Modele.getNomPrenomC()+//V_login.getJtfId().getText()+
+										"</h1></html>",JLabel.CENTER);
 		this.nomVisiteur.setPreferredSize(new Dimension(700,50));
-		/*
+		
+		this.lstVisiteur= new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
+		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
 		 * AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		 */
 		this.setJMenuBar(menu);
