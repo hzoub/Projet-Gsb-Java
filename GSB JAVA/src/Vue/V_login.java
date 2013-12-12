@@ -137,13 +137,14 @@ public class V_login extends JFrame implements ActionListener {
 		@SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			Boolean result = Modele.Connexion(jtfId.getText(), jtfMdp.getText());
+			
 			/**
 			 * Verifier si le champ identifiant est vide ou pas
 			 * si il est vide il affiche un popup si non il ouvre la fenêtre V_accueil
 			 * @author zoubert hanem
 			 */
-			Boolean result = Modele.Connexion(jtfId.getText(), jtfMdp.getText());
-			
 			if(jtfId.getText().isEmpty()){
 				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -152,6 +153,12 @@ public class V_login extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre mot de passe","Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
 			
+			/**
+			 * Verifier si l'identifiant est le mot de passe saisie 
+			 * est incorrect si non si c'est correct il ferme la fenêtre V_login 
+			 * et ouvre la fenêtre V_accueil.
+			 * @author zoubert hanem
+			 */
 			else if (result==false){
 				JOptionPane.showMessageDialog(null,"Indentifiant ou mot de passe incorrect","Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
