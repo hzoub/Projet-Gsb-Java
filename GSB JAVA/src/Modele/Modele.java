@@ -195,7 +195,7 @@ public class Modele {
 				
 				while(rs.next()){
 					
-					String mois = rs.getString("mois");
+					int mois = rs.getInt("mois");
 					lesMoisVisiteur.add(new Mois(mois));
 					
 					

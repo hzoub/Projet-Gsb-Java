@@ -166,7 +166,7 @@ public class V_accueil extends JFrame {
 				/*
 				 * Panel fiche frais
 				 */
-				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur());
+				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur(),choixVis.getChoixMois());
 				ficheFrais.setBackground(bgColor);
 				setContentPane(ficheFrais);
 				setVisible(true);
