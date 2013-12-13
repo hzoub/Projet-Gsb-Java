@@ -34,7 +34,7 @@ public class V_etatFrais extends JPanel{
 	    
 	    private JButton bntValider;
 	    
-	public V_etatFrais(String visiteur){
+	public V_etatFrais(String visiteur, int mois){
 		
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(400,50));
@@ -55,9 +55,10 @@ public class V_etatFrais extends JPanel{
 		this.nomVmedicale.setPreferredSize(new Dimension(700,30));
 		
 		
+		
 		this.date = new JLabel("<html>"+
 									"<h2 style=\"font-family:Comic Sans MS\">"+
-									"Fiche de frais du mois : "+
+									"Fiche de frais du mois : "+mois+
 								"</h2>");
 		this.date.setPreferredSize(new Dimension(700,30));
 		
