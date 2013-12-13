@@ -2,10 +2,7 @@ package Modele;
 
 public class Mois {
 
-	static String  unMois;
-	
-
-
+	private String  unMois;
 
 	public Mois(String unMois) {
 	
@@ -13,8 +10,7 @@ public class Mois {
 	}
 
 
-
-	public static String getUnMois() {
+	public  String getUnMois() {
 		
 		return unMois;
 	}

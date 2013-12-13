@@ -22,7 +22,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private Color bgColor;
 	private static JButton btnValider;
 	private JLabel espace;
-
+	private String nomVisiteur;
+	private String idVisiteur;
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -59,18 +60,37 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
+		/**
+		 * Action liste deroulante visiteur
+		 * @author hzoubert
+		 */
+		this.choixVisiteur.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Recupere le nom selectionné
+				nomVisiteur = (String) choixVisiteur.getSelectedItem();
+				
+				for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
+					
+					Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
+					idVisiteur = visiteur.getId();	
+				}
+				
+				System.out.println(idVisiteur);
+				for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
+					Mois mois = Modele.getLesMois(idVisiteur).get(i);
+					choixMois.addItem(mois.getUnMois());
+				}
+			}
+		});
+		
 		//LABEL mois
 		this.lblChoixMois = new JLabel("Mois :");
 		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
 		
 		//Liste deroulante mois
 		this.choixMois = new JComboBox<String>();
-			String test ="zsedhjd";
-			
-		for(int i=0; i<Modele.getLesMois(test).size();i++){
-		
-			this.choixMois.addItem(Mois.getUnMois());
-		}
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
@@ -99,7 +119,11 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
+		
+		
 	}
+	
+
 	
 	/**
 	 * @return le visiteur

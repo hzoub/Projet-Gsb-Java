@@ -110,7 +110,36 @@ public class Modele {
 				 }
 			return lesVisiteurs ;
 		}	
-		
+		/**
+		 * @author hzoubert
+		 */
+		public static  ArrayList<Visiteur> getIdVisiteur(String nom) {
+			//Collection les visiteurs
+			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT id FROM visiteur WHERE nom='"+nom+"'");
+				ResultSet rs = st.executeQuery(); 
+				while(rs.next()){
+					String id = rs.getString("id");
+					lesVisiteurs.add(new Visiteur(id, null, null));	
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesVisiteurs ;
+		}	
 		/**
 		 * 
 		 * @author Zoubert hanem
@@ -161,13 +190,12 @@ public class Modele {
 			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE id="+idVisiteur
-						 											);
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"'");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
 					
-					String mois = rs.getString("idVisiteur");
+					String mois = rs.getString("mois");
 					lesMoisVisiteur.add(new Mois(mois));
 					
 					
