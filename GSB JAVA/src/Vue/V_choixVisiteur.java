@@ -17,7 +17,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private JLabel lblChoixVisiteur;
 	private JComboBox<String>choixVisiteur;
 	private JLabel lblChoixMois;
-	private JComboBox<Date>choixMois;
+	private JComboBox<String>choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
 	private static JButton btnValider;
@@ -64,7 +64,15 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
 		
 		//Liste deroulante mois
-		this.choixMois = new JComboBox<Date>();
+		this.choixMois = new JComboBox<String>();
+			String test ="zsedhjd";
+			
+		for(int i=0; i<Modele.getLesMois(test).size();i++){
+		
+			this.choixMois.addItem(Mois.getUnMois());
+		}
+		this.choixMois.setPreferredSize(new Dimension(150,20));
+		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
 		//Espace entre les labels est les bouttons

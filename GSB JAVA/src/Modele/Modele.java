@@ -150,6 +150,46 @@ public class Modele {
 		}	
 		
 		/**
+		 * Fonction retournant les dates des visiteurs 
+		 * @author bfraizy
+		 * lesMois
+		 * return les mois
+		 */
+		
+		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
+			//Collection les visiteurs
+			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
+			try {
+				
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE id="+idVisiteur
+						 											);
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String mois = rs.getString("idVisiteur");
+					lesMoisVisiteur.add(new Mois(mois));
+					
+					
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{	
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesMoisVisiteur ;
+		}	
+		
+		
+		/**
 		 * Fonction qui renvoie les etats
 		 * @author Zoubert hanem
 		 * @return lesEtats
