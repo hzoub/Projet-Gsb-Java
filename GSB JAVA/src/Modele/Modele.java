@@ -190,7 +190,7 @@ public class Modele {
 			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"'");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"'");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
