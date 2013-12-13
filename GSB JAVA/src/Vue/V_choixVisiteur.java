@@ -1,7 +1,6 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import Modele.*;
@@ -24,6 +23,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private JLabel espace;
 	private String nomVisiteur;
 	private String idVisiteur;
+	private int moisFiche;
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -77,10 +77,17 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 					idVisiteur = visiteur.getId();	
 				}
 				
-				System.out.println(idVisiteur);
+				
+				choixMois.removeAllItems();
 				for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
-					Mois mois = Modele.getLesMois(idVisiteur).get(i);
+					Mois mois = Modele.getLesMois(idVisiteur).get(i);	
 					choixMois.addItem(mois.getUnMois());
+					moisFiche = (int) choixMois.getSelectedItem();
+				}
+				
+				
+				if(moisFiche==0){
+					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","",JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
