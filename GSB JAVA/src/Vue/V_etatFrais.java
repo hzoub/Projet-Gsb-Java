@@ -139,7 +139,7 @@ public class V_etatFrais extends JPanel{
 			this.DescElHorFofais[i][2] = fhf.getMontant();
 		}
 		this.scrollDescElHorFofais = new JScrollPane(tblDescElHorFofais);
-		this.scrollDescElHorFofais.setPreferredSize(new Dimension(730,85));
+		this.scrollDescElHorFofais.setPreferredSize(new Dimension(730,50));
 		/*-------------------------------------------------------------*/
 		
 		//boutton valider
