@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import Vue.V_login;
 public class Modele {
 		
@@ -254,27 +255,26 @@ public class Modele {
 		
 		
 		/**
-		 * Retourne toutes les lignes de frais au forfait d'un visiteur
+		 * Retourne toutes la lignefraisforfait d'un visiteur
 		 * @author Zoubert hanem
 		 * @param idVisiteur
-		 * @param mois
+		 * @param mois sous la forme aaaamm
 		 * @return fraisForfait
-		 * 
+		 * @author Zoubert Hanem
 		 */
-		public static  ArrayList<FraisForfait> getFraisForfaitVisiteur(String idVisiteur, int mois) {
+		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, Object mois) {
 			
-			ArrayList<FraisForfait> fraisForfait= new ArrayList<FraisForfait>();
+			ArrayList<FraisForfait> fraisForfait = new ArrayList<FraisForfait>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT quantite"+
-						                                             "FROM fraisforfait,lignefraisforfait"+
-																	 "WHERE fraisforfait.id = lignefraisforfait.idFraisForfait "+
-						                                             "AND idVisiteur = '"+idVisiteur+"' AND mois = '"+mois+"' ");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT quantite FROM lignefraisforfait,fraisforfait WHERE idVisiteur ='"+idVisiteur+"' AND mois ='"+mois+"' AND fraisforfait.id = lignefraisforfait.idFraisForfait ORDER BY idFraisForfait");
 				ResultSet	rs = st.executeQuery(); 	
 				
 				while(rs.next()){
+					
 					int qte = rs.getInt("quantite");
 					fraisForfait.add(new FraisForfait(qte));
+					break;
 				}
 				
 			} 

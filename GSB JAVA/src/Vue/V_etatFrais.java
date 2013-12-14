@@ -34,6 +34,9 @@ public class V_etatFrais extends JPanel{
 	    
 	    private JButton bntValider;
 	    
+	    private int ForfaitEtape;
+	    private String idVisiteur;
+	    
 	public V_etatFrais(String visiteur, Object mois){
 		
 		this.panStatut = new JPanel();
@@ -75,9 +78,30 @@ public class V_etatFrais extends JPanel{
 		
 		}
 		
+		/**
+		 * Cette fonction recupére l'idVisiteur en fonction de son nom
+		 * @author Zoubert Hanem
+		 */
+		for (int i = 0; i <Modele.getIdVisiteur(visiteur).size(); i++) {
+			
+			Visiteur visit = Modele.getIdVisiteur(visiteur).get(i);
+			idVisiteur = visit.getId();
+		}
 		
 		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
+		
+		/**
+		 * @author Zoubert Hanem
+		 */
+		for(int i =0; i<Modele.getLesFraisForfait(idVisiteur, mois).size(); i++){
+			
+			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur, mois).get(i);
+
+			System.out.println(fiche.getForfaitEtape());
+	
+
+		}
 		
 		/**TABLEAU 1**/
 		//Entete
@@ -91,10 +115,10 @@ public class V_etatFrais extends JPanel{
   
 		for (int i=0 ; i<1 ;i++){
 		
-			
-			this.donneesElFofaitises[i][0] = "";
+			this.donneesElFofaitises[i][0] = this.ForfaitEtape;
 			this.donneesElFofaitises[i][1] = "";
 			this.donneesElFofaitises[i][2] = "";
+			this.donneesElFofaitises[i][3] ="";
 		}
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
 		this.scrollElFofaitises.setPreferredSize(new Dimension(730, 60));
