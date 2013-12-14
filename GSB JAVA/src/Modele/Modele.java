@@ -156,7 +156,7 @@ public class Modele {
 			//String moisEncour = date.toString(); 
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND mois=201311");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND mois>=201311 ORDER BY mois DESC");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
