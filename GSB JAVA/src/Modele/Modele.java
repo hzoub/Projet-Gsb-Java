@@ -1,5 +1,6 @@
 package Modele;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -140,44 +141,7 @@ public class Modele {
 				   }
 				 }
 			return lesVisiteurs ;
-		}	
-		/**
-		 * 
-		 * @author Zoubert hanem
-		 * @param idVisiteur
-		 * @return leVisiteur
-		 */
-		public static  ArrayList<Visiteur> getLeVisiteur(String idVisiteur) {
-			//Collection les visiteurs
-			ArrayList<Visiteur>leVisiteur = new ArrayList<Visiteur>();
-			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT id, nom, prenom FROM visiteur WHERE comptable=0 +"+
-						 											"AND id='"+idVisiteur+"'"+
-						 											"ORDER BY id");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String id = rs.getString("id");
-					String nom = rs.getString("nom");
-					String prenom = rs.getString("prenom");
-					leVisiteur.add(new Visiteur(id, nom, prenom));	
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{	
-				   try{
-					   //fermeture de la connexion
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return leVisiteur ;
-		}	
+		}		
 		
 		/**
 		 * Fonction retournant les dates des visiteurs 
@@ -267,14 +231,14 @@ public class Modele {
 			ArrayList<FraisForfait> fraisForfait = new ArrayList<FraisForfait>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT quantite FROM lignefraisforfait,fraisforfait WHERE idVisiteur ='"+idVisiteur+"' AND mois ='"+mois+"' AND fraisforfait.id = lignefraisforfait.idFraisForfait ORDER BY idFraisForfait");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle,quantite FROM lignefraisforfait,fraisforfait WHERE idVisiteur ='"+idVisiteur+"' AND mois ='"+mois+"' AND fraisforfait.id = lignefraisforfait.idFraisForfait ORDER BY idFraisForfait");
 				ResultSet	rs = st.executeQuery(); 	
 				
 				while(rs.next()){
 					
+					String lib = rs.getString("libelle");
 					int qte = rs.getInt("quantite");
-					fraisForfait.add(new FraisForfait(qte));
-					break;
+					fraisForfait.add(new FraisForfait(lib, qte));
 				}
 				
 			} 
@@ -293,6 +257,46 @@ public class Modele {
 			return fraisForfait ;
 		}
 		
+		/**
+		 * Retourne toutes toutes les lignes de frais hors forfait
+		 * @author Zoubert hanem
+		 * @param idVisiteur
+		 * @param mois sous la forme aaaamm
+		 * @return fraisForfait
+		 * @author Zoubert Hanem
+		 */
+		public static  ArrayList<FraisHorsForfait> getLesFraisHorsForfait(String idVisiteur, Object mois) {
+			
+			ArrayList<FraisHorsForfait> fraisHorsForfait = new ArrayList<FraisHorsForfait>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle,date,montant FROM lignefraishorsforfait  WHERE lignefraishorsforfait.idvisiteur ='"+idVisiteur+"'  AND lignefraishorsforfait.mois = '"+mois+"'");
+				ResultSet rs = st.executeQuery(); 	
+				
+				while(rs.next()){
+					
+					String lib = rs.getString("libelle");
+					Date date = rs.getDate("date");
+					float montant = rs.getFloat("montant");
+					
+					fraisHorsForfait.add(new FraisHorsForfait(lib,date, montant));
+				}
+				
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return fraisHorsForfait ;
+		}
 		/**
 		 * @author Fraizy Brandon
 		 * @return le nom et le prenom du comptable

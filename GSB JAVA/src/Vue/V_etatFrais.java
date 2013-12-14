@@ -34,7 +34,6 @@ public class V_etatFrais extends JPanel{
 	    
 	    private JButton bntValider;
 	    
-	    private int ForfaitEtape;
 	    private String idVisiteur;
 	    
 	public V_etatFrais(String visiteur, Object mois){
@@ -91,64 +90,58 @@ public class V_etatFrais extends JPanel{
 		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
 		
-		/**
-		 * @author Zoubert Hanem
-		 */
-		for(int i =0; i<Modele.getLesFraisForfait(idVisiteur, mois).size(); i++){
-			
-			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur, mois).get(i);
-
-			System.out.println(fiche.getForfaitEtape());
-	
-
-		}
 		
-		/**TABLEAU 1**/
+		/**
+		 * TABLEAU 1
+		 */
 		//Entete
-    	String[]entetesElFofaitises = {"Forfait Etape","Frais Kilométrique","Nuitée Hôtel","Repas Restaurant"};
+	
+    	String[]entetesElFofaitises = {"Libellé","quantité"};
     	
     	//Définir la taille du tableau
-    	this.donneesElFofaitises = new Object[1][entetesElFofaitises.length];
+    	this.donneesElFofaitises = new Object[Modele.getLesFraisForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
     	
     
     	 this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
   
-		for (int i=0 ; i<1 ;i++){
-		
-			this.donneesElFofaitises[i][0] = this.ForfaitEtape;
-			this.donneesElFofaitises[i][1] = "";
-			this.donneesElFofaitises[i][2] = "";
-			this.donneesElFofaitises[i][3] ="";
+		for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
+			
+			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
+			this.donneesElFofaitises[i][0] = fiche.getLibelle();
+			this.donneesElFofaitises[i][1] = fiche.getQte();
 		}
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
-		this.scrollElFofaitises.setPreferredSize(new Dimension(730, 60));
-		
-		
+		this.scrollElFofaitises.setPreferredSize(new Dimension(730,85));
 		
 		this.descriptifElement = new JLabel("Descriptif des éléments hors forfait ");
 		this.descriptifElement.setPreferredSize(new Dimension(700,30));
 		
-		/**TABLEAU 2**/
-		//Entete
-    	String[]entetesDescElement = {"Date","Libellé","Montant"};
-    	
-    	//Définir la taille du tableau
-    	this.donneesDescElement = new Object[1][entetesElFofaitises.length];
-    	
-    
-    	 this.tableauDescElement = new JTable(donneesDescElement, entetesDescElement);
-  
-		for (int i=0 ; i<1 ;i++){
 		
+		for (int i=0 ; i<Modele.getLesFraisHorsForfait(idVisiteur, mois).size() ;i++){
 			
-			this.donneesDescElement[i][0] = "";
-			this.donneesDescElement[i][1] = "";
-			this.donneesDescElement[i][2] = "";
+			FraisHorsForfait fhf = Modele.getLesFraisHorsForfait(idVisiteur, mois).get(i);
+			
+			System.out.println("Libellé -> "+fhf.getLibelle());
+			System.out.println("Date -> "+fhf.getDate());
+			System.out.println("Montant -> "+fhf.getMontant()+" €");
 		}
+		
+		
+		/**
+		 * TABLEAU 2
+		 */
+		//Entete
+    	String[]entetesDescElement = {"Libellé","Date","Montant"};
+    	//Définir la taille du tableau
+    	this.donneesDescElement = new Object[Modele.getLesFraisHorsForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
+    	this.tableauDescElement = new JTable(donneesDescElement,entetesDescElement);
+		
 		this.scrollDescElement = new JScrollPane(tableauDescElement);
 		this.scrollDescElement.setPreferredSize(new Dimension(730, 60));
 		
 		this.bntValider = new JButton("Valider");
+		
+		
 		//ajout
 		this.add(this.nomVmedicale);
 		this.add(this.date);
@@ -165,7 +158,7 @@ public class V_etatFrais extends JPanel{
 
 		
 		this.add(this.descriptifElement);
-		this.add(this.scrollDescElement);
+		//this.add(this.scrollDescElement);
 		this.add(this.bntValider );
 	}
 }

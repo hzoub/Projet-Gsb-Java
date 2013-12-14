@@ -39,7 +39,7 @@ public class V_afficherVisiteur extends JPanel {
 	}
 	//Taille et scroll
 	this.scroll = new JScrollPane(tableau);
-	this.scroll.setPreferredSize(new Dimension(450, 300));
+	this.scroll.setPreferredSize(new Dimension(500, 350));
 	this.add(scroll);
   }
 

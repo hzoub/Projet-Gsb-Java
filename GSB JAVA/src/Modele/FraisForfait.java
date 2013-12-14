@@ -2,45 +2,27 @@ package Modele;
 
 public class FraisForfait {
 
-	private int forfaitEtape;
-	private int fraisKlm;
-	private int NHotel;
-	private int RepResto;
 	
-	public FraisForfait(int forfaitEtape, int fraisKlm, int nHotel, int repResto) {
-		
-		this.forfaitEtape = forfaitEtape;
-		this.fraisKlm = fraisKlm;
-		this.NHotel = nHotel;
-		this.RepResto = repResto;
+	private String libelle;
+	private int qte;
+
+	public FraisForfait(String libelle, int qte) {
+		this.libelle = libelle;
+		this.qte = qte;
 	}
-	
-	
+
 	/**
-	 * @return the forfaitEtape
+	 * @return the libelle
 	 */
-	public int getForfaitEtape() {
-		return forfaitEtape;
+	public String getLibelle() {
+		return libelle;
 	}
+
 	/**
-	 * @return the fraisKlm
+	 * @return the qte
 	 */
-	public int getFraisKlm() {
-		return fraisKlm;
+	public int getQte() {
+		return qte;
 	}
-	/**
-	 * @return the nHotel
-	 */
-	public int getNHotel() {
-		return NHotel;
-	}
-	/**
-	 * @return the repResto
-	 */
-	public int getRepResto() {
-		return RepResto;
-	}
-	
-	
 	
 }
