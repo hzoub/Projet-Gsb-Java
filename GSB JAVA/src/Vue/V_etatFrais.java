@@ -34,7 +34,7 @@ public class V_etatFrais extends JPanel{
 	    
 	    private JButton bntValider;
 	    
-	public V_etatFrais(String visiteur, int mois){
+	public V_etatFrais(String visiteur, Object mois){
 		
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(400,50));

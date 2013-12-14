@@ -1,8 +1,10 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
 import Modele.*;
 /**
  * 
@@ -60,6 +62,31 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
+		//LABEL mois
+		this.lblChoixMois = new JLabel("Mois :");
+		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
+		
+		//Liste deroulante mois
+		this.choixMois = new JComboBox<Integer>();
+		this.choixMois.setPreferredSize(new Dimension(150,20));
+		this.choixMois = new JComboBox<Integer>();
+		this.choixMois.setPreferredSize(new Dimension(150,20));
+		
+		//Recupere le nom selectionné
+		nomVisiteur = (String) choixVisiteur.getSelectedItem();
+		
+		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
+			
+			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
+			idVisiteur = visiteur.getId();	
+		}
+		
+		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
+		for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
+			Mois mois = Modele.getLesMois(idVisiteur).get(i);
+			this.choixMois.addItem(mois.getUnMois());
+		}
+		
 		/**
 		 * Action liste deroulante visiteur
 		 * @author hzoubert
@@ -85,23 +112,14 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 					moisFiche = (int) choixMois.getSelectedItem();
 				}
 				
-				
 				if(moisFiche==0){
-					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","Erreur",JOptionPane.INFORMATION_MESSAGE);
+					btnValider.setEnabled(false);
+				}else{
+					btnValider.setEnabled(true);
 				}
 			}
 		});
-		
-		//LABEL mois
-		this.lblChoixMois = new JLabel("Mois :");
-		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
-		
-		//Liste deroulante mois
-		this.choixMois = new JComboBox<Integer>();
-		this.choixMois.setPreferredSize(new Dimension(150,20));
-		this.choixMois = new JComboBox<Integer>();
-		this.choixMois.setPreferredSize(new Dimension(150,20));
-		
 		//Espace entre les labels est les bouttons
 		this.espace = new JLabel();
 		this.espace.setPreferredSize(new Dimension(220,15));
@@ -140,8 +158,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		return visiteur;
 	}
 
-	public int getChoixMois() {
-		int mois = (int) choixMois.getSelectedItem();
+	public Object getChoixMois() {
+		Object mois =  choixMois.getSelectedItem();
 		return mois;
 	}
 
