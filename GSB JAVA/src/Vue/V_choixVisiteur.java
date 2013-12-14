@@ -1,10 +1,12 @@
 package Vue;
 import java.awt.*;
-import java.awt.event.*;
 
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
 import Modele.*;
 /**
  * 
@@ -26,6 +28,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private String nomVisiteur;
 	private String idVisiteur;
 	private int moisFiche;
+	private String date;
+	private JLabel lblDate;
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -46,8 +50,12 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 				"<h1 style=\"font-family:Comic Sans MS\">"+
 					"Choix du visiteur"+
 				"</h1>",JLabel.CENTER);
-		this.lblTitre.setPreferredSize(new Dimension(800,100));
+		this.lblTitre.setPreferredSize(new Dimension(800,50));
 		
+		this.date = new SimpleDateFormat("dd-MM-yyyy", Locale.FRANCE).format(new Date());
+		
+		this.lblDate = new JLabel("Nous sommes le : "+date,JLabel.CENTER);
+		this.lblDate.setPreferredSize(new Dimension(700,50));
 		//LABEL Visiteur
 		this.lblChoixVisiteur = new JLabel("Visiteur :");
 		this.lblChoixVisiteur.setPreferredSize(new Dimension(70,10));
@@ -131,7 +139,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
-		
+		this.add(lblDate);
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);
 		this.panelForm.add(choixVisiteur);

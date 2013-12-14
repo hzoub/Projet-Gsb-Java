@@ -28,9 +28,9 @@ public class V_etatFrais extends JPanel{
 	    private JTable tableauElFofaitises;
 	    private JScrollPane scrollElFofaitises;
 	    
-	    private Object[][] donneesDescElement;
-	    private JTable tableauDescElement;
-	    private JScrollPane scrollDescElement;
+	    private Object[][] DescElHorFofais;
+	    private JTable tblDescElHorFofais;
+	    private JScrollPane scrollDescElHorFofais;
 	    
 	    private JButton bntValider;
 	    
@@ -38,6 +38,9 @@ public class V_etatFrais extends JPanel{
 	    
 	public V_etatFrais(String visiteur, Object mois){
 		
+		/**
+		 * 
+		 */
 		this.panStatut = new JPanel();
 		this.panStatut.setPreferredSize(new Dimension(400,50));
 		
@@ -69,7 +72,9 @@ public class V_etatFrais extends JPanel{
 	
 		this.listeStatut = new JComboBox<String>();
 
-		
+		/**
+		 * Liste deroulante "etat"
+		 */
 		for(int i=0; i<Modele.getLesEtats().size();i++){
 			Etat etat = Modele.getLesEtats().get(i);
 			
@@ -90,19 +95,17 @@ public class V_etatFrais extends JPanel{
 		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
 		
-		
+		/*-----------------------------------------------------------*/
 		/**
-		 * TABLEAU 1
+		 * TABLEAU Eléments fofaitisés
+		 * @author Zoubert Hanem
 		 */
 		//Entete
-	
     	String[]entetesElFofaitises = {"Libellé","quantité"};
-    	
     	//Définir la taille du tableau
     	this.donneesElFofaitises = new Object[Modele.getLesFraisForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
     	
-    
-    	 this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
+    	this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
   
 		for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
 			
@@ -111,34 +114,35 @@ public class V_etatFrais extends JPanel{
 			this.donneesElFofaitises[i][1] = fiche.getQte();
 		}
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
-		this.scrollElFofaitises.setPreferredSize(new Dimension(730,85));
+		this.scrollElFofaitises.setPreferredSize(new Dimension(730,85));		
+		/*------------------------------------------------------------*/
 		
 		this.descriptifElement = new JLabel("Descriptif des éléments hors forfait ");
-		this.descriptifElement.setPreferredSize(new Dimension(700,30));
+		this.descriptifElement.setPreferredSize(new Dimension(700,30));	
 		
-		
-		for (int i=0 ; i<Modele.getLesFraisHorsForfait(idVisiteur, mois).size() ;i++){
-			
-			FraisHorsForfait fhf = Modele.getLesFraisHorsForfait(idVisiteur, mois).get(i);
-			
-			System.out.println("Libellé -> "+fhf.getLibelle());
-			System.out.println("Date -> "+fhf.getDate());
-			System.out.println("Montant -> "+fhf.getMontant()+" €");
-		}
-		
-		
+		/*------------------------------------------------------------*/
 		/**
-		 * TABLEAU 2
+		 * TABLEAU Descriptif des éléments hors forfait
 		 */
 		//Entete
-    	String[]entetesDescElement = {"Libellé","Date","Montant"};
+		String[]entetesHorsForfait = {"Libellé","Date","Montant"};
     	//Définir la taille du tableau
-    	this.donneesDescElement = new Object[Modele.getLesFraisHorsForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
-    	this.tableauDescElement = new JTable(donneesDescElement,entetesDescElement);
+    	this.DescElHorFofais = new Object[Modele.getLesFraisHorsForfait(idVisiteur,mois).size()][entetesHorsForfait.length];
+    	
+    	this.tblDescElHorFofais = new JTable(DescElHorFofais,entetesHorsForfait);
+  
+		for (int i=0 ; i<Modele.getLesFraisHorsForfait(idVisiteur,mois).size() ;i++){
+			
+			FraisHorsForfait fhf = Modele.getLesFraisHorsForfait(idVisiteur,mois).get(i);
+			this.DescElHorFofais[i][0] = fhf.getLibelle();
+			this.DescElHorFofais[i][1] = fhf.getDate();
+			this.DescElHorFofais[i][2] = fhf.getMontant();
+		}
+		this.scrollDescElHorFofais = new JScrollPane(tblDescElHorFofais);
+		this.scrollDescElHorFofais.setPreferredSize(new Dimension(730,85));
+		/*-------------------------------------------------------------*/
 		
-		this.scrollDescElement = new JScrollPane(tableauDescElement);
-		this.scrollDescElement.setPreferredSize(new Dimension(730, 60));
-		
+		//boutton valider
 		this.bntValider = new JButton("Valider");
 		
 		
@@ -153,12 +157,18 @@ public class V_etatFrais extends JPanel{
 		//Ajout du panel "panStatut & "elementFofaitises"
 		this.add(this.panStatut);
 		
+		/**
+		 * Tableau 1
+		 */
 		this.add(this.elementFofaitises);
 		this.add(this.scrollElFofaitises);
 
-		
+		/**
+		 * Tabeau 2
+		 */
 		this.add(this.descriptifElement);
-		//this.add(this.scrollDescElement);
+		this.add(this.scrollDescElHorFofais);
+		
 		this.add(this.bntValider );
 	}
 }
