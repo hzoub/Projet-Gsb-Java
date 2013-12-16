@@ -1,5 +1,7 @@
 package Vue;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -170,5 +172,17 @@ public class V_etatFrais extends JPanel{
 		this.add(this.scrollDescElHorFofais);
 		
 		this.add(this.bntValider );
+		
+		/**
+		 * Action boutton valider
+		 */
+		this.bntValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String statut = (String) listeStatut.getSelectedItem();
+				JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
+			}
+		});
 	}
 }

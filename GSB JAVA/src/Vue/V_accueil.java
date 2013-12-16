@@ -20,15 +20,16 @@ public class V_accueil extends JFrame {
 	private JMenuItem validation ;
 	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
-	private V_choixVisiteur choixVis;
-	private JLabel nomVisiteur;
-	private JPanel panAccueil;
 	private Color bgColor;
+	private String nom,prenom;
+	//LABELS
+	private JLabel nomVisiteur;
+	private JLabel lstVisiteur;
+	//PANELS
+	private JPanel panAccueil;
+	private V_choixVisiteur choixVis;
 	private V_etatFrais ficheFrais;
 	private V_afficherVisiteur listeVisiteurs;
-	private String nom,prenom;
-	private JLabel lstVisiteur;
-
 	/**
 	* Constructeur..
 	* */
@@ -55,7 +56,7 @@ public class V_accueil extends JFrame {
 	    */
 	    this.setResizable(false);
 
-
+	    
 	    /**
 		 * ICONE DE l'application
 		 * @author Zoubert hanem
@@ -67,20 +68,20 @@ public class V_accueil extends JFrame {
 		 */
 		this.bgColor = Color.decode("#77aadd");
 		
-		/*
+		/**
 		 * Panel choixVisiteur
 		 */
 		this.choixVis = new V_choixVisiteur();
 		
+	
 		
-		
-		/*
+		/**
 		 * Panel de l'accueil
 		 */
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
 		
-		/*
+		/**
 		 * Tableau visiteur
 		 */
 		this.listeVisiteurs = new V_afficherVisiteur();
@@ -196,6 +197,7 @@ public class V_accueil extends JFrame {
 			}
 		});
 		
+
 		/**
 		 * ACTION ITEM "deconnexion"
 		 * Cette action permet de deconecter
