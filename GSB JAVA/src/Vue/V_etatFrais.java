@@ -21,6 +21,8 @@ public class V_etatFrais extends JPanel{
 		
 		private JComboBox<String>listeStatut;
 		private JLabel elementFofaitises;
+		private JLabel etatActuel;
+		private String etatAct;
 		
 		private JPanel panStatut;
 		private JPanel panLesForfais;
@@ -69,11 +71,29 @@ public class V_etatFrais extends JPanel{
 								"</h2>");
 		this.date.setPreferredSize(new Dimension(700,30));
 		
+		/**
+		 * Cette fonction recupére l'idVisiteur en fonction de son nom
+		 * @author Zoubert Hanem
+		 */
+		for (int i = 0; i <Modele.getIdVisiteur(visiteur).size(); i++) {
+			
+			Visiteur visit = Modele.getIdVisiteur(visiteur).get(i);
+			idVisiteur = visit.getId();
+		}
+		/**
+		 *
+		 */
+		for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
+			Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
+			this.etatAct = etat.getlibelle();
+		}
+		//etat actuel de la fiche du visiteur séléctionné
+		this.etatActuel = new JLabel("Etat actuel : "+this.etatAct);
 		
 		this.statutFiche = new JLabel("Statut de la fiche : ");
 	
 		this.listeStatut = new JComboBox<String>();
-
+		
 		/**
 		 * Liste deroulante "etat"
 		 */
@@ -84,16 +104,9 @@ public class V_etatFrais extends JPanel{
 		
 		}
 		
-		/**
-		 * Cette fonction recupére l'idVisiteur en fonction de son nom
-		 * @author Zoubert Hanem
-		 */
-		for (int i = 0; i <Modele.getIdVisiteur(visiteur).size(); i++) {
-			
-			Visiteur visit = Modele.getIdVisiteur(visiteur).get(i);
-			idVisiteur = visit.getId();
-		}
 		
+		
+		this.etatActuel.setPreferredSize(new Dimension(700,30));
 		this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 		this.elementFofaitises.setPreferredSize(new Dimension(700,30));
 		
@@ -152,9 +165,12 @@ public class V_etatFrais extends JPanel{
 		this.add(this.nomVmedicale);
 		this.add(this.date);
 		
+		this.add(this.etatActuel);
+		
 		//Ajout du label statut est de la liste deroulante des statuts dans le panel "panStatut"
 		this.panStatut.add(this.statutFiche);
 		this.panStatut.add(this.listeStatut);
+		
 		
 		//Ajout du panel "panStatut & "elementFofaitises"
 		this.add(this.panStatut);

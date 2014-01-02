@@ -218,6 +218,40 @@ public class Modele {
 			return lesEtats ;
 		}
 		
+		/**
+		 * Fonction qui renvoie l'etat actuel de la fiche du visiteur séléctionné
+		 * @author Zoubert hanem
+		 * @return lesEtats
+		 * 
+		 */
+		public static  ArrayList<Etat> getEtatActuel(String idVisiteur,Object mois) {
+			
+		ArrayList<Etat> lesEtats = new ArrayList<Etat>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat, fichefrais WHERE etat.id=fichefrais.idEtat AND idVisiteur ='"+idVisiteur+"' AND mois ='"+mois+"'");
+				ResultSet rs = st.executeQuery(); 	
+				while(rs.next()){
+				
+				String libelle = rs.getString("libelle");
+				lesEtats.add(new Etat(libelle));
+				
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesEtats ;
+		}
 		
 		/**
 		 * Retourne toutes la lignefraisforfait d'un visiteur
