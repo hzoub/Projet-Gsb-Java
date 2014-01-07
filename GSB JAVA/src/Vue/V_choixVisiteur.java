@@ -1,12 +1,13 @@
 package Vue;
 import java.awt.*;
-
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
 import Modele.*;
 /**
  * 
@@ -20,7 +21,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private JLabel lblChoixVisiteur;
 	private JComboBox<String>choixVisiteur;
 	private JLabel lblChoixMois;
-	private JComboBox<Integer>choixMois;
+	private JComboBox<String> choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
 	private static JButton btnValider;
@@ -75,9 +76,9 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
 		
 		//Liste deroulante mois
-		this.choixMois = new JComboBox<Integer>();
+		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
-		this.choixMois = new JComboBox<Integer>();
+		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
 		//Recupere le nom selectionné
@@ -166,8 +167,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		return visiteur;
 	}
 
-	public Object getChoixMois() {
-		Object mois =  choixMois.getSelectedItem();
+	public String  getChoixMois() {
+		String mois =  (String) choixMois.getSelectedItem();
 		return mois;
 	}
 

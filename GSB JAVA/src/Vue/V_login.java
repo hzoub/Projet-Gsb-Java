@@ -138,7 +138,7 @@ public class V_login extends JFrame implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			Boolean result = Modele.Connexion(jtfId.getText(), jtfMdp.getText());
+			Boolean result = Modele.connexion(jtfId.getText(), jtfMdp.getText());
 			
 			/**
 			 * Verifier si le champ identifiant est vide ou pas

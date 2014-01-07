@@ -40,13 +40,13 @@ public class V_etatFrais extends JPanel{
 	    
 	    private String idVisiteur;
 	    
-	    private int qteElFofaitises;
 	    /*---Descriptif des éléments hors forfait---*/
 	    private  String libelleElHorFofais ;
 	    private String dateElHorFofais ;
 	    private float montantElHorFofais ;
 		
-	public V_etatFrais(String visiteur, final Object mois){
+	    private int [] tabQte;
+	public V_etatFrais(String visiteur, final String mois){
 		
 		/**
 		 * 
@@ -126,13 +126,15 @@ public class V_etatFrais extends JPanel{
     	
     	this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
     	
+    	tabQte = new int[Modele.getLesFraisForfait(idVisiteur,mois).size()];
 		for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
 			
 			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
 			this.donneesElFofaitises[i][0] = fiche.getLibelle();
 			this.donneesElFofaitises[i][1] = fiche.getQte();
 			
-			qteElFofaitises = Integer.parseInt(this.donneesElFofaitises[i][1].toString());
+			tabQte[i] = fiche.getQte();
+			//qteElFofaitises = Integer.parseInt(this.donneesElFofaitises[i][1].toString());
 		}
 		
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
@@ -212,17 +214,13 @@ public class V_etatFrais extends JPanel{
 				JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
 				
 				System.out.println("---Eléments fofaitisés---");
-				for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
+				
 					
-					FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
-					donneesElFofaitises[i][0] = fiche.getLibelle();
-					donneesElFofaitises[i][1] = fiche.getQte();
-					qteElFofaitises = Integer.parseInt(donneesElFofaitises[i][1].toString());
-					System.out.println("Qté -> "+qteElFofaitises);
-				}
+					System.out.println("Forfait Etape-> "+tabQte[0]+"\nFrais Kilométrique -> "+tabQte[1]+"\nNuitée Hôtel -> "+tabQte[2]);
+				
 			
 				System.out.println("---Descriptif des éléments hors forfait---");
-				System.out.println("Libelle -> "+libelleElHorFofais+"\nDate -> "+dateElHorFofais+"\nMontant -> "+montantElHorFofais);
+				System.out.print("Libelle -> "+libelleElHorFofais+"\nDate -> "+dateElHorFofais+"\nMontant -> "+montantElHorFofais);
 			}
 		});
 	}

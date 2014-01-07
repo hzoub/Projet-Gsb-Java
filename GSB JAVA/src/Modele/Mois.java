@@ -2,15 +2,15 @@ package Modele;
 
 public class Mois {
 
-	private int  unMois;
+	private String  unMois;
 
-	public Mois(int unMois) {
+	public Mois(String unMois) {
 	
 		this.unMois = unMois;
 	}
 
 
-	public  int getUnMois() {
+	public  String getUnMois() {
 		
 		return unMois;
 	}

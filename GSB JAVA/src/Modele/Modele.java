@@ -37,7 +37,7 @@ public class Modele {
 	 * @author Fraizy Brandon
 	 */
 	
-	public static boolean Connexion(String login, String mdp) {
+	public static boolean connexion(String login, String mdp) {
 		//Connexion
 	
 		String mdp_2 = null;
@@ -158,12 +158,12 @@ public class Modele {
 			String moisEncour = date.toString(); 
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND mois='"+moisEncour+"' ORDER BY mois DESC");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' ORDER BY mois DESC");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
 					
-					int mois = rs.getInt("mois");
+					String mois = rs.getString("mois");
 					lesMoisVisiteur.add(new Mois(mois));
 					
 					
@@ -367,5 +367,31 @@ public class Modele {
 				   }
 				 }	
 			return NomPrenom;
+		}
+		
+		/**
+		 * @author Zoubert Hanem
+		 * @param idEtat
+		 */
+		public static  int validerFicheFraisForfait(String idEtat,String mois,String idVis) {	
+			int nbLignes = 0;
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='"+idEtat+"' WHERE mois='"+mois+"' AND idVisiteur ='"+idVis+"' ");
+					
+				nbLignes = st.executeUpdate();
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return nbLignes;
 		}
 }
