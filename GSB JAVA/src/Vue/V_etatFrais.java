@@ -32,15 +32,21 @@ public class V_etatFrais extends JPanel{
 	    private JTable tableauElFofaitises;
 	    private JScrollPane scrollElFofaitises;
 	    
-	    private Object[][] DescElHorFofais;
-	    private JTable tblDescElHorFofais;
-	    private JScrollPane scrollDescElHorFofais;
+	    private Object[][] ElHorFofais;
+	    private JTable tblElHorFofais;
+	    private JScrollPane scrollElHorFofais;
 	    
 	    private JButton bntValider;
 	    
 	    private String idVisiteur;
 	    
-	public V_etatFrais(String visiteur, Object mois){
+	    private int qteElFofaitises;
+	    /*---Descriptif des éléments hors forfait---*/
+	    private  String libelleElHorFofais ;
+	    private String dateElHorFofais ;
+	    private float montantElHorFofais ;
+		
+	public V_etatFrais(String visiteur, final Object mois){
 		
 		/**
 		 * 
@@ -99,9 +105,7 @@ public class V_etatFrais extends JPanel{
 		 */
 		for(int i=0; i<Modele.getLesEtats().size();i++){
 			Etat etat = Modele.getLesEtats().get(i);
-			
 			this.listeStatut.addItem(etat.getlibelle());
-		
 		}
 		
 		
@@ -121,13 +125,16 @@ public class V_etatFrais extends JPanel{
     	this.donneesElFofaitises = new Object[Modele.getLesFraisForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
     	
     	this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
-  
+    	
 		for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
 			
 			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
 			this.donneesElFofaitises[i][0] = fiche.getLibelle();
 			this.donneesElFofaitises[i][1] = fiche.getQte();
+			
+			qteElFofaitises = Integer.parseInt(this.donneesElFofaitises[i][1].toString());
 		}
+		
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
 		this.scrollElFofaitises.setPreferredSize(new Dimension(730,85));		
 		/*------------------------------------------------------------*/
@@ -142,19 +149,24 @@ public class V_etatFrais extends JPanel{
 		//Entete
 		String[]entetesHorsForfait = {"Libellé","Date","Montant"};
     	//Définir la taille du tableau
-    	this.DescElHorFofais = new Object[Modele.getLesFraisHorsForfait(idVisiteur,mois).size()][entetesHorsForfait.length];
+    	this.ElHorFofais = new Object[Modele.getLesFraisHorsForfait(idVisiteur,mois).size()][entetesHorsForfait.length];
     	
-    	this.tblDescElHorFofais = new JTable(DescElHorFofais,entetesHorsForfait);
+    	this.tblElHorFofais = new JTable(ElHorFofais,entetesHorsForfait);
   
 		for (int i=0 ; i<Modele.getLesFraisHorsForfait(idVisiteur,mois).size() ;i++){
 			
 			FraisHorsForfait fhf = Modele.getLesFraisHorsForfait(idVisiteur,mois).get(i);
-			this.DescElHorFofais[i][0] = fhf.getLibelle();
-			this.DescElHorFofais[i][1] = fhf.getDate();
-			this.DescElHorFofais[i][2] = fhf.getMontant();
+			this.ElHorFofais[i][0] = fhf.getLibelle();
+			this.ElHorFofais[i][1] = fhf.getDate();
+			this.ElHorFofais[i][2] = fhf.getMontant();
+			
+			libelleElHorFofais = this.ElHorFofais[i][0].toString();
+			dateElHorFofais = this.ElHorFofais[i][1].toString();
+			montantElHorFofais = Float.parseFloat(this.ElHorFofais[i][2].toString());
+			
 		}
-		this.scrollDescElHorFofais = new JScrollPane(tblDescElHorFofais);
-		this.scrollDescElHorFofais.setPreferredSize(new Dimension(730,50));
+		this.scrollElHorFofais = new JScrollPane(tblElHorFofais);
+		this.scrollElHorFofais.setPreferredSize(new Dimension(730,50));
 		/*-------------------------------------------------------------*/
 		
 		//boutton valider
@@ -185,7 +197,7 @@ public class V_etatFrais extends JPanel{
 		 * Tabeau 2
 		 */
 		this.add(this.descriptifElement);
-		this.add(this.scrollDescElHorFofais);
+		this.add(this.scrollElHorFofais);
 		
 		this.add(this.bntValider );
 		
@@ -198,6 +210,19 @@ public class V_etatFrais extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String statut = (String) listeStatut.getSelectedItem();
 				JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
+				
+				System.out.println("---Eléments fofaitisés---");
+				for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
+					
+					FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
+					donneesElFofaitises[i][0] = fiche.getLibelle();
+					donneesElFofaitises[i][1] = fiche.getQte();
+					qteElFofaitises = Integer.parseInt(donneesElFofaitises[i][1].toString());
+					System.out.println("Qté -> "+qteElFofaitises);
+				}
+			
+				System.out.println("---Descriptif des éléments hors forfait---");
+				System.out.println("Libelle -> "+libelleElHorFofais+"\nDate -> "+dateElHorFofais+"\nMontant -> "+montantElHorFofais);
 			}
 		});
 	}

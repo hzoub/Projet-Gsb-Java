@@ -1,12 +1,14 @@
 package Modele;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+
 import Vue.V_login;
 public class Modele {
 		
@@ -152,11 +154,11 @@ public class Modele {
 		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
 			//Collection les visiteurs
 			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
-			//String date = new SimpleDateFormat("yyyyMM", Locale.FRANCE).format(new Date());
-			//String moisEncour = date.toString(); 
+			String date = new SimpleDateFormat("yyyyMM", Locale.FRANCE).format(new Date());
+			String moisEncour = date.toString(); 
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND mois>=201311 ORDER BY mois DESC");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND mois='"+moisEncour+"' ORDER BY mois DESC");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
