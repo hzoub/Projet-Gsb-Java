@@ -200,7 +200,7 @@ public class Modele {
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				lesEtats.add(new Etat(libelle));
+				lesEtats.add(new Etat("",libelle));
 				
 				}
 			} 
@@ -235,7 +235,7 @@ public class Modele {
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				lesEtats.add(new Etat(libelle));
+				lesEtats.add(new Etat(null,libelle));
 				
 				}
 			} 
@@ -262,7 +262,7 @@ public class Modele {
 		 * @return fraisForfait
 		 * @author Zoubert Hanem
 		 */
-		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, Object mois) {
+		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, String mois) {
 			
 			ArrayList<FraisForfait> fraisForfait = new ArrayList<FraisForfait>();
 			
@@ -372,10 +372,10 @@ public class Modele {
 		 * @author Zoubert Hanem
 		 * @param idEtat
 		 */
-		public static  int validerFicheFraisForfait(String idEtat,String mois,String idVis) {	
+		public static  int validerFicheFraisForfait(String idEtat,String mois,String idVis,float montant,int nbJustificatifs) {	
 			int nbLignes = 0;
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='"+idEtat+"' WHERE mois='"+mois+"' AND idVisiteur ='"+idVis+"' ");
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='"+idEtat+"', montantValide='"+montant+"' , nbJustificatifs='"+nbJustificatifs+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
 					
 				nbLignes = st.executeUpdate();
 			} 
@@ -392,5 +392,62 @@ public class Modele {
 				   }
 				 }
 			return nbLignes;
+		}
+		
+		/**
+		 * @author Zoubert Hanem
+		 * @param idEtat
+		 */
+		public static  int updateLigneFraisForfait(int qte,String id,String mois) {	
+			int nbLignes = 0;
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE lignefraisforfait SET  WHERE idVisiteur='"+id+"' mois='"+mois+"' ");
+					
+				nbLignes = st.executeUpdate();
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return nbLignes;
+		}
+		
+		/**
+		 * @param lib
+		 * @return idEtat
+		 */
+		public static  ArrayList<Etat>  getIdEtat(String lib) {	
+			ArrayList<Etat> idEtat = new ArrayList<Etat>();
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT id FROM etat WHERE libelle='"+lib+"'");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String id = rs.getString("id");
+					idEtat.add(new Etat(id,""));
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return idEtat;
 		}
 }

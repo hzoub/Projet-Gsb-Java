@@ -1,8 +1,8 @@
 package Vue;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 import Modele.*;
@@ -39,12 +39,13 @@ public class V_etatFrais extends JPanel{
 	    private JButton bntValider;
 	    
 	    private String idVisiteur;
+	    private String idEtat;
 	    
-	    /*---Descriptif des éléments hors forfait---*/
-	    private  String libelleElHorFofais ;
-	    private String dateElHorFofais ;
-	    private float montantElHorFofais ;
-		
+	
+	    private JLabel justificatif;
+	    private int nbJustificatifs =0;
+	    private JTextField jtfJustif;
+	    
 	public V_etatFrais(String visiteur, final String mois){
 		
 		/**
@@ -84,6 +85,7 @@ public class V_etatFrais extends JPanel{
 			
 			Visiteur visit = Modele.getIdVisiteur(visiteur).get(i);
 			idVisiteur = visit.getId();
+			System.out.println(idVisiteur);
 		}
 		/**
 		 *
@@ -121,6 +123,7 @@ public class V_etatFrais extends JPanel{
 		//Entete
     	String[]entetesElFofaitises = {"Libellé","quantité"};
     	//Définir la taille du tableau
+    	
     	this.donneesElFofaitises = new Object[Modele.getLesFraisForfait(idVisiteur,mois).size()][entetesElFofaitises.length];
     	
     	this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
@@ -156,16 +159,14 @@ public class V_etatFrais extends JPanel{
 			this.ElHorFofais[i][0] = fhf.getLibelle();
 			this.ElHorFofais[i][1] = fhf.getDate();
 			this.ElHorFofais[i][2] = fhf.getMontant();
-			
-			libelleElHorFofais = this.ElHorFofais[i][0].toString();
-			dateElHorFofais = this.ElHorFofais[i][1].toString();
-			montantElHorFofais = Float.parseFloat(this.ElHorFofais[i][2].toString());
-			
 		}
+
 		this.scrollElHorFofais = new JScrollPane(tblElHorFofais);
 		this.scrollElHorFofais.setPreferredSize(new Dimension(730,50));
 		/*-------------------------------------------------------------*/
+		this.justificatif = new JLabel("Nombre de justificatifs :");
 		
+		this.jtfJustif = new JTextField(2);
 		//boutton valider
 		this.bntValider = new JButton("Valider");
 		
@@ -196,6 +197,9 @@ public class V_etatFrais extends JPanel{
 		this.add(this.descriptifElement);
 		this.add(this.scrollElHorFofais);
 		
+		this.add(this.justificatif);
+		this.add(this.jtfJustif);
+		
 		this.add(this.bntValider );
 		
 		/**
@@ -207,29 +211,67 @@ public class V_etatFrais extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String statut = (String) listeStatut.getSelectedItem();
 				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
-
+				nbJustificatifs = Integer.parseInt(jtfJustif.getText());
 				if(verif==0){
-				JOptionPane.showConfirmDialog(null,
+					/**
+					 * Récapitulatif avant la validation de la fiche
+					 */
+					int verifRecap = JOptionPane.showConfirmDialog(null,
+							
+							"---Eléments fofaitisés---"
+							
+							+"\nForfait Etape -> "+tableauElFofaitises.getValueAt(0,1)+
+							"\nFrais Kilométrique -> "+tableauElFofaitises.getValueAt(1,1)+
+							"\nNuitée Hôtel -> "+tableauElFofaitises.getValueAt(2,1)+
+							"\nRepas Restaurant -> "+tableauElFofaitises.getValueAt(3,1)+
+							
+							"\n---Descriptif des éléments hors forfait---"
+							
+							+"\nLibelle -> "+tblElHorFofais.getValueAt(0,0)+
+							"\nDate -> "+tblElHorFofais.getValueAt(0,1)+
+							"\nMontant -> "+tblElHorFofais.getValueAt(0,2)+
+							
+							"\n------------------------------"+
+							"\nNombre de justificatifs -> "+nbJustificatifs+
+							"\nMontant validée -> "+tblElHorFofais.getValueAt(0,2)+" €"+
+							"\n------------------------------"+
+							
+							"\nVoullez-vous valider cette fiche ?",
+							
+							"Récapitulatif avant la validation",JOptionPane.YES_NO_OPTION);
+				
+					
+					for(int i=0; i<Modele.getIdEtat(statut).size(); i++){
 						
-						"---Eléments fofaitisés---"
+						idEtat = Modele.getIdEtat(statut).get(i).getId();
+					}
+					if(verifRecap==0){
 						
-						+"\nForfait Etape -> "+tableauElFofaitises.getValueAt(0,1)+
-						"\nFrais Kilométrique -> "+tableauElFofaitises.getValueAt(1,1)+
-						"\nNuitée Hôtel -> "+tableauElFofaitises.getValueAt(2,1)+
-						"\nRepas Restaurant -> "+tableauElFofaitises.getValueAt(3,1)+
+						System.out.println(idVisiteur);
 						
-						"\n---Descriptif des éléments hors forfait---"
+						int verifValidFiche = Modele.validerFicheFraisForfait(idEtat,mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
 						
-						+"\nLibelle -> "+tblElHorFofais.getValueAt(0,0)+
-						"\nDate -> "+tblElHorFofais.getValueAt(0,1)+
-						"\nMontant -> "+tblElHorFofais.getValueAt(0,2)+
+						if(verifValidFiche==1){
+							
+							JOptionPane.showMessageDialog(null,"La fiche est"+statut,"Validation",JOptionPane.INFORMATION_MESSAGE);
+							
+						}else{
+							
+							JOptionPane.showMessageDialog(null,"Validation échouée","Erreur",JOptionPane.INFORMATION_MESSAGE);
+						}
 						
-						"\nVoullez-vous valider cette fiche ?",
-						
-						"Récapitulatif avant la validation",JOptionPane.YES_NO_OPTION);
+					}else{
+						System.out.println("Validation de la fiche annulée");
+					}
+					
+					for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
+						Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
+						etatAct = etat.getlibelle();
+					}
+				
+					etatActuel.setText("Etat actuel : "+etatAct);
 				}
-				else{
-				}
+				
 			}
 		});
 	}

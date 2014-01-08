@@ -28,7 +28,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private JLabel espace;
 	private String nomVisiteur;
 	private String idVisiteur;
-	private int moisFiche;
+	private String moisFiche;
 	private String date;
 	private JLabel lblDate;
 	/**
@@ -118,10 +118,10 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 				for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
 					Mois mois = Modele.getLesMois(idVisiteur).get(i);	
 					choixMois.addItem(mois.getUnMois());
-					moisFiche = (int) choixMois.getSelectedItem();
+					moisFiche =  (String) choixMois.getSelectedItem();
 				}
 				
-				if(moisFiche==0){
+				if(moisFiche==null){
 					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","Erreur",JOptionPane.INFORMATION_MESSAGE);
 					btnValider.setEnabled(false);
 				}else{
