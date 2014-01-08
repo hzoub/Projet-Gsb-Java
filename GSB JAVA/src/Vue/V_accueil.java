@@ -16,20 +16,19 @@ public class V_accueil extends JFrame {
 	private JMenuBar menu;
 	private JMenu fiche ;
 	private JMenuItem consulter;
-	private JMenuItem ToutesLesFiches;
-	private JMenuItem validation ;
+	private JMenuItem listeDesVisiteur;
+	
 	private JMenuItem suivi ;
 	private JMenuItem deconnexion ;
 	private Color bgColor;
 	private String nom,prenom;
-	//LABELS
-	private JLabel nomVisiteur;
-	private JLabel lstVisiteur;
+
 	//PANELS
 	private JPanel panAccueil;
 	private V_choixVisiteur choixVis;
 	private V_etatFrais ficheFrais;
 	private V_afficherVisiteur listeVisiteurs;
+	private V_choixSuivi choixSuivi;
 	/**
 	* Constructeur..
 	* */
@@ -73,7 +72,7 @@ public class V_accueil extends JFrame {
 		 */
 		this.choixVis = new V_choixVisiteur();
 		
-	
+		this.choixSuivi = new V_choixSuivi();
 		
 		/**
 		 * Panel de l'accueil
@@ -81,11 +80,6 @@ public class V_accueil extends JFrame {
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
 		
-		/**
-		 * Tableau visiteur
-		 */
-		this.listeVisiteurs = new V_afficherVisiteur();
-		this.listeVisiteurs.setBackground(bgColor);
 		/*
 		 * MENU BAR
 		 */
@@ -95,16 +89,14 @@ public class V_accueil extends JFrame {
 		 * MENU
 		 */
 		this.fiche = new JMenu("Fiche");
-		this.validation = new JMenuItem("Validation");
-		this.suivi = new JMenuItem("Suivi");
 		
 		/*
 		 * ITEMS
 		 */
-		this.deconnexion = new JMenuItem("Deconnexion");
 		this.consulter = new JMenuItem("Consulter");
-		this.ToutesLesFiches = new JMenuItem("Toutes Les Fiches");
-
+		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs");
+		this.suivi = new JMenuItem("Suivi paiement");
+		this.deconnexion = new JMenuItem("Deconnexion");
 
 		
 		
@@ -118,15 +110,14 @@ public class V_accueil extends JFrame {
 			nom = comptable.getNom();
 			prenom = comptable.getPrenom();
 		}
-		this.nomVisiteur= new JLabel("<html>"+
-										"<h1 style=\"font-family:Comic Sans MS\">"+
-											"Comptable : "+nom+" "+prenom+
-										"</h1></html>",JLabel.CENTER);
-		this.nomVisiteur.setPreferredSize(new Dimension(700,50));
 		
-		this.lstVisiteur = new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
-		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
+		/**
+		 * Tableau visiteur
+		 */
+		this.listeVisiteurs = new V_afficherVisiteur(nom,prenom);
+		this.listeVisiteurs.setBackground(bgColor);
 		
+
 		 /* AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		 */
 		this.setJMenuBar(menu);
@@ -138,8 +129,7 @@ public class V_accueil extends JFrame {
 		 * AJOUT DES ITEMS DANS LE MENU "fiche"
 		 */
 		this.fiche.add(consulter);
-		this.fiche.add(ToutesLesFiches);
-		this.fiche.add(validation);
+		this.fiche.add(listeDesVisiteur);
 		this.fiche.add(suivi);
 		this.fiche.add(deconnexion);
 		
@@ -148,7 +138,7 @@ public class V_accueil extends JFrame {
 		 * Ajout du label nomVisiteur dans le panel "paneAccueil"
 		 * Ajout du tableau listeVisiteur dans le panel "paneAccueil"
 		 */
-		this.panAccueil.add(nomVisiteur);
+
 		this.panAccueil.add(listeVisiteurs);
 		
 		
@@ -197,7 +187,32 @@ public class V_accueil extends JFrame {
 			}
 		});
 		
+		/**
+		 * ACTION ITEM "listeDesVisiteur"
+		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+		 */
+		this.listeDesVisiteur.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(listeVisiteurs);
+				setVisible(true);
+			}
+		});
 
+		
+		/**
+		 * ACTION ITEM "suivi"
+		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+		 */
+		this.suivi.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(choixSuivi);
+				setVisible(true);
+			}
+		});
 		/**
 		 * ACTION ITEM "deconnexion"
 		 * Cette action permet de deconecter

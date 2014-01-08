@@ -13,13 +13,33 @@ public class V_afficherVisiteur extends JPanel {
     private JTable tableau;
     private JScrollPane scroll;
     
-    
-    public V_afficherVisiteur(){
+    private JLabel nomVisiteur;
+	private JLabel lstVisiteur;
+	
+	private Color bgColor;
+	private JPanel pan;
+    public V_afficherVisiteur(String nomVisiteur,String prenomVisiteur){
+    	
+    	
+    	/*
+		 * Couleur arriere-plan de la fenetre
+		 */
+		this.bgColor = Color.decode("#77aadd");
     	/**
     	 * Création du tableau, affichant les visiteurs non comptable
     	 */
-    	
-    	
+    	pan = new JPanel();
+    	pan.setPreferredSize(new Dimension(700,600));
+    	pan.setBackground(bgColor);
+    	this.nomVisiteur= new JLabel("<html>"+
+				"<h1 style=\"font-family:Comic Sans MS\">"+
+					"Comptable : "+nomVisiteur+" "+prenomVisiteur+
+				"</h1></html>",JLabel.CENTER);
+		this.nomVisiteur.setPreferredSize(new Dimension(700,50));
+		
+		this.lstVisiteur = new JLabel("<html>"+"<h2 style=\"font-family:Comic Sans MS\">"+" Liste des visiteurs :"+"</h2></html>",JLabel.CENTER);
+		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
+
     	//Entete
     	String[]entetes = {"Id","Nom","Prenom"};
     	
@@ -40,7 +60,13 @@ public class V_afficherVisiteur extends JPanel {
 	//Taille et scroll
 	this.scroll = new JScrollPane(tableau);
 	this.scroll.setPreferredSize(new Dimension(500, 350));
-	this.add(scroll);
+	
+	this.pan.add(this.nomVisiteur);
+	this.pan.add(this.lstVisiteur);
+	this.pan.add(scroll);
+	
+	this.add(this.pan);
+	
   }
 
     
