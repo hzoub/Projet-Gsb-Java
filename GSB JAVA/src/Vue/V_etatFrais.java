@@ -43,8 +43,9 @@ public class V_etatFrais extends JPanel{
 	    
 	
 	    private JLabel justificatif;
-	    private int nbJustificatifs =0;
+	    private int nbJustificatifs = -1;
 	    private JTextField jtfJustif;
+	    private JLabel saut;
 	    
 	public V_etatFrais(String visiteur, final String mois){
 		
@@ -85,7 +86,6 @@ public class V_etatFrais extends JPanel{
 			
 			Visiteur visit = Modele.getIdVisiteur(visiteur).get(i);
 			idVisiteur = visit.getId();
-			System.out.println(idVisiteur);
 		}
 		/**
 		 *
@@ -167,8 +167,11 @@ public class V_etatFrais extends JPanel{
 		this.justificatif = new JLabel("Nombre de justificatifs :");
 		
 		this.jtfJustif = new JTextField(2);
+		this.saut = new JLabel();
+		this.saut.setPreferredSize(new Dimension(730,20));
 		//boutton valider
 		this.bntValider = new JButton("Valider");
+//		this.bntValider.setEnabled(false);
 		
 		
 		//ajout
@@ -199,8 +202,14 @@ public class V_etatFrais extends JPanel{
 		
 		this.add(this.justificatif);
 		this.add(this.jtfJustif);
-		
+		this.add(this.saut);
 		this.add(this.bntValider );
+		
+//		if(nbJustificatifs!=-1){
+//			this.bntValider.setEnabled(true);
+//		}else{
+//			this.bntValider.setEnabled(false);
+//		}
 		
 		/**
 		 * Action boutton valider
@@ -211,7 +220,9 @@ public class V_etatFrais extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String statut = (String) listeStatut.getSelectedItem();
 				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
+				
 				nbJustificatifs = Integer.parseInt(jtfJustif.getText());
+
 				if(verif==0){
 					/**
 					 * Récapitulatif avant la validation de la fiche
@@ -247,8 +258,6 @@ public class V_etatFrais extends JPanel{
 					}
 					if(verifRecap==0){
 						
-						System.out.println(idVisiteur);
-						
 						int verifValidFiche = Modele.validerFicheFraisForfait(idEtat,mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
 						
 						if(verifValidFiche==1){
@@ -271,8 +280,8 @@ public class V_etatFrais extends JPanel{
 				
 					etatActuel.setText("Etat actuel : "+etatAct);
 				}
-				
-			}
+			 }
+			
 		});
 	}
 }
