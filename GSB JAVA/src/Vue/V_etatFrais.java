@@ -45,7 +45,6 @@ public class V_etatFrais extends JPanel{
 	    private String dateElHorFofais ;
 	    private float montantElHorFofais ;
 		
-	    private int [] tabQte;
 	public V_etatFrais(String visiteur, final String mois){
 		
 		/**
@@ -126,15 +125,11 @@ public class V_etatFrais extends JPanel{
     	
     	this.tableauElFofaitises = new JTable(donneesElFofaitises, entetesElFofaitises);
     	
-    	tabQte = new int[Modele.getLesFraisForfait(idVisiteur,mois).size()];
 		for (int i=0 ; i<Modele.getLesFraisForfait(idVisiteur,mois).size() ;i++){
 			
 			FraisForfait fiche = Modele.getLesFraisForfait(idVisiteur,mois).get(i);
 			this.donneesElFofaitises[i][0] = fiche.getLibelle();
 			this.donneesElFofaitises[i][1] = fiche.getQte();
-			
-			tabQte[i] = fiche.getQte();
-			//qteElFofaitises = Integer.parseInt(this.donneesElFofaitises[i][1].toString());
 		}
 		
 		this.scrollElFofaitises = new JScrollPane(tableauElFofaitises);
@@ -211,16 +206,30 @@ public class V_etatFrais extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String statut = (String) listeStatut.getSelectedItem();
-				JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
-				
-				System.out.println("---Eléments fofaitisés---");
-				
-					
-					System.out.println("Forfait Etape-> "+tabQte[0]+"\nFrais Kilométrique -> "+tabQte[1]+"\nNuitée Hôtel -> "+tabQte[2]);
-				
-			
-				System.out.println("---Descriptif des éléments hors forfait---");
-				System.out.print("Libelle -> "+libelleElHorFofais+"\nDate -> "+dateElHorFofais+"\nMontant -> "+montantElHorFofais);
+				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
+
+				if(verif==0){
+				JOptionPane.showConfirmDialog(null,
+						
+						"---Eléments fofaitisés---"
+						
+						+"\nForfait Etape -> "+tableauElFofaitises.getValueAt(0,1)+
+						"\nFrais Kilométrique -> "+tableauElFofaitises.getValueAt(1,1)+
+						"\nNuitée Hôtel -> "+tableauElFofaitises.getValueAt(2,1)+
+						"\nRepas Restaurant -> "+tableauElFofaitises.getValueAt(3,1)+
+						
+						"\n---Descriptif des éléments hors forfait---"
+						
+						+"\nLibelle -> "+tblElHorFofais.getValueAt(0,0)+
+						"\nDate -> "+tblElHorFofais.getValueAt(0,1)+
+						"\nMontant -> "+tblElHorFofais.getValueAt(0,2)+
+						
+						"\nVoullez-vous valider cette fiche ?",
+						
+						"Récapitulatif avant la validation",JOptionPane.YES_NO_OPTION);
+				}
+				else{
+				}
 			}
 		});
 	}
