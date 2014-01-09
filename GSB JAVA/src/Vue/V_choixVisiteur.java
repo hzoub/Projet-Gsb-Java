@@ -65,8 +65,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
 
-		for(int i=0; i<Modele.getLesVisiteurs().size();i++){
-			Visiteur visiteur = Modele.getLesVisiteurs().get(i);
+		for(int i=0; i<Modele.getVisiteursFiche().size();i++){
+			Visiteur visiteur = Modele.getVisiteursFiche().get(i);
 			this.choixVisiteur.addItem(visiteur.getNom());
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));

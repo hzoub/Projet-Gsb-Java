@@ -79,11 +79,10 @@ public class Modele {
 		/**
 		 * Fonction qui renvoie un ArrayList de type Visiteur
 		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
-		 * @author Zoubert hanem
+		 * @author Fraizy Brandon
 		 * @return lesVisiteurs
 		 * 
 		 */
-	
 		public static  ArrayList<Visiteur> getLesVisiteurs() {
 			//Collection les visiteurs
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
@@ -112,7 +111,80 @@ public class Modele {
 				   }
 				 }
 			return lesVisiteurs ;
-		}	
+		}
+		
+		/**
+		 * Fonction qui renvoie les visiteurs ayant une Fiche créée, saisie en cours
+		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
+		 * @author Zoubert hanem
+		 * @return lesVisiteurs
+		 */
+		public static  ArrayList<Visiteur> getVisiteursFiche() {
+			//Collection les visiteurs
+			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='CR' ORDER BY id");
+				ResultSet rs = st.executeQuery(); 
+				while(rs.next()){
+					String id = rs.getString("id");
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesVisiteurs ;
+		}
+		
+		/**
+		 * Fonction qui renvoie les visiteurs ayant une fiche validée et mise en paiement
+		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
+		 * @author
+		 * @return lesVisiteurs
+		 */
+		public static  ArrayList<Visiteur> getVisiteurSuiviPaiement() {
+			//Collection les visiteurs
+			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='VA' ORDER BY id");
+				ResultSet rs = st.executeQuery(); 
+				while(rs.next()){
+					String id = rs.getString("id");
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesVisiteurs ;
+		}
+		
 		/**
 		 * @author hzoubert
 		 */
@@ -146,9 +218,8 @@ public class Modele {
 		
 		/**
 		 * Fonction retournant les dates des visiteurs 
-		 * @author bfraizy
-		 * lesMois
-		 * return les mois
+		 * @author Fraizy Brandon
+		 * return lesMoisVisiteur
 		 */
 		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
 			//Collection les visiteurs
