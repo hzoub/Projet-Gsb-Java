@@ -28,9 +28,10 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 	private JLabel espace;
 	private String nomVisiteur;
 	private String idVisiteur;
-	private String moisFiche;
+
 	private String date;
 	private JLabel lblDate;
+	private JLabel msg;// s'il n y a aucune fiche 
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -78,8 +79,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		//Liste deroulante mois
 		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
-		this.choixMois = new JComboBox<String>();
-		this.choixMois.setPreferredSize(new Dimension(150,20));
+		
 		
 		//Recupere le nom selectionné
 		nomVisiteur = (String) choixVisiteur.getSelectedItem();
@@ -95,6 +95,40 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 			Mois mois = Modele.getLesMois(idVisiteur).get(i);
 			this.choixMois.addItem(mois.getUnMois());
 		}
+		
+		//Espace entre les labels est les bouttons
+		this.espace = new JLabel();
+		this.espace.setPreferredSize(new Dimension(220,15));
+		
+		//BOUTTON VALIDER
+		btnValider = new JButton("Valider");
+		
+		//Ce message va s'afficher que quand il n y' aucune fiche 
+		this.msg = new JLabel("Il n y'a aucune fiche a valider ce mois çi",JLabel.CENTER);
+		this.msg.setPreferredSize(new Dimension(700,50));
+		//this.btnValider.addActionListener(this);
+		
+		//AJOUT DU TITRE DANS LE PANEL
+		this.add(lblTitre);
+		this.add(lblDate);
+		
+		if(this.choixVisiteur.getSelectedItem()==null){
+			btnValider.setEnabled(false);
+			this.add(this.msg);
+		}
+		
+		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
+		this.panelForm.add(lblChoixVisiteur);
+		this.panelForm.add(choixVisiteur);
+		this.panelForm.add(lblChoixMois);
+		this.panelForm.add(choixMois);
+		
+		this.panelForm.add(espace);
+		
+		this.panelForm.add(btnValider);
+		
+		//AJOUT DU FORMULAIRE DANS LE PANEL
+		this.add(panelForm);
 		
 		/**
 		 * Action liste deroulante visiteur
@@ -112,53 +146,10 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 					Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
 					idVisiteur = visiteur.getId();	
 				}
-				
-				
-				choixMois.removeAllItems();
-				for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
-					Mois mois = Modele.getLesMois(idVisiteur).get(i);	
-					choixMois.addItem(mois.getUnMois());
-					moisFiche =  (String) choixMois.getSelectedItem();
-				}
-				
-				if(moisFiche==null){
-					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","Erreur",JOptionPane.INFORMATION_MESSAGE);
-					btnValider.setEnabled(false);
-				}else{
-					btnValider.setEnabled(true);
-				}
 			}
 		});
-		//Espace entre les labels est les bouttons
-		this.espace = new JLabel();
-		this.espace.setPreferredSize(new Dimension(220,15));
-		
-		//BOUTTON VALIDER
-		V_choixVisiteur.btnValider = new JButton("Valider");
-		
-		//this.btnValider.addActionListener(this);
-		
-		//AJOUT DU TITRE DANS LE PANEL
-		this.add(lblTitre);
-		this.add(lblDate);
-		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
-		this.panelForm.add(lblChoixVisiteur);
-		this.panelForm.add(choixVisiteur);
-		this.panelForm.add(lblChoixMois);
-		this.panelForm.add(choixMois);
-		
-		this.panelForm.add(espace);
-		
-		this.panelForm.add(btnValider);
-		
-		//AJOUT DU FORMULAIRE DANS LE PANEL
-		this.add(panelForm);
-		
-		
 	}
-	
 
-	
 	/**
 	 * @return le visiteur
 	 */

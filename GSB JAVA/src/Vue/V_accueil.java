@@ -156,18 +156,11 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * Panel fiche frais
-				 */
-				if(choixVis.getChoixMois()==null){
-					JOptionPane.showMessageDialog(null,"Ce visiteur n'a pas de fiche","Erreur",JOptionPane.INFORMATION_MESSAGE);
-				}
-				else{
+	
 				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur(),choixVis.getChoixMois());
 				ficheFrais.setBackground(bgColor);
 				setContentPane(ficheFrais);
 				setVisible(true);
-				}
 			}
 		});
 		/**

@@ -236,20 +236,14 @@ public class V_etatFrais extends JPanel{
 							"\nNuitée Hôtel -> "+tableauElFofaitises.getValueAt(2,1)+
 							"\nRepas Restaurant -> "+tableauElFofaitises.getValueAt(3,1)+
 							
-							"\n---Descriptif des éléments hors forfait---"
-							
-							+"\nLibelle -> "+tblElHorFofais.getValueAt(0,0)+
-							"\nDate -> "+tblElHorFofais.getValueAt(0,1)+
-							"\nMontant -> "+tblElHorFofais.getValueAt(0,2)+
-							
 							"\n------------------------------"+
 							"\nNombre de justificatifs -> "+nbJustificatifs+
 							"\nMontant validée -> "+tblElHorFofais.getValueAt(0,2)+" €"+
 							"\n------------------------------"+
 							
-							"\nVoullez-vous valider cette fiche ?",
+							"\nSouhaitez-vous valider cette fiche ?",
 							
-							"Récapitulatif avant la validation",JOptionPane.YES_NO_OPTION);
+							"Détails de la validation",JOptionPane.YES_NO_OPTION);
 				
 					
 					for(int i=0; i<Modele.getIdEtat(statut).size(); i++){
