@@ -1,7 +1,5 @@
 package Vue;
-import Modele.*;
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JTable;
