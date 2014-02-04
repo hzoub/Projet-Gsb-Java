@@ -114,8 +114,8 @@ public class Modele {
 		}
 		
 		/**
-		 * Fonction qui renvoie les visiteurs ayant une Fiche créée, saisie en cours
-		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
+		 *Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
+		 *Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
 		 * @author Zoubert hanem
 		 * @return lesVisiteurs
 		 */
@@ -150,9 +150,9 @@ public class Modele {
 		}
 		
 		/**
-		 * Fonction qui renvoie les visiteurs ayant une fiche validée et mise en paiement
-		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
-		 * @author
+		 * Renvoie <b>l'id, le nom, le prenom et le mois</b> des visiteurs ayant une fiche validées et mise en paiement<br>
+		 * Ajoute le résultat de la requête dans la collection <b>Visiteur</b>
+		 * @author ...
 		 * @return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getVisiteurSuiviPaiement() {
@@ -160,7 +160,7 @@ public class Modele {
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='VA' ORDER BY id");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom,mois FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='VA' ORDER BY id");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String id = rs.getString("id");
@@ -217,15 +217,13 @@ public class Modele {
 		}		
 		
 		/**
-		 * Fonction retournant les dates des visiteurs 
-		 * @author Fraizy Brandon
-		 * return lesMoisVisiteur
+		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "CR". 
+		 *@author Fraizy Brandon
+		 *return lesMoisVisiteur
 		 */
 		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
 			//Collection les visiteurs
 			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
-//			String date = new SimpleDateFormat("yyyyMM", Locale.FRANCE).format(new Date());
-//			String moisEncour = date.toString(); 
 			try {
 				
 				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' ORDER BY mois DESC");
@@ -256,14 +254,13 @@ public class Modele {
 		
 		
 		/**
-		 * Fonction qui renvoie les etats
-		 * @author Zoubert hanem
-		 * @return lesEtats
-		 * 
+		 *Renvoie le libellé de tout les etats
+		 *@author Zoubert hanem
+		 *@return lesLibs
 		 */
 		public static  ArrayList<Etat> getLesEtats() {
 			
-		ArrayList<Etat> lesEtats = new ArrayList<Etat>();
+		ArrayList<Etat> lesLibs = new ArrayList<Etat>();
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat");
@@ -271,7 +268,7 @@ public class Modele {
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				lesEtats.add(new Etat("",libelle));
+				lesLibs.add(new Etat("",libelle));
 				
 				}
 			} 
@@ -287,16 +284,15 @@ public class Modele {
 					   e.printStackTrace();
 				   }
 				 }
-			return lesEtats ;
+			return lesLibs;
 		}
 		
 		/**
-		 * Fonction qui renvoie l'etat actuel de la fiche du visiteur séléctionné
-		 * @author Zoubert hanem
-		 * @return lesEtats
-		 * 
+		 *Renvoie l'etat actuel de la fiche du visiteur séléctionné
+		 *@author Zoubert hanem
+		 *@return lesEtats
 		 */
-		public static  ArrayList<Etat> getEtatActuel(String idVisiteur,Object mois) {
+		public static  ArrayList<Etat> getEtatActuel(String idVisiteur,String mois) {
 			
 		ArrayList<Etat> lesEtats = new ArrayList<Etat>();
 			
@@ -329,7 +325,7 @@ public class Modele {
 		 * Retourne toutes la lignefraisforfait d'un visiteur
 		 * @author Zoubert hanem
 		 * @param idVisiteur
-		 * @param mois sous la forme aaaamm
+		 * @param mois - sous la forme aaaamm
 		 * @return fraisForfait
 		 * @author Zoubert Hanem
 		 */
@@ -372,7 +368,7 @@ public class Modele {
 		 * @return fraisForfait
 		 * @author Zoubert Hanem
 		 */
-		public static  ArrayList<FraisHorsForfait> getLesFraisHorsForfait(String idVisiteur, Object mois) {
+		public static  ArrayList<FraisHorsForfait> getLesFraisHorsForfait(String idVisiteur, String mois) {
 			
 			ArrayList<FraisHorsForfait> fraisHorsForfait = new ArrayList<FraisHorsForfait>();
 			
