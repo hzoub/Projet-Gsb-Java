@@ -1,6 +1,5 @@
 package Modele;
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,7 +76,7 @@ public class Modele {
 		}
 	
 		/**
-		 * Fonction qui renvoie un ArrayList de type Visiteur
+		 * Renvoie un ArrayList de type Visiteur
 		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
 		 * @author Fraizy Brandon
 		 * @return lesVisiteurs
@@ -114,8 +113,8 @@ public class Modele {
 		}
 		
 		/**
-		 *Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
-		 *Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
+		 * Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
+		 * Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
 		 * @author Zoubert hanem
 		 * @return lesVisiteurs
 		 */
