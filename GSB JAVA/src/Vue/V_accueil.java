@@ -19,16 +19,19 @@ public class V_accueil extends JFrame {
 	private JMenuItem listeDesVisiteur;
 	
 	private JMenuItem suivi ;
+	private JMenuItem valider ;
 	private JMenuItem deconnexion ;
 	private Color bgColor;
 	private String nom,prenom;
 
 	//PANELS
 	private JPanel panAccueil;
+	
 	private V_choixVisiteur choixVis;
 	private V_etatFrais ficheFrais;
 	private V_afficherVisiteur listeVisiteurs;
 	private V_choixSuivi choixSuivi;
+	private V_ficheValidee v_validee;
 	/**
 	* Constructeur..
 	* */
@@ -80,6 +83,14 @@ public class V_accueil extends JFrame {
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
 		
+	
+		
+		/**
+		 * Panel afficher fiche validées
+		 */
+		this.v_validee = new V_ficheValidee();
+		this.v_validee.setBackground(bgColor);
+		
 		/*
 		 * MENU BAR
 		 */
@@ -96,6 +107,7 @@ public class V_accueil extends JFrame {
 		this.consulter = new JMenuItem("Consulter");
 		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs");
 		this.suivi = new JMenuItem("Suivi paiement");
+		this.valider = new JMenuItem("Fiche Validées");
 		this.deconnexion = new JMenuItem("Deconnexion");
 
 		
@@ -131,6 +143,7 @@ public class V_accueil extends JFrame {
 		this.fiche.add(consulter);
 		this.fiche.add(listeDesVisiteur);
 		this.fiche.add(suivi);
+		this.fiche.add(valider);
 		this.fiche.add(deconnexion);
 		
 		
@@ -203,6 +216,19 @@ public class V_accueil extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setContentPane(choixSuivi);
+				setVisible(true);
+			}
+		});
+		
+		/**
+		 * ACTION ITEM "valider"
+		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+		 */
+		this.valider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(v_validee);
 				setVisible(true);
 			}
 		});

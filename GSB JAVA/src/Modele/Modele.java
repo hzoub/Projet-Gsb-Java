@@ -516,4 +516,38 @@ public class Modele {
 				 }
 			return idEtat;
 		}
+		
+		public static  ArrayList<Visiteur> getFicheValidees(){
+			
+			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT nom, prenom FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND libelle='VA'");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					lesVisiteurs.add(new Visiteur(null,nom, prenom));	
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				   
+				 }
+			
+			
+			return lesVisiteurs;
+			
+		}
+		
 }
