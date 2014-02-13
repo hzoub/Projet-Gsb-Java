@@ -58,6 +58,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		this.lblDate = new JLabel("Nous sommes le : "+date,JLabel.CENTER);
 		this.lblDate.setPreferredSize(new Dimension(700,50));
+		
 		//LABEL Visiteur
 		this.lblChoixVisiteur = new JLabel("Visiteur :");
 		this.lblChoixVisiteur.setPreferredSize(new Dimension(70,10));

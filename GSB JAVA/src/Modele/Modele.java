@@ -4,8 +4,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import Vue.V_login;
 public class Modele {
@@ -221,11 +223,12 @@ public class Modele {
 		 *return lesMoisVisiteur
 		 */
 		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
+			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			//Collection les visiteurs
 			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' ORDER BY mois DESC");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
@@ -257,12 +260,12 @@ public class Modele {
 		 *@author Zoubert hanem
 		 *@return lesLibs
 		 */
-		public static  ArrayList<Etat> getLesEtats() {
+		public static  ArrayList<Etat> getEtatVa() {
 			
 		ArrayList<Etat> lesLibs = new ArrayList<Etat>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat where id='VA'");
 				ResultSet rs = st.executeQuery(); 	
 				while(rs.next()){
 				
@@ -438,7 +441,7 @@ public class Modele {
 		 * @author Zoubert Hanem
 		 * @param idEtat
 		 */
-		public static  int validerFicheFraisForfait(String idEtat,String mois,String idVis,float montant,int nbJustificatifs) {	
+		public static  int validerFicheFrais(String idEtat,String mois,String idVis,float montant,int nbJustificatifs) {	
 			int nbLignes = 0;
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='"+idEtat+"', montantValide='"+montant+"' , nbJustificatifs='"+nbJustificatifs+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
@@ -464,7 +467,7 @@ public class Modele {
 		 * @author Zoubert Hanem
 		 * @param idEtat
 		 */
-		public static  int updateLigneFraisForfait(int qte,String id,String mois) {	
+		/*public static  int updateLigneFraisForfait(int qte,String id,String mois) {	
 			int nbLignes = 0;
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("UPDATE lignefraisforfait SET  WHERE idVisiteur='"+id+"' mois='"+mois+"' ");
@@ -484,7 +487,7 @@ public class Modele {
 				   }
 				 }
 			return nbLignes;
-		}
+		}*/
 		
 		/**
 		 * @param lib
@@ -517,6 +520,12 @@ public class Modele {
 			return idEtat;
 		}
 		
+		
+		/**
+		 * ------------------
+		 * @author Brandon Fraizy
+		 * @return lesVisiteurs
+		 */
 		public static  ArrayList<Visiteur> getFicheValidees(){
 			
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();

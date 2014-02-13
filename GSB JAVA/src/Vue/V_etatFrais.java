@@ -100,12 +100,14 @@ public class V_etatFrais extends JPanel{
 		this.statutFiche = new JLabel("Statut de la fiche : ");
 	
 		this.listeStatut = new JComboBox<String>();
-		
+		this.listeStatut.addItem("");
 		/**
 		 * Liste deroulante "etat"
 		 */
-		for(int i=0; i<Modele.getLesEtats().size();i++){
-			Etat etat = Modele.getLesEtats().get(i);
+		for(int i=0; i<Modele.getEtatVa().size();i++){
+			
+			Etat etat = Modele.getEtatVa().get(i);
+			
 			this.listeStatut.addItem(etat.getlibelle());
 		}
 		
@@ -252,27 +254,32 @@ public class V_etatFrais extends JPanel{
 					}
 					if(verifRecap==0){
 						
-						int verifValidFiche = Modele.validerFicheFraisForfait(idEtat,mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
+						int verifValidFiche = Modele.validerFicheFrais(idEtat,mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
 						
 						if(verifValidFiche==1){
 							
 							JOptionPane.showMessageDialog(null,"La fiche est"+statut,"Validation",JOptionPane.INFORMATION_MESSAGE);
+								
+							for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
+								Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
+								etatAct = etat.getlibelle();
+							}
 							
-						}else{
+							etatActuel.setText("Etat actuel : "+etatAct);
+							bntValider.setEnabled(false);
+							
+						}
+						else{
 							
 							JOptionPane.showMessageDialog(null,"Validation échouée","Erreur",JOptionPane.INFORMATION_MESSAGE);
 						}
 						
-					}else{
+					}
+					else{
 						System.out.println("Validation de la fiche annulée");
 					}
 					
-					for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
-						Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
-						etatAct = etat.getlibelle();
-					}
-				
-					etatActuel.setText("Etat actuel : "+etatAct);
+					
 				}
 			 }
 			
