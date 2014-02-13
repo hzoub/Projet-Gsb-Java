@@ -522,7 +522,7 @@ public class Modele {
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT nom, prenom FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND libelle='VA'");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT nom, prenom FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND etat.id='VA'");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
