@@ -161,22 +161,6 @@ public class V_accueil extends JFrame {
 		this.getContentPane().add(panAccueil);
 		
 		/**
-		 * ACTION boutton "BtnValider" de la classe V_choixVisiteur
-		 * Cette action permet d'ouvrir le panel "ficheFrais"
-		 * @author Zoubert hanem
-		 */
-		V_choixVisiteur.getBtnValider().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-	
-				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur(),choixVis.getChoixMois());
-				ficheFrais.setBackground(bgColor);
-				setContentPane(ficheFrais);
-				setVisible(true);
-			}
-		});
-		/**
 		 * ACTION ITEM "FicheVisiteur"
 		 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
 		 * @author Zoubert hanem
@@ -246,6 +230,38 @@ public class V_accueil extends JFrame {
 				
 				V_login log = new  V_login();
 				log.setVisible(true);
+			}
+		});
+		
+		
+		/**
+		 * ACTION boutton "BtnValider" de la classe V_choixVisiteur
+		 * Cette action permet d'ouvrir le panel "ficheFrais"
+		 * @author Zoubert hanem
+		 */
+		V_choixVisiteur.getBtnValider().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+	
+				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur(),choixVis.getChoixMois());
+				ficheFrais.setBackground(bgColor);
+				setContentPane(ficheFrais);
+				setVisible(true);
+			}
+		});
+		
+		/**
+		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
+		 *
+		 * @author 
+		 */
+		V_choixSuivi.getBtnValider().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JOptionPane.showMessageDialog(null,"Suivie paiement en cour de mise en place","Partie Folaké",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 	}

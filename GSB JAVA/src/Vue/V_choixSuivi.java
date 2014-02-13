@@ -11,7 +11,7 @@ import Modele.*;
  *
  */
 @SuppressWarnings("serial")
-public class V_choixSuivi extends JPanel implements ActionListener{
+public class V_choixSuivi extends JPanel{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
@@ -20,7 +20,7 @@ public class V_choixSuivi extends JPanel implements ActionListener{
 	private JComboBox<Date>choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
-	private  JButton btnValider;
+	private  static JButton btnValider;
 	private JLabel espace;
 
 	/**
@@ -104,12 +104,7 @@ public class V_choixSuivi extends JPanel implements ActionListener{
 		/**
 		 * @return le boutton "Valider"
 		 */
-		public JButton getBtnValider() {
+		public static JButton getBtnValider() {
 			return btnValider;
-		}
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("test");
-			
 		}
 }
