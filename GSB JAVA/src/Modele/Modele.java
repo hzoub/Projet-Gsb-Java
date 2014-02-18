@@ -34,7 +34,7 @@ public class Modele {
 				JOptionPane.showMessageDialog(null,
 						"Impossible de se connecter au serveur\n"
 						+"Veuillez verifier si easyPhp ou wampServer fonctionne correctement",
-						"Erreur",JOptionPane.INFORMATION_MESSAGE);
+						"Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 		return connexion;
 	 }
