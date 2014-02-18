@@ -5,7 +5,11 @@ public class FraisForfait {
 	
 	private String libelle;
 	private int qte;
-
+	/**
+	 * 
+	 * @param libelle
+	 * @param qte
+	 */
 	public FraisForfait(String libelle, int qte) {
 		this.libelle = libelle;
 		this.qte = qte;

@@ -13,7 +13,12 @@ public class FraisHorsForfait {
 	private String libelle;
 	private Date date;
 	private float montant;
-	
+	/**
+	 * 
+	 * @param libelle
+	 * @param date
+	 * @param montant
+	 */
 	public FraisHorsForfait(String libelle, Date date, float montant) {
 		this.libelle = libelle;
 		this.date = date;

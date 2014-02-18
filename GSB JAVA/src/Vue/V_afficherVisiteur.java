@@ -5,7 +5,10 @@ import javax.swing.*;
 
 import java.awt.*;
 
-
+/**
+ * Affiche la liste de tout les visiteurs sauf les comptables
+ * @author Fraizy Brandon
+ */
 @SuppressWarnings("serial")
 public class V_afficherVisiteur extends JPanel {
 	
@@ -18,6 +21,11 @@ public class V_afficherVisiteur extends JPanel {
 	
 	private Color bgColor;
 	private JPanel pan;
+	/**
+	 * 
+	 * @param nomVisiteur
+	 * @param prenomVisiteur
+	 */
     public V_afficherVisiteur(String nomVisiteur,String prenomVisiteur){
     	
     	

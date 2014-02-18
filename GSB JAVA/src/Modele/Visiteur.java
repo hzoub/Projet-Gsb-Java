@@ -5,7 +5,12 @@ public class Visiteur {
 	
 	String id, nom, prenom;
 	
-	
+	/**
+	 * 
+	 * @param id
+	 * @param nom
+	 * @param prenom
+	 */
 	public Visiteur(String id, String nom, String prenom) {
 		
 		this.id = id;

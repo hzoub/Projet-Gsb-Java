@@ -4,7 +4,10 @@ import Modele.*;
 import javax.swing.*;
 
 import java.awt.*;
-
+/**
+ * Affiche la liste des visiteur ayant une fiche validées
+ * @author Fraizy Brandon
+ */
 
 @SuppressWarnings("serial")
 public class V_ficheValidee extends JPanel {

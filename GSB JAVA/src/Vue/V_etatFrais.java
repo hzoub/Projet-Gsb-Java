@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import Modele.*;
 /**
- * 
+ * Affiche la fiche forfais et horsforfais du visiteur séléctionné
  * @author Zoubert hanem
  *
  */
@@ -46,7 +46,11 @@ public class V_etatFrais extends JPanel{
 	    private int nbJustificatifs = -1;
 	    private JTextField jtfJustif;
 	    private JLabel saut;
-	    
+	    /**
+	     * Constructeur
+	     * @param visiteur
+	     * @param mois
+	     */
 	public V_etatFrais(String visiteur, final String mois){
 		
 		/**
