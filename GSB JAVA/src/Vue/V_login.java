@@ -7,7 +7,7 @@ import javax.swing.border.TitledBorder;
 
 import Modele.Modele;
 /**
- * 
+ * Formulaire de connexion à l'espace comptable
  * @author zoubert hanem
  *@version 1.0
  */

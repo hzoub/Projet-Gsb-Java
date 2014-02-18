@@ -10,7 +10,9 @@ import javax.swing.border.TitledBorder;
 
 import Modele.*;
 /**
- * 
+ * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"CR"</b> 
+ * c'est à dire <b>"fiche créée, saisie en cours"</b> et le mois dont la fiche
+ * a été crée dans une liste déroulante
  * @author Zoubert hanem
  *
  */

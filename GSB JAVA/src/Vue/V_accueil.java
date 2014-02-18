@@ -7,7 +7,8 @@ import javax.swing.*;
 import Modele.Modele;
 import Modele.Visiteur;
 /**
- * @author Aguiar Folaké
+ * Accueil de l'application affiche la vue <b>V_afficherVisiteur</b>
+ *@author Aguiar Folaké
  *@version 1.0
  */
 @SuppressWarnings("serial")
