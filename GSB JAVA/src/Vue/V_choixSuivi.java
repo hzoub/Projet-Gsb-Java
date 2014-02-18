@@ -8,7 +8,7 @@ import Modele.*;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"VA"</b> 
  * c'est à dire <b>"Validée et mise en paiement"</b> et le mois dont la fiche
- * a été validé dans une liste déroulante
+ * a été validée dans une liste déroulante
  * @author Aguiar
  *
  */
