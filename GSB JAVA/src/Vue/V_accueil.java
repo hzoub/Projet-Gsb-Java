@@ -262,7 +262,7 @@ public class V_accueil extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JOptionPane.showMessageDialog(null,"Suivie paiement en cour de mise en place","Partie Folaké",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Suivie paiement EN COURS","Partie Folaké",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 	}
