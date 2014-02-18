@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.swing.JOptionPane;
+
 import Vue.V_login;
 public class Modele {
 		
@@ -26,8 +28,13 @@ public class Modele {
 				
 			} catch (ClassNotFoundException e) {
 				System.out.println(e);
+				System.out.println("class");
 			} catch (SQLException e) {
 				System.out.println(e);
+				JOptionPane.showMessageDialog(null,
+						"Impossible de se connecter au serveur\n"
+						+"Veuillez verifier si easyPhp ou wampServer fonctionne correctement",
+						"Erreur",JOptionPane.INFORMATION_MESSAGE);
 			}
 		return connexion;
 	 }
