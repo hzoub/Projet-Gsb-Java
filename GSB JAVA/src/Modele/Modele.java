@@ -12,15 +12,15 @@ import javax.swing.JOptionPane;
 
 import Vue.V_login;
 /**
- * Contient toute les fonctions qui vont chercher les informations dans la base de
- * données
+ *Contient toute les fonctions qui vont chercher les informations dans la base de
+ *données
  */
 public class Modele {
 		
 	/**
-	 * Permet la connexion à la base de données
-	 * @author Zoubert hanem
-	 * @return connexion
+	 *Permet la connexion à la base de données
+	 *@author Zoubert hanem
+	 *@return connexion
 	 */
 	public static Connection dbconnect(){
 		Connection connexion = null;
@@ -42,11 +42,11 @@ public class Modele {
 	 }
 	
 	/**
-	 * Connexion membre
-	 * @author Fraizy Brandon
+	 *Connexion membre
+	 *@author Fraizy Brandon
 	 */
 	public static boolean connexion(String login, String mdp) {
-		//Connexion
+		/*Connexion*/
 	
 		String mdp_2 = null;
 		
@@ -74,7 +74,7 @@ public class Modele {
 				finally{
 					
 					  try{
-						   //fermeture de la connexion
+						   /*fermeture de la connexion*/
 						   dbconnect().close();
 					  }
 					 
@@ -86,13 +86,13 @@ public class Modele {
 		}
 	
 		/**
-		 * Renvoie un ArrayList de type Visiteur
-		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
-		 * @author Fraizy Brandon
-		 * @return lesVisiteurs
+		 *Renvoie un ArrayList de type Visiteur
+		 *Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
+		 *@author Fraizy Brandon
+		 *@return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getLesVisiteurs() {
-			//Collection les visiteurs
+			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
@@ -111,7 +111,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -122,13 +122,13 @@ public class Modele {
 		}
 		
 		/**
-		 * Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
-		 * Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
-		 * @author Zoubert hanem
-		 * @return lesVisiteurs
+		 *Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
+		 *Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
+		 *@author Zoubert hanem
+		 *@return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getVisiteursFiche() {
-			
+			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
@@ -147,7 +147,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -158,13 +158,12 @@ public class Modele {
 		}
 		
 		/**
-		 * Renvoie <b>l'id, le nom, le prenom et le mois</b> des visiteurs ayant une fiche validées et mise en paiement<br>
-		 * Ajoute le résultat de la requête dans la collection <b>Visiteur</b>
-		 * @author ...
-		 * @return lesVisiteurs
+		 *Renvoie <b>l'id, le nom, le prenom et le mois</b> des visiteurs ayant une fiche validées et mise en paiement<br>
+		 *Ajoute le résultat de la requête dans la collection <b>Visiteur</b>
+		 *@return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getVisiteurSuiviPaiement() {
-			//Collection les visiteurs
+			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
@@ -183,7 +182,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -194,10 +193,10 @@ public class Modele {
 		}
 		
 		/**
-		 * @author hzoubert
+		 *@author hzoubert
 		 */
 		public static  ArrayList<Visiteur> getIdVisiteur(String nom) {
-			//Collection les visiteurs
+			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
@@ -214,7 +213,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -227,12 +226,12 @@ public class Modele {
 		/**
 		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "CR". 
 		 *@author Fraizy Brandon
-		 *return lesMoisVisiteur
+		 *@return MoisFiche
 		 */
 		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
 			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
-			//Collection les visiteurs
-			ArrayList<Mois> lesMoisVisiteur = new ArrayList<Mois>();
+			/*Collection les visiteurs*/
+			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
 			try {
 				
 				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
@@ -241,7 +240,7 @@ public class Modele {
 				while(rs.next()){
 					
 					String mois = rs.getString("mois");
-					lesMoisVisiteur.add(new Mois(mois));
+					MoisFiche.add(new Mois(mois));
 					
 					
 				}
@@ -251,25 +250,25 @@ public class Modele {
 			}
 			finally{	
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
 					   e.printStackTrace();
 				   }
 				 }
-			return lesMoisVisiteur ;
+			return MoisFiche ;
 		}	
 		
 		
 		/**
-		 *Renvoie le libellé de tout les etats
+		 *Renvoie le libelle de l'idEtat "Va"
 		 *@author Zoubert hanem
-		 *@return lesLibs
+		 *@return leLib
 		 */
 		public static  ArrayList<Etat> getEtatVa() {
 			
-		ArrayList<Etat> lesLibs = new ArrayList<Etat>();
+		ArrayList<Etat> leLib = new ArrayList<Etat>();
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat where id='VA'");
@@ -277,7 +276,7 @@ public class Modele {
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				lesLibs.add(new Etat("",libelle));
+				leLib.add(new Etat("",libelle));
 				
 				}
 			} 
@@ -286,14 +285,14 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
 					   e.printStackTrace();
 				   }
 				 }
-			return lesLibs;
+			return leLib;
 		}
 		
 		/**
@@ -320,7 +319,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -331,12 +330,11 @@ public class Modele {
 		}
 		
 		/**
-		 * Retourne toutes la lignefraisforfait d'un visiteur
-		 * @author Zoubert hanem
-		 * @param idVisiteur
-		 * @param mois - sous la forme aaaamm
-		 * @return fraisForfait
-		 * @author Zoubert Hanem
+		 *Retourne toutes la lignefraisforfait d'un visiteur
+		 *@author Zoubert hanem
+		 *@param idVisiteur
+		 *@param mois - sous la forme aaaamm
+		 *@return fraisForfait
 		 */
 		public static  ArrayList<FraisForfait> getLesFraisForfait(String idVisiteur, String mois) {
 			
@@ -359,7 +357,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -370,12 +368,11 @@ public class Modele {
 		}
 		
 		/**
-		 * Retourne toutes toutes les lignes de frais hors forfait
-		 * @author Zoubert hanem
-		 * @param idVisiteur
-		 * @param mois sous la forme aaaamm
-		 * @return fraisForfait
-		 * @author Zoubert Hanem
+		 *Retourne toutes toutes les lignes de frais hors forfait
+		 *@author Zoubert hanem
+		 *@param idVisiteur
+		 *@param mois sous la forme aaaamm
+		 *@return fraisForfait
 		 */
 		public static  ArrayList<FraisHorsForfait> getLesFraisHorsForfait(String idVisiteur, String mois) {
 			
@@ -400,7 +397,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -410,8 +407,8 @@ public class Modele {
 			return fraisHorsForfait ;
 		}
 		/**
-		 * @author Fraizy Brandon
-		 * @return le nom et le prenom du comptable
+		 *@author Fraizy Brandon
+		 *@return le nom et le prenom du comptable
 		 */
 		public static  ArrayList<Visiteur> getNomPrenomC(){
 			
@@ -434,7 +431,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -445,8 +442,8 @@ public class Modele {
 		}
 		
 		/**
-		 * @author Zoubert Hanem
-		 * @param idEtat
+		 *@author Zoubert Hanem
+		 *@param idEtat
 		 */
 		public static  int validerFicheFrais(String idEtat,String mois,String idVis,float montant,int nbJustificatifs) {	
 			int nbLignes = 0;
@@ -460,7 +457,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -497,8 +494,8 @@ public class Modele {
 		}*/
 		
 		/**
-		 * @param lib
-		 * @return idEtat
+		 *@param lib
+		 *@return idEtat
 		 */
 		public static  ArrayList<Etat>  getIdEtat(String lib) {	
 			ArrayList<Etat> idEtat = new ArrayList<Etat>();
@@ -517,7 +514,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -530,8 +527,8 @@ public class Modele {
 		
 		/**
 		 *
-		 * @author Brandon Fraizy
-		 * @return lesVisiteurs
+		 *@author Brandon Fraizy
+		 *@return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getFicheValidees(){
 			
@@ -552,7 +549,7 @@ public class Modele {
 			}
 			finally{
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
@@ -567,14 +564,14 @@ public class Modele {
 		}
 	
 		/**
-		 * Renvoie l'id , le nom , le prenom,le mois,le montant validé et l'idEtat 
-		 * des visiteurs ayant une fiche "VA".<br>
-		 * Ajoute le résultat de la requête dans la collection <b>Suivi.</b>
-		 * @author Folaké AGUIAR
-		 * @return lesSuivis
+		 *Renvoie l'id , le nom , le prenom,le mois,le montant validé et l'idEtat 
+		 *des visiteurs ayant une fiche "VA".<br>
+		 *Ajoute le résultat de la requête dans la collection <b>Suivi.</b>
+		 *@author Folaké AGUIAR
+		 *@return lesSuivis
 		 */
 		public static  ArrayList<Suivi> getSuivi() {
-			//Collection les visiteurs
+			/*Collection les visiteurs*/
 			ArrayList<Suivi>lesSuivis = new ArrayList<Suivi>();
 			
 			try {
@@ -597,7 +594,7 @@ public class Modele {
 			finally{
 				
 				   try{
-					   //fermeture de la connexion
+					   /*fermeture de la connexion*/
 					   dbconnect().close();
 				   }
 				   catch(Exception e){
