@@ -49,7 +49,6 @@ public class V_ficheValidee extends JPanel {
     	//Boucle parcourant la taille de la fonction getLesVisiteurs(), et les ajoute dans le tableau (le nom, prenom et id)
 	for (int i=0 ; i<Modele.getFicheValidees().size();i++){
 		Visiteur visiteur = Modele.getFicheValidees().get(i);
-		System.out.println(visiteur.getNom());
 		this.donnees[i][0] = visiteur.getNom();
 		this.donnees[i][1] = visiteur.getPrenom();
 	}

@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
 import javax.swing.JOptionPane;
 
 import Vue.V_login;
@@ -578,16 +577,16 @@ public class Modele {
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT mois,idVisiteur,nom,prenom,montantValide,idEtat"
-						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur ");
+						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur AND idEtat='VA' ");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
-					Date date = rs.getDate("Mois");
-					String id = rs.getString("Id");
-					String nom = rs.getString("Nom");
-					String prenom = rs.getString("Prenom");
-					int montant = rs.getInt("MontantValide");
-					String etat = rs.getString("Etat");
-					lesSuivis.add(new Suivi(date,id, nom, prenom,montant,etat));	
+					String date = rs.getString("mois");
+					String id = rs.getString("idVisiteur");
+					String nom = rs.getString("nom");
+					String prenom = rs.getString("prenom");
+					int montant = rs.getInt("montantValide");
+					String etat = rs.getString("idEtat");
+					lesSuivis.add(new Suivi(id, nom, prenom,date,montant,etat));	
 				}
 			} 
 			catch (SQLException e) {

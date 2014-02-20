@@ -36,9 +36,10 @@ public class V_afficherVisiteur extends JPanel {
     	/**
     	 * Création du tableau, affichant les visiteurs non comptable
     	 */
-    	pan = new JPanel();
-    	pan.setPreferredSize(new Dimension(700,600));
-    	pan.setBackground(bgColor);
+		this.pan = new JPanel();
+		this.pan.setPreferredSize(new Dimension(700,600));
+		this.pan.setBackground(bgColor);
+    	
     	this.nomVisiteur= new JLabel("<html>"+
 				"<h1 style=\"font-family:Comic Sans MS\">"+
 					"Comptable : "+nomVisiteur+" "+prenomVisiteur+

@@ -93,6 +93,12 @@ public class V_accueil extends JFrame {
 		this.v_validee = new V_ficheValidee();
 		this.v_validee.setBackground(bgColor);
 		
+		/**
+		 * Panel suivi
+		 */
+		this.suiviV = new V_suivi();
+		this.suiviV.setBackground(bgColor);
+		
 		/*
 		 * MENU BAR
 		 */
