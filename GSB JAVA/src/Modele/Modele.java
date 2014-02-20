@@ -128,11 +128,12 @@ public class Modele {
 		 *@return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getVisiteursFiche() {
+			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='CR' ORDER BY id");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='CR'AND mois='"+moisEnCour+"' ORDER BY id");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String id = rs.getString("id");
