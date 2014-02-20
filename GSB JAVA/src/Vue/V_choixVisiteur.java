@@ -94,8 +94,8 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		}
 		
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
-		for(int i=0; i<Modele.getLesMois(idVisiteur).size();i++){
-			Mois mois = Modele.getLesMois(idVisiteur).get(i);
+		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
+			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
 			this.choixMois.addItem(mois.getUnMois());
 		}
 		

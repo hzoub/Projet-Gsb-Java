@@ -229,7 +229,7 @@ public class Modele {
 		 *@author Fraizy Brandon
 		 *@return MoisFiche
 		 */
-		public static  ArrayList<Mois> getLesMois(String idVisiteur) {
+		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
 			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			/*Collection les visiteurs*/
 			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
