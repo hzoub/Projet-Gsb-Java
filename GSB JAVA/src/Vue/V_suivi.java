@@ -13,7 +13,7 @@ import Modele.Suivi;
  * @author Aguiar F
  *@version 1.0
  */
-
+//SUIvi
 @SuppressWarnings("serial")
 public class V_suivi extends JPanel implements ActionListener {
 	

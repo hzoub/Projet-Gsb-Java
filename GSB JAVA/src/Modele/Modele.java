@@ -569,7 +569,7 @@ public class Modele {
 		/**
 		 * Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
 		 * Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
-		 * @author Folaké
+		 * @author Folaké AGUIAR
 		 * @return lesVisiteurs
 		 */
 		public static  ArrayList<Suivi> getSuivi() {
