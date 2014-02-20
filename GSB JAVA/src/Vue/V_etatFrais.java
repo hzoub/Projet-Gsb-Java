@@ -43,7 +43,7 @@ public class V_etatFrais extends JPanel{
 	    
 	
 	    private JLabel justificatif;
-	    private int nbJustificatifs = -1;
+	    private int nbJustificatifs = 0;
 	    private JTextField jtfJustif;
 	    private JLabel saut;
 	    /**
@@ -173,12 +173,14 @@ public class V_etatFrais extends JPanel{
 		this.justificatif = new JLabel("Nombre de justificatifs :");
 		
 		this.jtfJustif = new JTextField(2);
+		
 		this.saut = new JLabel();
 		this.saut.setPreferredSize(new Dimension(730,20));
 		//boutton valider
 		this.bntValider = new JButton("Valider");
-//		this.bntValider.setEnabled(false);
+		//this.bntValider.setEnabled(false);
 		
+	
 		
 		//ajout
 		this.add(this.nomVmedicale);
@@ -225,25 +227,32 @@ public class V_etatFrais extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String statut = (String) listeStatut.getSelectedItem();
+				
+				if(statut.isEmpty()){
+					
+					JOptionPane.showMessageDialog(null,"Veuillez choisir un statut","Erreur",JOptionPane.ERROR_MESSAGE);
+				}
+				
+				else{
+					
 				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
 				
+				if(jtfJustif.getText().isEmpty()){
+					
+					JOptionPane.showMessageDialog(null,"Veuillez mettre le nombre de justificatifs","Erreur",JOptionPane.ERROR_MESSAGE);
+				}
+				
+				else{
+				
 				nbJustificatifs = Integer.parseInt(jtfJustif.getText());
-
+				System.out.println(nbJustificatifs);
 				if(verif==0){
 					/**
 					 * Récapitulatif avant la validation de la fiche
 					 */
 					int verifRecap = JOptionPane.showConfirmDialog(null,
 							
-							"---Eléments fofaitisés---"
-							
-							+"\nForfait Etape -> "+tableauElFofaitises.getValueAt(0,1)+
-							"\nFrais Kilométrique -> "+tableauElFofaitises.getValueAt(1,1)+
-							"\nNuitée Hôtel -> "+tableauElFofaitises.getValueAt(2,1)+
-							"\nRepas Restaurant -> "+tableauElFofaitises.getValueAt(3,1)+
-							
-							"\n------------------------------"+
-							"\nNombre de justificatifs -> "+nbJustificatifs+
+							"Nombre de justificatifs -> "+nbJustificatifs+
 							"\nMontant validée -> "+tblElHorFofais.getValueAt(0,2)+" €"+
 							"\n------------------------------"+
 							
@@ -283,9 +292,15 @@ public class V_etatFrais extends JPanel{
 						System.out.println("Validation de la fiche annulée");
 					}
 					
-					
-				}
-			 }
+			
+				}//fin verif
+				
+				}//fin else nbjustif
+				
+				}//fin else statut
+				
+				
+			 }//fin actionPerformed
 			
 		});
 	}
