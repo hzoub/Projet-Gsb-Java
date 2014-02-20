@@ -1,8 +1,13 @@
 package Vue;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.JTable;
+
+import Modele.Modele;
+import Modele.Suivi;
 
 /**
  * @author Aguiar F
@@ -22,12 +27,11 @@ public class V_suivi extends JPanel implements ActionListener {
     
     
        
-     public  V_suivi(String visiteur) {
+     public  V_suivi() {
     	
     	 this.titre = new JLabel(	"<html>"+
 					"<h1 style=\"font-family:Comic Sans MS\">"+
-					"Suivi fiche de frais de "+visiteur+
-				"</h1>",JLabel.CENTER);
+					"Suivi fiche de frais de </h1>",JLabel.CENTER);
        this.titre.setPreferredSize(new Dimension(700,30));
        this.majEtat = new JComboBox<String>();
 
@@ -40,16 +44,18 @@ public class V_suivi extends JPanel implements ActionListener {
      //  this.donnees = new Object[Modele.getSuivi().size()][entetes.length];
        this.tab = new JTable(donnees, entetes);
       
-       /*
+       
                 //Boucle qui parcours la BDD pour la fonction getSuivi(), et les ajoute dans le tableau 
             for (int i=0 ; i<Modele.getSuivi().size();i++){
-            		M_FicheFrais suivi = Modele.getSuivi().get(i);
-                    this.donnees[i][0] = suivi.getMois();
-                    this.donnees[i][0] = suivi.getIdVisiteur();
-                    this.donnees[i][1] = suivi.getMontantValide();
-                    this.donnees[i][2] = suivi.getIdEtat();
+            		Suivi suivi = Modele.getSuivi().get(i);
+                    this.donnees[i][0] = suivi.getDate();
+                    this.donnees[i][1] = suivi.getId();
+                    this.donnees[i][2] = suivi.getNom();
+                    this.donnees[i][3] = suivi.getPrenom();
+                    this.donnees[i][4] = suivi.getMontantValide();
+                    this.donnees[i][5] = suivi.getEtat();
             }
-           */
+           
             this.scroll = new JScrollPane(tab);
             this.scroll.setPreferredSize(new Dimension(450, 300));
             this.add(scroll);

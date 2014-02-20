@@ -565,5 +565,44 @@ public class Modele {
 			return lesVisiteurs;
 			
 		}
-		
+	
+		/**
+		 * Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
+		 * Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
+		 * @author Folaké
+		 * @return lesVisiteurs
+		 */
+		public static  ArrayList<Suivi> getSuivi() {
+			//Collection les visiteurs
+			ArrayList<Suivi>lesSuivis = new ArrayList<Suivi>();
+			
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois,idVisiteur,nom,prenom,montantValide,idEtat"
+						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur ");
+				ResultSet rs = st.executeQuery(); 
+				while(rs.next()){
+					Date date = rs.getDate("Mois");
+					String id = rs.getString("Id");
+					String nom = rs.getString("Nom");
+					String prenom = rs.getString("Prenom");
+					int montant = rs.getInt("MontantValide");
+					String etat = rs.getString("Etat");
+					lesSuivis.add(new Suivi(date,id, nom, prenom,montant,etat));	
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				
+				   try{
+					   //fermeture de la connexion
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return lesSuivis ;
+		}
 }

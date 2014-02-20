@@ -33,6 +33,7 @@ public class V_accueil extends JFrame {
 	private V_afficherVisiteur listeVisiteurs;
 	private V_choixSuivi choixSuivi;
 	private V_ficheValidee v_validee;
+	private V_suivi suiviV ;
 	/**
 	* Constructeur..
 	* */
@@ -200,7 +201,7 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(choixSuivi);
+				setContentPane(suiviV);
 				setVisible(true);
 			}
 		});
@@ -256,14 +257,14 @@ public class V_accueil extends JFrame {
 		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
 		 *
 		 * @author 
-		 */
+		 
 		V_choixSuivi.getBtnValider().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				JOptionPane.showMessageDialog(null,"Suivie paiement EN COURS","Partie Folaké",JOptionPane.INFORMATION_MESSAGE);
+				setContentPane(v_suivi);
+				setVisible(true);
 			}
-		});
+		});*/
 	}
 }
