@@ -19,8 +19,8 @@ public class Modele {
 		
 	/**
 	 * Permet la connexion à la base de données
-	 * @return connexion
 	 * @author Zoubert hanem
+	 * @return connexion
 	 */
 	public static Connection dbconnect(){
 		Connection connexion = null;
@@ -45,7 +45,6 @@ public class Modele {
 	 * Connexion membre
 	 * @author Fraizy Brandon
 	 */
-	
 	public static boolean connexion(String login, String mdp) {
 		//Connexion
 	
@@ -91,7 +90,6 @@ public class Modele {
 		 * Permet d'ajouter le résultat de la requête dans la collection <Visiteur>
 		 * @author Fraizy Brandon
 		 * @return lesVisiteurs
-		 * 
 		 */
 		public static  ArrayList<Visiteur> getLesVisiteurs() {
 			//Collection les visiteurs
@@ -130,7 +128,7 @@ public class Modele {
 		 * @return lesVisiteurs
 		 */
 		public static  ArrayList<Visiteur> getVisiteursFiche() {
-			//Collection les visiteurs
+			
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
