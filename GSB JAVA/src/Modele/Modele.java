@@ -159,6 +159,44 @@ public class Modele {
 		}
 		
 		/**
+		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "CR". 
+		 *@author Fraizy Brandon
+		 *@return MoisFiche
+		 */
+		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
+			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+			/*Collection les visiteurs*/
+			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
+			try {
+				
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String mois = rs.getString("mois");
+					MoisFiche.add(new Mois(mois));
+					
+					
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{	
+				   try{
+					   /*fermeture de la connexion*/
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return MoisFiche ;
+		}	
+		
+		
+		/**
 		 *Renvoie <b>l'id, le nom, le prenom et le mois</b> des visiteurs ayant une fiche validées et mise en paiement<br>
 		 *Ajoute le résultat de la requête dans la collection <b>Visiteur</b>
 		 *@return lesVisiteurs
@@ -223,44 +261,6 @@ public class Modele {
 				 }
 			return lesVisiteurs ;
 		}		
-		
-		/**
-		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "CR". 
-		 *@author Fraizy Brandon
-		 *@return MoisFiche
-		 */
-		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
-			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
-			/*Collection les visiteurs*/
-			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
-			try {
-				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String mois = rs.getString("mois");
-					MoisFiche.add(new Mois(mois));
-					
-					
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{	
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return MoisFiche ;
-		}	
-		
 		
 		/**
 		 *Renvoie le libelle de l'idEtat "Va"
