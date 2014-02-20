@@ -11,14 +11,17 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import Vue.V_login;
+/**
+ * Contient toute les fonctions qui vont chercher les informations dans la base de
+ * données
+ */
 public class Modele {
 		
 	/**
-	 * Fonction qui permet la connexion à la base de données
+	 * Permet la connexion à la base de données
 	 * @return connexion
 	 * @author Zoubert hanem
 	 */
-	 
 	public static Connection dbconnect(){
 		Connection connexion = null;
 		try {
@@ -528,7 +531,7 @@ public class Modele {
 		
 		
 		/**
-		 * ------------------
+		 *
 		 * @author Brandon Fraizy
 		 * @return lesVisiteurs
 		 */
@@ -566,10 +569,11 @@ public class Modele {
 		}
 	
 		/**
-		 * Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
-		 * Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
+		 * Renvoie l'id , le nom , le prenom,le mois,le montant validé et l'idEtat 
+		 * des visiteurs ayant une fiche "VA".<br>
+		 * Ajoute le résultat de la requête dans la collection <b>Suivi.</b>
 		 * @author Folaké AGUIAR
-		 * @return lesVisiteurs
+		 * @return lesSuivis
 		 */
 		public static  ArrayList<Suivi> getSuivi() {
 			//Collection les visiteurs

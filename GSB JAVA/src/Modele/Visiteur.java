@@ -1,12 +1,15 @@
 package Modele;
-
+/**
+ * Modele <b>visiteur</b> qui renvoie <b>l'id , le nom et le prenom du visiteur.</b>
+ * @author Brandon Fraizy
+ */
 public class Visiteur {
 
 	
 	String id, nom, prenom;
 	
 	/**
-	 * 
+	 * Constructeur 
 	 * @param id
 	 * @param nom
 	 * @param prenom
