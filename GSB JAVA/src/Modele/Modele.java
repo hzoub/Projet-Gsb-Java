@@ -127,7 +127,7 @@ public class Modele {
 		 *@author Zoubert hanem
 		 *@return lesVisiteurs
 		 */
-		public static  ArrayList<Visiteur> getVisiteursFiche() {
+		public static  ArrayList<Visiteur> getVisiteursFicheCR() {
 			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
@@ -163,7 +163,7 @@ public class Modele {
 		 *Ajoute le résultat de la requête dans la collection <b>Visiteur</b>
 		 *@return lesVisiteurs
 		 */
-		public static  ArrayList<Visiteur> getVisiteurSuiviPaiement() {
+		public static  ArrayList<Visiteur> getVisiteursFicheVA(){
 			/*Collection les visiteurs*/
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
