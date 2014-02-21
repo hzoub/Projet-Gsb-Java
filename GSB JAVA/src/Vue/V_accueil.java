@@ -34,6 +34,7 @@ public class V_accueil extends JFrame {
 	private V_choixSuivi choixSuivi;
 	private V_ficheValidee v_validee;
 	private V_suivi suiviV ;
+	private V_recapitulatif recap ;
 	/**
 	* Constructeur..
 	* */
@@ -268,7 +269,7 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(suiviV);
+				setContentPane(recap);
 				setVisible(true);
 			}
 		});
