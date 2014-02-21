@@ -62,8 +62,8 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		//Liste deroulante Visiteur
 		this.choixSuivi = new JComboBox<String>();
 
-		for(int i=0; i<Modele.getSuivi().size();i++){
-			Visiteur visiteur = Modele.getSuivi().get(i);
+		for(int i=0; i<Modele.getFicheValidees().size();i++){
+			Visiteur visiteur = Modele.getFicheValidees().get(i);
 			this.choixSuivi.addItem(visiteur.getNom());
 		}
 		this.choixSuivi.setPreferredSize(new Dimension(150,20));
@@ -76,6 +76,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		this.choixMois = new JComboBox<Date>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
+		
 
 		//Recupere le nom selectionné
 		nomVisiteur = (String) choixSuivi.getSelectedItem();
@@ -84,6 +85,11 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 			
 			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
 			idVisiteur = visiteur.getId();	
+		}
+		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
+		for(int i=0; i<Modele.getMoisFicheVA(idVisiteur).size();i++){
+			Mois mois = Modele.getMoisFicheVA(idVisiteur).get(i);
+			//this.choixMois.addItem(mois.getUnMois());
 		}
 		
 	
