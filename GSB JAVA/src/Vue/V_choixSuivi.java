@@ -2,8 +2,10 @@ package Vue;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+
 import Modele.*;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"VA"</b> 
@@ -13,20 +15,26 @@ import Modele.*;
  *
  */
 @SuppressWarnings("serial")
-public class V_choixSuivi extends JPanel{
+public class V_choixSuivi extends JPanel implements ActionListener {
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
-	private JComboBox<String>choixVisiteur;
+	private JComboBox<String>choixSuivi;
 	private JLabel lblChoixMois;
 	private JComboBox<Date>choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
 	private  static JButton btnValider;
+	private static JButton btnSuiviComplet ;
 	private JLabel espace;
+	private String nomVisiteur;
+	private String idVisiteur;
+	
+	
 
 	/**
 	 * Constructeur V_ficheFrais
+	 * @param visiteur 
 	 */
 	public V_choixSuivi(){
 		
@@ -43,8 +51,7 @@ public class V_choixSuivi extends JPanel{
 		//TITRE
 		this.lblTitre = new JLabel("<html>"+
 				"<h1 style=\"font-family:Comic Sans MS\">"+
-					"Choix du visiteur ( Suivi )"+
-				"</h1>",JLabel.CENTER);
+					"Choix du visiteur ( Suivi ) </h1>",JLabel.CENTER);
 		this.lblTitre.setPreferredSize(new Dimension(800,100));
 		
 		//LABEL Visiteur
@@ -53,13 +60,13 @@ public class V_choixSuivi extends JPanel{
 		
 		
 		//Liste deroulante Visiteur
-		this.choixVisiteur = new JComboBox<String>();
+		this.choixSuivi = new JComboBox<String>();
 
-		for(int i=0; i<Modele.getVisiteursFicheVA().size();i++){
-			Visiteur visiteur = Modele.getVisiteursFicheVA().get(i);
-			this.choixVisiteur.addItem(visiteur.getNom());
+		for(int i=0; i<Modele.getFicheValidees().size();i++){
+			Visiteur visiteur = Modele.getFicheValidees().get(i);
+			this.choixSuivi.addItem(visiteur.getNom());
 		}
-		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
+		this.choixSuivi.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
 		this.lblChoixMois = new JLabel("Mois :");
@@ -69,12 +76,31 @@ public class V_choixSuivi extends JPanel{
 		this.choixMois = new JComboBox<Date>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
+		
+
+		//Recupere le nom selectionné
+		nomVisiteur = (String) choixSuivi.getSelectedItem();
+		
+		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
+			
+			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
+			idVisiteur = visiteur.getId();	
+		}
+		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
+		for(int i=0; i<Modele.getMoisFicheVA(idVisiteur).size();i++){
+			Mois mois = Modele.getMoisFicheVA(idVisiteur).get(i);
+			//this.choixMois.addItem(mois.getUnMois());
+		}
+		
+	
+		
 		//Espace entre les labels est les bouttons
 		this.espace = new JLabel();
 		this.espace.setPreferredSize(new Dimension(220,15));
 		
 		//BOUTTON VALIDER
 		btnValider = new JButton("Valider");
+		btnSuiviComplet = new JButton("Suivi de tous les visiteurs");
 		
 		//this.btnValider.addActionListener(this);
 		
@@ -83,13 +109,14 @@ public class V_choixSuivi extends JPanel{
 		
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);
-		this.panelForm.add(choixVisiteur);
+		this.panelForm.add(choixSuivi);
 		this.panelForm.add(lblChoixMois);
 		this.panelForm.add(choixMois);
 		
 		this.panelForm.add(espace);
 		
 		this.panelForm.add(btnValider);
+		this.panelForm.add(btnSuiviComplet);
 		
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
@@ -99,14 +126,30 @@ public class V_choixSuivi extends JPanel{
 	 * @return le visiteur
 	 */
 	public String getChoixVisiteur() {
-		String visiteur = choixVisiteur.getSelectedItem().toString();
+		String visiteur = choixSuivi.getSelectedItem().toString();
 		return visiteur;
 	}
+
+	public String  getChoixMois() {
+		String mois =  (String) choixMois.getSelectedItem();
+		return mois;
+	}
+
 
 		/**
 		 * @return le boutton "Valider"
 		 */
 		public static JButton getBtnValider() {
 			return btnValider;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		public static JButton getBtnSuiviComplet(){
+			return btnSuiviComplet ;
+			
 		}
 }

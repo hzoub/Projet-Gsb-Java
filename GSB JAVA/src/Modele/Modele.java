@@ -163,13 +163,13 @@ public class Modele {
 		 *@author Fraizy Brandon
 		 *@return MoisFiche
 		 */
-		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
+		public static  ArrayList<Mois> getMoisFicheVA(String idVisiteur) {
 			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			/*Collection les visiteurs*/
 			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='VA' ");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
@@ -577,7 +577,7 @@ public class Modele {
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT mois,idVisiteur,nom,prenom,montantValide,idEtat"
-						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur AND idEtat='VA' ");
+						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur ");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String date = rs.getString("mois");
@@ -603,5 +603,36 @@ public class Modele {
 				   }
 				 }
 			return lesSuivis ;
+		}
+		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
+			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+			/*Collection les visiteurs*/
+			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
+			try {
+				
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String mois = rs.getString("mois");
+					MoisFiche.add(new Mois(mois));
+					
+					
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{	
+				   try{
+					   /*fermeture de la connexion*/
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return MoisFiche ;
 		}
 }
