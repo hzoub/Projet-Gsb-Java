@@ -169,7 +169,7 @@ public class Modele {
 			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='VA' AND mois='"+moisEnCour+"' ");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='VA' ");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
