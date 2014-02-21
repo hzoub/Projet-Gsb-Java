@@ -207,7 +207,7 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(suiviV);
+				setContentPane(choixSuivi);
 				setVisible(true);
 			}
 		});
@@ -263,14 +263,27 @@ public class V_accueil extends JFrame {
 		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
 		 *
 		 * @author 
-		 
+		 */
 		V_choixSuivi.getBtnValider().addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(v_suivi);
+				setContentPane(suiviV);
 				setVisible(true);
 			}
-		});*/
+		});
+		/**
+		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
+		 *
+		 * @author 
+		 */
+		V_choixSuivi.getBtnSuiviComplet().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				setContentPane(suiviV);
+				setVisible(true);
+			}
+		});
 	}
 }

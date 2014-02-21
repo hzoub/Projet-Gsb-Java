@@ -577,7 +577,7 @@ public class Modele {
 			
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("SELECT mois,idVisiteur,nom,prenom,montantValide,idEtat"
-						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur AND idEtat='VA' ");
+						+ " FROM fichefrais , visiteur  WHERE visiteur.id = fichefrais.idVisiteur ");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String date = rs.getString("mois");
