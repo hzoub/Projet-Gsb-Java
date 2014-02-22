@@ -159,12 +159,12 @@ public class Modele {
 		}
 		
 		/**
-		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "CR". 
-		 *@author Fraizy Brandon
-		 *@return MoisFiche
+		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "VA". 
+		 *@author 
+		 *@return 
 		 */
 		public static  ArrayList<Mois> getMoisFicheVA(String idVisiteur) {
-			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+			//String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
 			/*Collection les visiteurs*/
 			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
 			try {

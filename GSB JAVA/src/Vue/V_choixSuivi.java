@@ -142,14 +142,16 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		public static JButton getBtnValider() {
 			return btnValider;
 		}
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
+	
 		public static JButton getBtnSuiviComplet(){
 			return btnSuiviComplet ;
 			
 		}
+
+		
 }
