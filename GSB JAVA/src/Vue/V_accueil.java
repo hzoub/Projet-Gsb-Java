@@ -100,6 +100,7 @@ public class V_accueil extends JFrame {
 		this.suiviV = new V_suivi();
 		this.suiviV.setBackground(bgColor);
 		
+		
 		/*
 		 * MENU BAR
 		 */
@@ -269,6 +270,16 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				/*
+				 * faut pas oublie d'instancier ton objet recp ;)
+				 * pour l'instant il a en parametre idVisteur=null et mois=null
+				 */
+				
+				/**
+				 * Panel recap
+				 */
+				recap = new V_recapitulatif(null,null);
+				recap.setBackground(bgColor);
 				setContentPane(recap);
 				setVisible(true);
 			}

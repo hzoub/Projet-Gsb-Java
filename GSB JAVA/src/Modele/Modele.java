@@ -121,6 +121,8 @@ public class Modele {
 			return lesVisiteurs ;
 		}
 		
+/*-------------------------------------VALIDATION--------------------------------------------*/
+		
 		/**
 		 *Renvoie l'id , le nom , le prenom des visiteurs ayant une fiche créée, saisie en cours.<br>
 		 *Permet d'ajouter le résultat de la requête dans la collection <b>Visiteur.</b>
@@ -158,6 +160,39 @@ public class Modele {
 			return lesVisiteurs ;
 		}
 		
+		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
+			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+			/*Collection les visiteurs*/
+			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
+			try {
+				
+				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
+				ResultSet rs = st.executeQuery(); 
+				
+				while(rs.next()){
+					
+					String mois = rs.getString("mois");
+					MoisFiche.add(new Mois(mois));
+					
+					
+				}
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{	
+				   try{
+					   /*fermeture de la connexion*/
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return MoisFiche ;
+		}
+		
+/*-------------------------------------SUIVIE--------------------------------------------*/		
 		/**
 		 *Renvoie le mois de la fiche des visiteurs ayant une fiche créée, saisie en cours "VA". 
 		 *@author 
@@ -230,7 +265,7 @@ public class Modele {
 				 }
 			return lesVisiteurs ;
 		}
-		
+/*---------------------------------------------------------------------------------*/		
 		/**
 		 *@author hzoubert
 		 */
@@ -603,36 +638,5 @@ public class Modele {
 				   }
 				 }
 			return lesSuivis ;
-		}
-		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
-			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
-			/*Collection les visiteurs*/
-			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
-			try {
-				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String mois = rs.getString("mois");
-					MoisFiche.add(new Mois(mois));
-					
-					
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{	
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return MoisFiche ;
 		}
 }

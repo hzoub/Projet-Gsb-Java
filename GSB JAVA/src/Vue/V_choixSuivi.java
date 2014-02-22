@@ -21,7 +21,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 	private JLabel lblChoixVisiteur;
 	private JComboBox<String>choixSuivi;
 	private JLabel lblChoixMois;
-	private JComboBox<Date>choixMois;
+	private JComboBox<String>choixMois;
 	private JPanel panelForm;
 	private Color bgColor;
 	private  static JButton btnValider;
@@ -44,7 +44,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		
 		//PANEL POUR LE FORMUAIRE
 		this.panelForm = new JPanel();
-		this.panelForm.setPreferredSize(new Dimension(250,140));
+		this.panelForm.setPreferredSize(new Dimension(250,160));
 		this.panelForm.setBorder(new TitledBorder("Choix visiteur"));
 		this.panelForm.setBackground(bgColor);
 		
@@ -62,8 +62,8 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		//Liste deroulante Visiteur
 		this.choixSuivi = new JComboBox<String>();
 
-		for(int i=0; i<Modele.getFicheValidees().size();i++){
-			Visiteur visiteur = Modele.getFicheValidees().get(i);
+		for(int i=0; i<Modele.getVisiteursFicheVA().size();i++){
+			Visiteur visiteur = Modele.getVisiteursFicheVA().get(i);
 			this.choixSuivi.addItem(visiteur.getNom());
 		}
 		this.choixSuivi.setPreferredSize(new Dimension(150,20));
@@ -73,7 +73,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		this.lblChoixMois.setPreferredSize(new Dimension(70,10));
 		
 		//Liste deroulante mois
-		this.choixMois = new JComboBox<Date>();
+		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
 		
@@ -89,7 +89,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
 		for(int i=0; i<Modele.getMoisFicheVA(idVisiteur).size();i++){
 			Mois mois = Modele.getMoisFicheVA(idVisiteur).get(i);
-			//this.choixMois.addItem(mois.getUnMois());
+			this.choixMois.addItem(mois.getUnMois());
 		}
 		
 	
