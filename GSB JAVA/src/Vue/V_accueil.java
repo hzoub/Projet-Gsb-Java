@@ -278,7 +278,7 @@ public class V_accueil extends JFrame {
 				/**
 				 * Panel recap
 				 */
-				recap = new V_recapitulatif(null,null);
+				recap = new V_recapitulatif(choixSuivi.getChoixVisiteur(),choixSuivi.getChoixMois());
 				recap.setBackground(bgColor);
 				setContentPane(recap);
 				setVisible(true);

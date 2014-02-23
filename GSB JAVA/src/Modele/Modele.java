@@ -639,4 +639,31 @@ public class Modele {
 				 }
 			return lesSuivis ;
 		}
+	
+		/**
+		 *@author 
+		 *@param 
+		 */
+		public static  int rembourseFiche(String idEtat,String mois,String idVis) {	
+		String date = new SimpleDateFormat("yyyy-mm-dd", Locale.FRANCE).format(new Date());
+			int nbLignes = 0;
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat= '"+date+"', dateModif='"+date+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
+					
+				nbLignes = st.executeUpdate();
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   /*fermeture de la connexion*/
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return nbLignes;
+		}
 }

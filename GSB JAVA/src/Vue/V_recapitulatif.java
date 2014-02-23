@@ -160,11 +160,10 @@ public class V_recapitulatif extends JPanel {
 			/*-------------------------------------------------------------*/
 			this.justificatif = new JLabel("Nombre de justificatifs :");
 			
-			this.jtfJustif = new JTextField(2);
+			
 			
 			this.saut = new JLabel();
 			this.saut.setPreferredSize(new Dimension(730,20));
-			//boutton valider
 			this.rembourse = new JButton("Rembourse");
 			//this.bntValider.setEnabled(false);
 			
@@ -194,9 +193,25 @@ public class V_recapitulatif extends JPanel {
 			this.add(this.scrollElHorFofais);
 			
 			this.add(this.justificatif);
-			this.add(this.jtfJustif);
+
 			this.add(this.saut);
-			this.add(this.rembourse );
-		}
-		}
+			this.add(this.rembourse);
+			
+			this.rembourse.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+				int verifValidFiche = Modele.rembourseFiche(idEtat,mois,idVisiteur );
+				if(verifValidFiche==1){
+					
+					JOptionPane.showMessageDialog(null,"la fiche");
+				}
+				}
+						
+				});
+				}
+			}
+
+		
+			
 	
