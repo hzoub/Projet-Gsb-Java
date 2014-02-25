@@ -12,12 +12,10 @@ public class V_recapitulatif extends JPanel {
 	
 			private JLabel nomVmedicale;
 			private JLabel date;
-			private JLabel statutFiche;
 			private JLabel descriptifElement;
-			
-			private JComboBox<String>listeStatut;
 			private JLabel elementFofaitises;
 			private JLabel etatActuel;
+			
 			private String etatAct;
 			
 			private JPanel panStatut;
@@ -37,9 +35,6 @@ public class V_recapitulatif extends JPanel {
 		    private String idVisiteur;
 		    private String idEtat;
 		    
-		
-		    private JLabel justificatif;
-		    private JTextField jtfJustif;
 		    private JLabel saut ;
 
 		    /**
@@ -53,7 +48,7 @@ public class V_recapitulatif extends JPanel {
 			 * 
 			 */
 			this.panStatut = new JPanel();
-			this.panStatut.setPreferredSize(new Dimension(400,50));
+			this.panStatut.setPreferredSize(new Dimension(400,20));
 			
 			this.panLesForfais = new JPanel();
 			this.panLesForfais.setBackground(bgColor);
@@ -97,14 +92,7 @@ public class V_recapitulatif extends JPanel {
 			//etat actuel de la fiche du visiteur séléctionné
 			this.etatActuel = new JLabel("Etat actuel : "+this.etatAct);
 			
-			this.statutFiche = new JLabel("Statut de la fiche : ");
 		
-			this.listeStatut = new JComboBox<String>();
-			this.listeStatut.addItem("");
-		
-			
-			
-			
 			this.etatActuel.setPreferredSize(new Dimension(700,30));
 			this.elementFofaitises = new JLabel("Eléments fofaitisés :");
 			this.elementFofaitises.setPreferredSize(new Dimension(700,30));
@@ -158,21 +146,18 @@ public class V_recapitulatif extends JPanel {
 			this.scrollElHorFofais = new JScrollPane(tblElHorFofais);
 			this.scrollElHorFofais.setPreferredSize(new Dimension(730,50));
 			/*-------------------------------------------------------------*/
-			this.justificatif = new JLabel("Nombre de justificatifs :");
-			
 			
 			
 			this.saut = new JLabel();
 			this.saut.setPreferredSize(new Dimension(730,20));
-			this.rembourse = new JButton("Rembourse");
-			//this.bntValider.setEnabled(false);
+			this.rembourse = new JButton("Rembourser");
+		
 			
 		
 			
 			//ajout
 			this.add(this.nomVmedicale);
 			this.add(this.date);
-			
 			this.add(this.etatActuel);
 			
 			
@@ -191,21 +176,36 @@ public class V_recapitulatif extends JPanel {
 			 */
 			this.add(this.descriptifElement);
 			this.add(this.scrollElHorFofais);
-			
-			this.add(this.justificatif);
 
 			this.add(this.saut);
+			
 			this.add(this.rembourse);
 			
 			this.rembourse.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				int verifValidFiche = Modele.rembourseFiche(idEtat,mois,idVisiteur );
-				if(verifValidFiche==1){
+					 //idEtat = "RB";
+						  
+					int verifValidFiche = Modele.rembourseFiche(idEtat,mois,idVisiteur);
 					
-					JOptionPane.showMessageDialog(null,"la fiche");
-				}
+					if(verifValidFiche==1){
+						
+						JOptionPane.showMessageDialog(null,"La fiche de frais du visiteur "+nomVmedicale+" a bien été mise en paiement","Remboursement",JOptionPane.INFORMATION_MESSAGE);
+						/**
+						 * Affiche l'etat actuelle de la fiche
+						 */
+						etatActuel.setText("Etat actuel : "+etatAct);
+						/**
+						 * Désactive le bouton rembourser
+						 */
+						rembourse.setEnabled(false);
+					}
+					
+					else{
+						JOptionPane.showMessageDialog(null,"La remboursement a échoué","Erreur",JOptionPane.ERROR_MESSAGE);
+					}
+				
 				}
 						
 				});
