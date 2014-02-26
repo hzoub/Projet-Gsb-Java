@@ -19,14 +19,19 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
-	private JComboBox<String>choixSuivi;
 	private JLabel lblChoixMois;
+	private JLabel msg;// s'il n y a aucune fiche
+	private JLabel espace;
+	
 	private JComboBox<String>choixMois;
+	private JComboBox<String>choixSuivi;
+	
 	private JPanel panelForm;
 	private Color bgColor;
+	
 	private  static JButton btnValider;
 	private static JButton btnSuiviComplet ;
-	private JLabel espace;
+
 	private String nomVisiteur;
 	private String idVisiteur;
 	
@@ -102,10 +107,17 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		btnValider = new JButton("Valider");
 		btnSuiviComplet = new JButton("Suivi de tous les visiteurs");
 		
-		//this.btnValider.addActionListener(this);
+		//Ce message va s'afficher que quand il n y' aucune fiche
+		this.msg = new JLabel("Il n y'a aucune fiche a rembourser",JLabel.CENTER);
+		this.msg.setPreferredSize(new Dimension(700,50));
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
+		
+		if(this.choixSuivi.getSelectedItem()==null){
+			btnValider.setEnabled(false);
+			this.add(this.msg);
+		}
 		
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);

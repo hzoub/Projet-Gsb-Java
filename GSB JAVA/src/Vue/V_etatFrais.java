@@ -16,12 +16,10 @@ public class V_etatFrais extends JPanel{
 	
 		private JLabel nomVmedicale;
 		private JLabel date;
-		private JLabel statutFiche;
 		private JLabel descriptifElement;
-		
-		private JComboBox<String>listeStatut;
 		private JLabel elementFofaitises;
 		private JLabel etatActuel;
+		
 		private String etatAct;
 		
 		private JPanel panStatut;
@@ -39,15 +37,14 @@ public class V_etatFrais extends JPanel{
 	    private JButton bntValider;
 	    
 	    private String idVisiteur;
-	    private String idEtat;
-	    
+  
 	
 	    private JLabel justificatif;
 	    private int nbJustificatifs = 0;
 	    private JTextField jtfJustif;
 	    private JLabel saut;
 	    /**
-	     * Constructeur
+	     * Constructeur V_etatFrais
 	     * @param visiteur
 	     * @param mois
 	     */
@@ -57,7 +54,7 @@ public class V_etatFrais extends JPanel{
 		 * 
 		 */
 		this.panStatut = new JPanel();
-		this.panStatut.setPreferredSize(new Dimension(400,50));
+		this.panStatut.setPreferredSize(new Dimension(400,20));
 		
 		this.panLesForfais = new JPanel();
 		this.panLesForfais.setBackground(bgColor);
@@ -99,22 +96,7 @@ public class V_etatFrais extends JPanel{
 			this.etatAct = etat.getlibelle();
 		}
 		//etat actuel de la fiche du visiteur séléctionné
-		this.etatActuel = new JLabel("Etat actuel : "+this.etatAct);
-		
-		this.statutFiche = new JLabel("Statut de la fiche : ");
-	
-		this.listeStatut = new JComboBox<String>();
-		this.listeStatut.addItem("");
-		/**
-		 * Liste deroulante "etat"
-		 */
-		for(int i=0; i<Modele.getEtatVa().size();i++){
-			
-			Etat etat = Modele.getEtatVa().get(i);
-			
-			this.listeStatut.addItem(etat.getlibelle());
-		}
-		
+		this.etatActuel = new JLabel("Etat actuel : "+this.etatAct);	
 		
 		
 		this.etatActuel.setPreferredSize(new Dimension(700,30));
@@ -187,11 +169,7 @@ public class V_etatFrais extends JPanel{
 		this.add(this.date);
 		
 		this.add(this.etatActuel);
-		
-		//Ajout du label statut est de la liste deroulante des statuts dans le panel "panStatut"
-		this.panStatut.add(this.statutFiche);
-		this.panStatut.add(this.listeStatut);
-		
+
 		
 		//Ajout du panel "panStatut & "elementFofaitises"
 		this.add(this.panStatut);
@@ -212,13 +190,7 @@ public class V_etatFrais extends JPanel{
 		this.add(this.jtfJustif);
 		this.add(this.saut);
 		this.add(this.bntValider );
-		
-//		if(nbJustificatifs!=-1){
-//			this.bntValider.setEnabled(true);
-//		}else{
-//			this.bntValider.setEnabled(false);
-//		}
-		
+
 		/**
 		 * Action boutton valider
 		 */
@@ -226,16 +198,9 @@ public class V_etatFrais extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String statut = (String) listeStatut.getSelectedItem();
-				
-				if(statut.isEmpty()){
+
 					
-					JOptionPane.showMessageDialog(null,"Veuillez choisir un statut","Erreur",JOptionPane.ERROR_MESSAGE);
-				}
-				
-				else{
-					
-				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous le nouveau statut : "+statut+" ?","Validation",JOptionPane.YES_NO_OPTION);
+				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous la validation cette fiche ?","Validation",JOptionPane.YES_NO_OPTION);
 				
 				if(jtfJustif.getText().isEmpty()){
 					
@@ -259,19 +224,14 @@ public class V_etatFrais extends JPanel{
 							"\nSouhaitez-vous valider cette fiche ?",
 							
 							"Détails de la validation",JOptionPane.YES_NO_OPTION);
-				
-					
-					for(int i=0; i<Modele.getIdEtat(statut).size(); i++){
-						
-						idEtat = Modele.getIdEtat(statut).get(i).getId();
-					}
+
 					if(verifRecap==0){
 						
-						int verifValidFiche = Modele.validerFicheFrais(idEtat,mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
+						int verifValidFiche = Modele.validerFicheFrais(mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
 						
 						if(verifValidFiche==1){
 							
-							JOptionPane.showMessageDialog(null,"La fiche est"+statut,"Validation",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"La fiche","Validation",JOptionPane.INFORMATION_MESSAGE);
 								
 							for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
 								Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
@@ -296,9 +256,7 @@ public class V_etatFrais extends JPanel{
 				}//fin verif
 				
 				}//fin else nbjustif
-				
-				}//fin else statut
-				
+					
 				
 			 }//fin actionPerformed
 			

@@ -7,7 +7,7 @@ import javax.swing.*;
 
 import Modele.*;
 @SuppressWarnings("serial")
-public class V_recapitulatif extends JPanel {
+public class V_suiviePaiement extends JPanel {
 
 	
 			private JLabel nomVmedicale;
@@ -33,8 +33,7 @@ public class V_recapitulatif extends JPanel {
 		    private JButton rembourse ;
 		    
 		    private String idVisiteur;
-		    private String idEtat;
-		    
+
 		    private JLabel saut ;
 
 		    /**
@@ -42,7 +41,7 @@ public class V_recapitulatif extends JPanel {
 		     * @param visiteur
 		     * @param mois
 		     */
-		public V_recapitulatif(String visiteur, final String mois){
+		public V_suiviePaiement(final String visiteur, final String mois){
 			
 			/**
 			 * 
@@ -185,13 +184,18 @@ public class V_recapitulatif extends JPanel {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					 //idEtat = "RB";
 						  
-					int verifValidFiche = Modele.rembourseFiche(idEtat,mois,idVisiteur);
+					int verifValidFiche = Modele.rembourserFiche(mois,idVisiteur);
 					
 					if(verifValidFiche==1){
 						
-						JOptionPane.showMessageDialog(null,"La fiche de frais du visiteur "+nomVmedicale+" a bien été mise en paiement","Remboursement",JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,"La fiche de frais du visiteur "+visiteur+" a bien été mise en paiement","Remboursement",JOptionPane.INFORMATION_MESSAGE);
+						
+						for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
+							Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
+							etatAct = etat.getlibelle();
+						}
+						
 						/**
 						 * Affiche l'etat actuelle de la fiche
 						 */
@@ -203,6 +207,7 @@ public class V_recapitulatif extends JPanel {
 					}
 					
 					else{
+						
 						JOptionPane.showMessageDialog(null,"La remboursement a échoué","Erreur",JOptionPane.ERROR_MESSAGE);
 					}
 				

@@ -298,21 +298,21 @@ public class Modele {
 		}		
 		
 		/**
-		 *Renvoie le libelle de l'idEtat "Va"
+		 *Renvoie tout les libelle de l'Etat.
 		 *@author Zoubert hanem
-		 *@return leLib
+		 *@return lesLib
 		 */
-		public static  ArrayList<Etat> getEtatVa() {
+		public static  ArrayList<Etat> getLibelleEtat() {
 			
-		ArrayList<Etat> leLib = new ArrayList<Etat>();
+		ArrayList<Etat> lesLib = new ArrayList<Etat>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat where id='VA'");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat");
 				ResultSet rs = st.executeQuery(); 	
 				while(rs.next()){
 				
 				String libelle = rs.getString("libelle");
-				leLib.add(new Etat("",libelle));
+				lesLib.add(new Etat("",libelle));
 				
 				}
 			} 
@@ -328,7 +328,7 @@ public class Modele {
 					   e.printStackTrace();
 				   }
 				 }
-			return leLib;
+			return lesLib;
 		}
 		
 		/**
@@ -477,31 +477,7 @@ public class Modele {
 			return NomPrenom;
 		}
 		
-		/**
-		 *@author Zoubert Hanem
-		 *@param idEtat
-		 */
-		public static  int validerFicheFrais(String idEtat,String mois,String idVis,float montant,int nbJustificatifs) {	
-			int nbLignes = 0;
-			try {
-				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='"+idEtat+"', montantValide='"+montant+"' , nbJustificatifs='"+nbJustificatifs+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
-					
-				nbLignes = st.executeUpdate();
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return nbLignes;
-		}
+		
 		
 		/**
 		 * @author Zoubert Hanem
@@ -639,16 +615,49 @@ public class Modele {
 				 }
 			return lesSuivis ;
 		}
-	
+		
 		/**
-		 *@author 
-		 *@param 
+		 * Met à jour la fiche de frais
+		 * @author Zoubert Hanem
+		 * @param mois
+		 * @param idVis
+		 * @param montant
+		 * @param nbJustificatifs
+		 * @return nbLignes
 		 */
-		public static  int rembourseFiche(String idEtat,String mois,String idVis) {	
-		String date = new SimpleDateFormat("yyyy-mm-dd", Locale.FRANCE).format(new Date());
+		public static  int validerFicheFrais(String mois,String idVis,float montant,int nbJustificatifs) {	
 			int nbLignes = 0;
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat= '"+date+"', dateModif='"+date+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='VA', montantValide='"+montant+"' , nbJustificatifs='"+nbJustificatifs+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
+					
+				nbLignes = st.executeUpdate();
+			} 
+			catch (SQLException e) {
+				System.out.println(e);
+			}
+			finally{
+				   try{
+					   /*fermeture de la connexion*/
+					   dbconnect().close();
+				   }
+				   catch(Exception e){
+					   e.printStackTrace();
+				   }
+				 }
+			return nbLignes;
+		}
+		
+		/**
+		 * @author Folaké AGUIAR
+		 * @param mois
+		 * @param idVis
+		 * @return nbLignes
+		 */
+		public static  int rembourserFiche(String mois,String idVis) {	
+		
+			int nbLignes = 0;
+			try {
+				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='RB' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");
 					
 				nbLignes = st.executeUpdate();
 			} 
