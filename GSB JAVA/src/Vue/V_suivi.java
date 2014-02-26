@@ -40,19 +40,21 @@ public class V_suivi extends JPanel{
 					"Suivi fiche de frais</h1>",JLabel.CENTER);
     	 
        this.titre.setPreferredSize(new Dimension(700,30));
-      // this.majEtat = new JComboBox<String>();
 
-                /**
-                 * Creation du tableau 
-                 */
-               
+
+	    /**
+	     * Creation de l'entête du tableau 
+	     */
        String[]entetes = {"Id","Nom","Prenom","Date","Montant Valide","Etat"}; {
-                	//Definir la taille du tableau
+       
+       //Définition de la taille du tableau
        this.donnees = new Object[Modele.getSuivi().size()][entetes.length];
+       
+       //Ajout des données dans le tableau JTable
        this.tab = new JTable(donnees, entetes);
       
        
-                //Boucle qui parcours la BDD pour la fonction getSuivi(), et les ajoute dans le tableau 
+            //Boucle qui parcours la fonction getSuivi() 
             for (int i=0 ; i<Modele.getSuivi().size();i++){
             		Suivi suivi = Modele.getSuivi().get(i);
                     
@@ -65,7 +67,7 @@ public class V_suivi extends JPanel{
             }
            
             this.scroll = new JScrollPane(tab);
-            this.scroll.setPreferredSize(new Dimension(450, 300));
+            this.scroll.setPreferredSize(new Dimension(500, 350));
             
             this.suiviEtat.add(this.titre);
             this.suiviEtat.add(this.scroll);

@@ -297,39 +297,7 @@ public class Modele {
 			return lesVisiteurs ;
 		}		
 		
-		/**
-		 *Renvoie tout les libelle de l'Etat.
-		 *@author Zoubert hanem
-		 *@return lesLib
-		 */
-		public static  ArrayList<Etat> getLibelleEtat() {
-			
-		ArrayList<Etat> lesLib = new ArrayList<Etat>();
-			
-			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT libelle FROM etat");
-				ResultSet rs = st.executeQuery(); 	
-				while(rs.next()){
-				
-				String libelle = rs.getString("libelle");
-				lesLib.add(new Etat("",libelle));
-				
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return lesLib;
-		}
+		
 		
 		/**
 		 *Renvoie l'etat actuel de la fiche du visiteur séléctionné
