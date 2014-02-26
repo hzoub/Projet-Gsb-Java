@@ -1,5 +1,6 @@
 package Modele;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -477,20 +478,27 @@ public class Modele {
 		/**
 		 *
 		 *@author Brandon Fraizy
-		 *@return lesVisiteurs
+		 *@return lesInfos
 		 */
-		public static  ArrayList<Visiteur> getFicheValidees(){
+		public static  ArrayList<infosFicheVa> getFicheValidees(){
 			
-			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
+			ArrayList<infosFicheVa>lesInfos = new ArrayList<infosFicheVa>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT nom, prenom FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND etat.id='VA'");
+				
+				PreparedStatement st = dbconnect().prepareStatement("SELECT idVisiteur,nom,prenom,dateModif,montantValide,idEtat FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND etat.id='VA'");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
+					
+					String id = rs.getString("idVisiteur");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					lesVisiteurs.add(new Visiteur(null,nom, prenom));	
+					Date  date = rs.getDate("dateModif");
+					float montantValide = rs.getFloat("montantValide");
+					String idEtat = rs.getString("idEtat");
+					
+					lesInfos.add(new infosFicheVa(id,nom, prenom, date, idEtat, montantValide));	
 				}
 			} 
 			catch (SQLException e) {
@@ -508,7 +516,7 @@ public class Modele {
 				 }
 			
 			
-			return lesVisiteurs;
+			return lesInfos;
 			
 		}
 	

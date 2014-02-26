@@ -38,7 +38,7 @@ public class V_ficheValidee extends JPanel {
 		this.lstVisiteur.setPreferredSize(new Dimension(700,50));
 
     	//Entete
-    	String[]entetes = {"Nom","Prenom"};
+    	String[]entetes = {"Id","Nom","Prenom","Date modification","Montant validé","Etat"};
     	
     	//Définir la taille du tableau
     	this.donnees = new Object[Modele.getFicheValidees().size()][entetes.length];
@@ -46,20 +46,27 @@ public class V_ficheValidee extends JPanel {
     
     	 this.tableau = new JTable(donnees, entetes);
   
-    	//Boucle parcourant la taille de la fonction getLesVisiteurs(), et les ajoute dans le tableau (le nom, prenom et id)
-	for (int i=0 ; i<Modele.getFicheValidees().size();i++){
-		Visiteur visiteur = Modele.getFicheValidees().get(i);
-		this.donnees[i][0] = visiteur.getNom();
-		this.donnees[i][1] = visiteur.getPrenom();
-	}
-	//Taille et scroll
-	this.scroll = new JScrollPane(tableau);
-	this.scroll.setPreferredSize(new Dimension(500, 350));
-
-	this.pan.add(this.lstVisiteur);
-	this.pan.add(scroll);
-	
-	this.add(this.pan);
+		for (int i=0 ; i<Modele.getFicheValidees().size();i++){
+			
+			infosFicheVa ficheVa = Modele.getFicheValidees().get(i);
+			
+			this.donnees[i][0] = ficheVa.getId();
+			this.donnees[i][1] = ficheVa.getNom();
+			this.donnees[i][2] = ficheVa.getPrenom();
+			this.donnees[i][3] = ficheVa.getDate();
+			this.donnees[i][4] = ficheVa.getMontant()+" €";
+			this.donnees[i][5] = ficheVa.getEtat();
+			
+		}
+		
+		//Taille et scroll
+		this.scroll = new JScrollPane(tableau);
+		this.scroll.setPreferredSize(new Dimension(600, 350));
+		
+		this.pan.add(this.lstVisiteur);
+		this.pan.add(scroll);
+		
+		this.add(this.pan);
 	
   }
 
