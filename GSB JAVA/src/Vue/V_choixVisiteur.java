@@ -17,7 +17,7 @@ import Modele.*;
  *
  */
 @SuppressWarnings("serial")
-public class V_choixVisiteur extends JPanel implements ActionListener{
+public class V_choixVisiteur extends JPanel{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
@@ -68,9 +68,11 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		
 		//Liste deroulante Visiteur
 		this.choixVisiteur = new JComboBox<String>();
-
+		
+		
 		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
 			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
+			this.choixVisiteur.removeAllItems();
 			this.choixVisiteur.addItem(visiteur.getNom());
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
@@ -96,6 +98,7 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
 		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
 			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
+			this.choixMois.removeAllItems();
 			this.choixMois.addItem(mois.getUnMois());
 		}
 		
@@ -172,9 +175,5 @@ public class V_choixVisiteur extends JPanel implements ActionListener{
 		public static JButton getBtnValider() {
 			return btnValider;
 		}
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("test");
-			
-		}
+
 }

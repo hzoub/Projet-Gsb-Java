@@ -24,7 +24,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 	private JLabel espace;
 	
 	private JComboBox<String>choixMois;
-	private JComboBox<String>choixSuivi;
+	private JComboBox<String>choixVisiteur;
 	
 	private JPanel panelForm;
 	private Color bgColor;
@@ -65,13 +65,16 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		
 		
 		//Liste deroulante Visiteur
-		this.choixSuivi = new JComboBox<String>();
-
+		this.choixVisiteur = new JComboBox<String>();
+		
+		
+		
 		for(int i=0; i<Modele.getVisiteursFicheVA().size();i++){
 			Visiteur visiteur = Modele.getVisiteursFicheVA().get(i);
-			this.choixSuivi.addItem(visiteur.getNom());
+
+			this.choixVisiteur.addItem(visiteur.getNom());
 		}
-		this.choixSuivi.setPreferredSize(new Dimension(150,20));
+		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
 		
 		//LABEL mois
 		this.lblChoixMois = new JLabel("Mois :");
@@ -81,19 +84,20 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
-		
-
 		//Recupere le nom selectionné
-		nomVisiteur = (String) choixSuivi.getSelectedItem();
+		nomVisiteur = (String) choixVisiteur.getSelectedItem();
 		
 		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
 			
 			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
 			idVisiteur = visiteur.getId();	
 		}
+		
+		this.choixMois.removeAllItems();
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
 		for(int i=0; i<Modele.getMoisFicheVA(idVisiteur).size();i++){
 			Mois mois = Modele.getMoisFicheVA(idVisiteur).get(i);
+			
 			this.choixMois.addItem(mois.getUnMois());
 		}
 		
@@ -114,14 +118,14 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
 		
-		if(this.choixSuivi.getSelectedItem()==null){
+		if(this.choixVisiteur.getSelectedItem()==null){
 			btnValider.setEnabled(false);
 			this.add(this.msg);
 		}
 		
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);
-		this.panelForm.add(choixSuivi);
+		this.panelForm.add(choixVisiteur);
 		this.panelForm.add(lblChoixMois);
 		this.panelForm.add(choixMois);
 		
@@ -138,7 +142,7 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 	 * @return le visiteur
 	 */
 	public String getChoixVisiteur() {
-		String visiteur = choixSuivi.getSelectedItem().toString();
+		String visiteur = choixVisiteur.getSelectedItem().toString();
 		return visiteur;
 	}
 
