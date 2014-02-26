@@ -64,10 +64,15 @@ public class Modele {
 				
 				if (mdp_2.equals(mdp)){
 					
-				result=true;
-			}
+				result = true;
+				}
+				
+				else{
+					
+					result = false;
+				}
 			
-		}
+			}
 				catch (SQLException e) {
 					System.out.println(e);
 				}
