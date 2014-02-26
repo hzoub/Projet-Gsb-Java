@@ -1,11 +1,8 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.*;
-
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-
 import Modele.*;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"VA"</b> 
