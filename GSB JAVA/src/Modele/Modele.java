@@ -473,37 +473,6 @@ public class Modele {
 			return nbLignes;
 		}*/
 		
-		/**
-		 *@param lib
-		 *@return idEtat
-		 */
-		public static  ArrayList<Etat>  getIdEtat(String lib) {	
-			ArrayList<Etat> idEtat = new ArrayList<Etat>();
-			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT id FROM etat WHERE libelle='"+lib+"'");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String id = rs.getString("id");
-					idEtat.add(new Etat(id,""));
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return idEtat;
-		}
-		
 		
 		/**
 		 *
