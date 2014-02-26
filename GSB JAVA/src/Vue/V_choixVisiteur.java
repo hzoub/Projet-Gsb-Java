@@ -1,14 +1,21 @@
 package Vue;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import Modele.*;
+import Modele.Modele;
+import Modele.Mois;
+import Modele.Visiteur;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"CR"</b> 
  * c'est à dire <b>"fiche créée, saisie en cours"</b> et le mois dont la fiche
@@ -21,9 +28,12 @@ public class V_choixVisiteur extends JPanel{
 	
 	private JLabel lblTitre;
 	private JLabel lblChoixVisiteur;
-	private JComboBox<String>choixVisiteur;
 	private JLabel lblChoixMois;
+	
+	private JComboBox<String>choixVisiteur;
 	private JComboBox<String> choixMois;
+	
+	
 	private JPanel panelForm;
 	private Color bgColor;
 	private static JButton btnValider;
@@ -32,8 +42,10 @@ public class V_choixVisiteur extends JPanel{
 	private String idVisiteur;
 
 	private String date;
+
+
 	private JLabel lblDate;
-	private JLabel msg;// s'il n y a aucune fiche 
+	private static JLabel msg;// s'il n y a aucune fiche 
 	/**
 	 * Constructeur V_ficheFrais
 	 */
@@ -72,7 +84,6 @@ public class V_choixVisiteur extends JPanel{
 		
 		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
 			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
-			this.choixVisiteur.removeAllItems();
 			this.choixVisiteur.addItem(visiteur.getNom());
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
@@ -87,18 +98,17 @@ public class V_choixVisiteur extends JPanel{
 		
 		
 		//Recupere le nom selectionné
-		nomVisiteur = (String) choixVisiteur.getSelectedItem();
+		this.nomVisiteur = (String) choixVisiteur.getSelectedItem();
 		
 		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
 			
 			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
-			idVisiteur = visiteur.getId();	
+			this.idVisiteur = visiteur.getId();	
 		}
 		
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
 		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
 			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
-			this.choixMois.removeAllItems();
 			this.choixMois.addItem(mois.getUnMois());
 		}
 		
@@ -110,18 +120,14 @@ public class V_choixVisiteur extends JPanel{
 		btnValider = new JButton("Valider");
 		
 		//Ce message va s'afficher que quand il n y' aucune fiche 
-		this.msg = new JLabel("Il n y'a aucune fiche a valider ce mois çi",JLabel.CENTER);
-		this.msg.setPreferredSize(new Dimension(700,50));
+		msg = new JLabel("Il n y'a aucune fiche a valider ce mois çi",JLabel.CENTER);
+		msg.setPreferredSize(new Dimension(700,50));
 		//this.btnValider.addActionListener(this);
 		
 		//AJOUT DU TITRE DANS LE PANEL
 		this.add(lblTitre);
 		this.add(lblDate);
 		
-		if(this.choixVisiteur.getSelectedItem()==null){
-			btnValider.setEnabled(false);
-			this.add(this.msg);
-		}
 		
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);
@@ -140,7 +146,7 @@ public class V_choixVisiteur extends JPanel{
 		 * Action liste deroulante visiteur
 		 * @author hzoubert
 		 */
-		this.choixVisiteur.addActionListener(new ActionListener() {
+		choixVisiteur.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -156,19 +162,38 @@ public class V_choixVisiteur extends JPanel{
 		});
 	}
 
-	/**
-	 * @return le visiteur
-	 */
-	public String getChoixVisiteur() {
-		String visiteur = choixVisiteur.getSelectedItem().toString();
-		return visiteur;
-	}
-
-	public String  getChoixMois() {
-		String mois =  (String) choixMois.getSelectedItem();
-		return mois;
-	}
-
+		/**
+		 * @return le visiteur
+		 */
+		public String getChoixVisiteur() {
+			String visiteur = choixVisiteur.getSelectedItem().toString();
+			return visiteur;
+		}
+		/**
+		 * 
+		 * @return le mois
+		 */
+		public String  getChoixMois() {
+			String mois =  (String) choixMois.getSelectedItem();
+			return mois;
+		}
+		
+		/**
+		 * 
+		 * @return la liste deroulante choixVisiteur
+		 */
+		public JComboBox<String> getListeVisiteur() {
+			return choixVisiteur;
+		}
+		
+		/**
+		 * 
+		 * @return La liste déroulant choixMois
+		 */
+		public JComboBox<String>  getListeMois() {
+			return choixMois;
+		}
+	
 		/**
 		 * @return le boutton "Valider"
 		 */
@@ -176,4 +201,11 @@ public class V_choixVisiteur extends JPanel{
 			return btnValider;
 		}
 
+		/**
+		 * @return le msg
+		 */
+		public static JLabel getMsg() {
+			return msg;
+		}
+	
 }

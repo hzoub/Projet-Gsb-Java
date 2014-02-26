@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import Modele.Modele;
+import Modele.Mois;
 import Modele.Visiteur;
 /**
  * Accueil de l'application affiche la vue <b>V_afficherVisiteur</b>
@@ -182,6 +183,7 @@ public class V_accueil extends JFrame {
 				/*
 				 * Remplace le panel "panAccueil" par le panel "choixVis"
 				 */
+				updateV_choixVisiteur();
 				setContentPane(choixVis);
 				setVisible(true);
 			}
@@ -297,5 +299,55 @@ public class V_accueil extends JFrame {
 				setVisible(true);
 			}
 		});
+	}
+	
+	/**
+	 * Met à jour le panel V_choixVisiteur
+	 * @author Zoubert Hanem.
+	 */
+	public void updateV_choixVisiteur(){
+
+		//Vide la liste deroulante choixVisiteur
+		choixVis.getListeVisiteur().removeAllItems();
+		
+		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
+			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
+			
+			//Ajoute les nouvelles donnée dans liste deroulante
+			choixVis.getListeVisiteur().addItem(visiteur.getNom());
+		}
+		
+		choixVis.getListeMois().removeAllItems();
+		//Recupere le nom selectionné
+		String nomVisiteur = (String) choixVis.getListeVisiteur().getSelectedItem();
+		String idVisiteur = null;
+		
+		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
+			
+			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
+			idVisiteur = visiteur.getId();	
+		}
+		
+		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
+		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
+			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
+			choixVis.getListeMois().addItem(mois.getUnMois());
+		}
+		
+		/**
+		 * Si la liste est vide ,désactive le bouton valider du panel V_choixVisiteur
+		 * et affiche un message
+		 */
+		if(choixVis.getListeVisiteur().getSelectedItem()==null){
+			
+			choixVis.add(V_choixVisiteur.getMsg());
+			V_choixVisiteur.getBtnValider().setEnabled(false);
+			
+		}
+		else{
+			
+			choixVis.remove(V_choixVisiteur.getMsg());
+			V_choixVisiteur.getBtnValider().setEnabled(true);
+		}
 	}
 }
