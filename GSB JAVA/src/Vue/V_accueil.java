@@ -15,27 +15,29 @@ import Modele.Visiteur;
 @SuppressWarnings("serial")
 public class V_accueil extends JFrame {
 		
-	private JMenuBar menu;
-	private JMenu fiche ;
-	private JMenuItem consulter;
-	private JMenuItem listeDesVisiteur;
+	private JMenuBar menuBar;
 	
+	private JMenu menu ;
+	
+	private JMenuItem validerFiche;
+	private JMenuItem listeDesVisiteur;
 	private JMenuItem suivi ;
-	private JMenuItem valider ;
+	private JMenuItem infosFicheVa ;
 	private JMenuItem deconnexion ;
+	
 	private Color bgColor;
-	private String nom,prenom;
+	private String nomC,prenomC;
 
 	//PANELS
 	private JPanel panAccueil;
 	
-	private V_choixVisiteur choixVis;
-	private V_etatFrais ficheFrais;
-	private V_afficherVisiteur listeVisiteurs;
-	private V_choixSuivi choixSuivi;
-	private V_ficheValidee v_validee;
-	private V_suivi suiviV ;
-	private V_suiviePaiement recap ;
+	private V_etatFrais panFicheFrais;
+	private V_afficherVisiteur panListeVisiteurs;
+	private V_choixVisiteur panChoixVis;
+	private V_ficheValidee panFicheValidee;
+	private V_choixSuivi panChoixSuivi;
+	private V_suivi panSuiviV ;
+	private V_suiviePaiement panSuiviePaiement ;
 	/**
 	* Constructeur..
 	* */
@@ -77,9 +79,8 @@ public class V_accueil extends JFrame {
 		/**
 		 * Panel choixVisiteur
 		 */
-		this.choixVis = new V_choixVisiteur();
-		
-		this.choixSuivi = new V_choixSuivi();
+		this.panChoixVis = new V_choixVisiteur();
+
 		
 		/**
 		 * Panel de l'accueil
@@ -90,36 +91,40 @@ public class V_accueil extends JFrame {
 	
 		
 		/**
-		 * Panel afficher fiche validées
+		 * Panel fiche validées
 		 */
-		this.v_validee = new V_ficheValidee();
-		this.v_validee.setBackground(bgColor);
+		this.panFicheValidee = new V_ficheValidee();
+		this.panFicheValidee.setBackground(bgColor);
 		
 		/**
 		 * Panel suivi
 		 */
-		this.suiviV = new V_suivi();
-		this.suiviV.setBackground(bgColor);
+		this.panSuiviV = new V_suivi();
+		this.panSuiviV.setBackground(bgColor);
 		
+		/**
+		 * Panel choixSuivi
+		 */
+		this.panChoixSuivi = new V_choixSuivi();
 		
 		/*
 		 * MENU BAR
 		 */
-		this.menu = new JMenuBar();
+		this.menuBar = new JMenuBar();
 		
 		/*
 		 * MENU
 		 */
-		this.fiche = new JMenu("Fiche");
+		this.menu = new JMenu("Menu");
 		
 		/*
 		 * ITEMS
 		 */
-		this.consulter = new JMenuItem("Consulter");
+		this.validerFiche = new JMenuItem("Valider fiche");
 		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs");
 		this.suivi = new JMenuItem("Suivi paiement");
-		this.valider = new JMenuItem("Fiche Validées");
-		this.deconnexion = new JMenuItem("Deconnexion");
+		this.infosFicheVa = new JMenuItem("Fiche Validée(s)");
+		this.deconnexion = new JMenuItem("Déconnexion");
 
 		
 		
@@ -130,32 +135,32 @@ public class V_accueil extends JFrame {
 		//Recupere le nom et le prenom du visiteur
 		for(int i =0; i<Modele.getNomPrenomC().size(); i++){
 			Visiteur comptable = Modele.getNomPrenomC().get(i); 
-			nom = comptable.getNom();
-			prenom = comptable.getPrenom();
+			nomC = comptable.getNom();
+			prenomC = comptable.getPrenom();
 		}
 		
 		/**
 		 * Tableau visiteur
 		 */
-		this.listeVisiteurs = new V_afficherVisiteur(nom,prenom);
-		this.listeVisiteurs.setBackground(bgColor);
+		this.panListeVisiteurs = new V_afficherVisiteur(nomC,prenomC);
+		this.panListeVisiteurs.setBackground(bgColor);
 		
 
 		 /* AJOUT DE "JMenuBar->menu" DANS LA FENETRE
 		 */
-		this.setJMenuBar(menu);
+		this.setJMenuBar(menuBar);
 	
 		//AJOUT DU MENU "consulter" DANS le "JMenuBar->menu"
-		this.menu.add(fiche);
+		this.menuBar.add(menu);
 		
 		/*
 		 * AJOUT DES ITEMS DANS LE MENU "fiche"
 		 */
-		this.fiche.add(consulter);
-		this.fiche.add(listeDesVisiteur);
-		this.fiche.add(suivi);
-		this.fiche.add(valider);
-		this.fiche.add(deconnexion);
+		this.menu.add(validerFiche);
+		this.menu.add(listeDesVisiteur);
+		this.menu.add(suivi);
+		this.menu.add(infosFicheVa);
+		this.menu.add(deconnexion);
 		
 		
 		/*
@@ -163,7 +168,7 @@ public class V_accueil extends JFrame {
 		 * Ajout du tableau listeVisiteur dans le panel "paneAccueil"
 		 */
 
-		this.panAccueil.add(listeVisiteurs);
+		this.panAccueil.add(panListeVisiteurs);
 		
 		
 		/*
@@ -171,81 +176,20 @@ public class V_accueil extends JFrame {
 		 */
 		this.getContentPane().add(panAccueil);
 		
-		/**
-		 * ACTION ITEM "FicheVisiteur"
-		 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
-		 * @author Zoubert hanem
-		 */
-		this.consulter.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				/*
-				 * Remplace le panel "panAccueil" par le panel "choixVis"
-				 */
-				updateV_choixVisiteur();
-				setContentPane(choixVis);
-				setVisible(true);
-			}
-		});
+		/***************************ACTIONS ITEMS***********************/
+		this.validerFiche.addActionListener(new ActionItemValiderFiche());
 		
-		/**
-		 * ACTION ITEM "listeDesVisiteur"
-		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
-		 */
-		this.listeDesVisiteur.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(listeVisiteurs);
-				setVisible(true);
-			}
-		});
+		this.listeDesVisiteur.addActionListener(new ActionItemLstVisiteur());
 
+		this.suivi.addActionListener(new ActionItemSuivi());
 		
-		/**
-		 * ACTION ITEM "suivi"
-		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
-		 */
-		this.suivi.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(choixSuivi);
-				setVisible(true);
-			}
-		});
+		this.infosFicheVa.addActionListener(new ActionItemInfosFicheVA());
 		
-		/**
-		 * ACTION ITEM "valider"
-		 * Cette action permet d'ouvrir le panel "listeVisiteurs"
-		 */
-		this.valider.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(v_validee);
-				setVisible(true);
-			}
-		});
-		/**
-		 * ACTION ITEM "deconnexion"
-		 * Cette action permet de deconecter
-		 * @author Zoubert hanem
-		 */
-		this.deconnexion.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				//fermer la premiere fenêtre 
-				dispose();
-				
-				V_login log = new  V_login();
-				log.setVisible(true);
-			}
-		});
+		this.deconnexion.addActionListener(new ActionItemDeconnexion());
 		
 		
+		
+		/***********************ACTIONS BOUTTONS PANEL***********************/
 		/**
 		 * ACTION boutton "BtnValider" de la classe V_choixVisiteur
 		 * Cette action permet d'ouvrir le panel "ficheFrais"
@@ -256,9 +200,9 @@ public class V_accueil extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 	
-				ficheFrais = new V_etatFrais(choixVis.getChoixVisiteur(),choixVis.getChoixMois());
-				ficheFrais.setBackground(bgColor);
-				setContentPane(ficheFrais);
+				panFicheFrais = new V_etatFrais(panChoixVis.getChoixVisiteur(),panChoixVis.getChoixMois());
+				panFicheFrais.setBackground(bgColor);
+				setContentPane(panFicheFrais);
 				setVisible(true);
 			}
 		});
@@ -272,17 +216,13 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				/*
-				 * faut pas oublie d'instancier ton objet recp ;)
-				 * pour l'instant il a en parametre idVisteur=null et mois=null
-				 */
-				
 				/**
 				 * Panel recap
 				 */
-				recap = new V_suiviePaiement(choixSuivi.getChoixVisiteur(),choixSuivi.getChoixMois());
-				recap.setBackground(bgColor);
-				setContentPane(recap);
+				
+				panSuiviePaiement = new V_suiviePaiement(panChoixSuivi.getChoixVisiteur(),panChoixSuivi.getChoixMois());
+				panSuiviePaiement.setBackground(bgColor);
+				setContentPane(panSuiviePaiement);
 				setVisible(true);
 			}
 		});
@@ -295,10 +235,92 @@ public class V_accueil extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(suiviV);
+				setContentPane(panSuiviV);
 				setVisible(true);
 			}
 		});
+	}
+	
+	/**
+	 * ACTION ITEM "validerFiche"
+	 * Cette action permet d'ouvrir le panel "ChoixVisiteur"
+	 * @author Zoubert hanem
+	 */
+	class ActionItemValiderFiche implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			/*
+			 * Remplace le panel "panAccueil" par le panel "choixVis"
+			 */
+			updateV_choixVisiteur();
+			setContentPane(panChoixVis);
+			setVisible(true);
+		}
+		
+	}
+	
+	/**
+	 * ACTION ITEM "listeDesVisiteur"
+	 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+	 */
+	class ActionItemLstVisiteur implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			setContentPane(panListeVisiteurs);
+			setVisible(true);
+		}
+		
+	}
+	
+	
+	/**
+	 * ACTION ITEM "suivi"
+	 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+	 */
+	class ActionItemSuivi implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			setContentPane(panChoixSuivi);
+			setVisible(true);
+		}
+		
+	}
+	
+	/**
+	 * ACTION ITEM "infosFicheVa"
+	 * Cette action permet d'ouvrir le panel "listeVisiteurs"
+	 */
+	class ActionItemInfosFicheVA implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			setContentPane(panFicheValidee);
+			setVisible(true);
+		}
+		
+	}
+	
+	/**
+	 * ACTION ITEM "deconnexion"
+	 * Cette action permet de deconecter
+	 * @author Zoubert hanem
+	 */
+	class ActionItemDeconnexion implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//fermer la premiere fenêtre 
+			dispose();
+			
+			V_login log = new  V_login();
+			log.setVisible(true);
+		}
+		
 	}
 	
 	/**
@@ -308,18 +330,18 @@ public class V_accueil extends JFrame {
 	public void updateV_choixVisiteur(){
 
 		//Vide la liste deroulante choixVisiteur
-		choixVis.getListeVisiteur().removeAllItems();
+		panChoixVis.getListeVisiteur().removeAllItems();
 		
 		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
 			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
 			
 			//Ajoute les nouvelles donnée dans liste deroulante
-			choixVis.getListeVisiteur().addItem(visiteur.getNom());
+			panChoixVis.getListeVisiteur().addItem(visiteur.getNom());
 		}
 		
-		choixVis.getListeMois().removeAllItems();
+		panChoixVis.getListeMois().removeAllItems();
 		//Recupere le nom selectionné
-		String nomVisiteur = (String) choixVis.getListeVisiteur().getSelectedItem();
+		String nomVisiteur = (String) panChoixVis.getListeVisiteur().getSelectedItem();
 		String idVisiteur = null;
 		
 		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
@@ -331,22 +353,22 @@ public class V_accueil extends JFrame {
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
 		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
 			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
-			choixVis.getListeMois().addItem(mois.getUnMois());
+			panChoixVis.getListeMois().addItem(mois.getUnMois());
 		}
 		
 		/**
 		 * Si la liste est vide ,désactive le bouton valider du panel V_choixVisiteur
 		 * et affiche un message
 		 */
-		if(choixVis.getListeVisiteur().getSelectedItem()==null){
+		if(panChoixVis.getListeVisiteur().getSelectedItem()==null){
 			
-			choixVis.add(V_choixVisiteur.getMsg());
+			panChoixVis.add(V_choixVisiteur.getMsg());
 			V_choixVisiteur.getBtnValider().setEnabled(false);
 			
 		}
 		else{
 			
-			choixVis.remove(V_choixVisiteur.getMsg());
+			panChoixVis.remove(V_choixVisiteur.getMsg());
 			V_choixVisiteur.getBtnValider().setEnabled(true);
 		}
 	}
