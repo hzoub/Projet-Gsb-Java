@@ -123,9 +123,9 @@ public class V_accueil extends JFrame {
 		this.validerFiche = new JMenuItem("Valider fiche",new ImageIcon("images/valider.png"));
 		
 		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs",new ImageIcon("images/lstVisiteur.png"));
-		this.suivi = new JMenuItem("Suivi paiement");
+		this.suivi = new JMenuItem("Suivi paiement",new ImageIcon("images/rembourser.png"));
 		this.infosFicheVa = new JMenuItem("Fiche Validée(s)",new ImageIcon("images/ficheVa.png"));
-		this.deconnexion = new JMenuItem("Déconnexion",new ImageIcon("images/deco.png"));
+		this.deconnexion = new JMenuItem("Déconnexion",new ImageIcon("images/logout.png"));
 
 		
 		
@@ -158,9 +158,13 @@ public class V_accueil extends JFrame {
 		 * AJOUT DES ITEMS DANS LE MENU "fiche"
 		 */
 		this.menu.add(validerFiche);
+		this.menu.add(new JSeparator());
 		this.menu.add(listeDesVisiteur);
+		this.menu.add(new JSeparator());
 		this.menu.add(suivi);
+		this.menu.add(new JSeparator());
 		this.menu.add(infosFicheVa);
+		this.menu.add(new JSeparator());
 		this.menu.add(deconnexion);
 		
 		
