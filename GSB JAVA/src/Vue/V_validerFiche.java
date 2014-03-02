@@ -1,8 +1,8 @@
 package Vue;
 import java.awt.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import Modele.*;
@@ -19,11 +19,16 @@ public class V_validerFiche extends JPanel{
 		private JLabel descriptifElement;
 		private JLabel elementFofaitises;
 		private JLabel etatActuel;
-		
-		private String etatAct;
-		
 		private JPanel panStatut;
 		private JPanel panLesForfais;
+		
+		
+		private JLabel justificatif;
+		private JLabel saut;
+		    
+		private String etatAct;
+		private String idVisiteur;
+		
 		private Color bgColor;
 		
 		private Object[][] donneesElFofaitises;
@@ -36,13 +41,11 @@ public class V_validerFiche extends JPanel{
 	    
 	    private JButton bntValider;
 	    
-	    private String idVisiteur;
-  
-	
-	    private JLabel justificatif;
 	    private int nbJustificatifs = 0;
+	    
 	    private JTextField jtfJustif;
-	    private JLabel saut;
+	    
+	    private ImageIcon iconSuccess ;
 	    /**
 	     * Constructeur V_etatFrais
 	     * @param visiteur
@@ -78,6 +81,8 @@ public class V_validerFiche extends JPanel{
 									"Fiche de frais du mois : "+mois+
 								"</h2>");
 		this.date.setPreferredSize(new Dimension(700,30));
+		
+		this.iconSuccess = new ImageIcon("images/success.png");
 		
 		/**
 		 * Cette fonction recupére l'idVisiteur en fonction de son nom
@@ -228,7 +233,7 @@ public class V_validerFiche extends JPanel{
 						
 						if(verifValidFiche==1){
 							
-							JOptionPane.showMessageDialog(null,"La fiche frais du visiteur "+visiteur+" a bien été validée","Validation",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"La fiche frais du visiteur "+visiteur+" a bien été validée","Validation",JOptionPane.INFORMATION_MESSAGE,iconSuccess);
 								
 							for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
 								Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);

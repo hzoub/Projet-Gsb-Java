@@ -6,7 +6,7 @@ package Modele;
 public class Visiteur {
 
 	
-	String id, nom, prenom;
+	String id, nom, prenom,mois;
 	
 	/**
 	 * Constructeur 
@@ -14,12 +14,12 @@ public class Visiteur {
 	 * @param nom
 	 * @param prenom
 	 */
-	public Visiteur(String id, String nom, String prenom) {
+	public Visiteur(String id, String nom, String prenom,String mois) {
 		
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
-		
+		this.mois = mois;
 	}
 
 
@@ -35,6 +35,14 @@ public class Visiteur {
 
 	public String getPrenom() {
 		return prenom;
+	}
+
+
+	/**
+	 * @return the mois
+	 */
+	public String getMois() {
+		return mois;
 	}
 	
 	

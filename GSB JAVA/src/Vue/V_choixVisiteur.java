@@ -1,20 +1,15 @@
 package Vue;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-
-import Modele.Modele;
-import Modele.Mois;
 import Modele.Visiteur;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"CR"</b> 
@@ -38,18 +33,16 @@ public class V_choixVisiteur extends JPanel{
 	private Color bgColor;
 	private static JButton btnValider;
 	private JLabel espace;
-	private String nomVisiteur;
-	private String idVisiteur;
 
 	private String date;
 
 
 	private JLabel lblDate;
-	private static JLabel msg;// s'il n y a aucune fiche 
+	private JLabel msg;// s'il n y a aucune fiche 
 	/**
 	 * Constructeur V_ficheFrais
 	 */
-	public V_choixVisiteur(){
+	public V_choixVisiteur(ArrayList<Visiteur> infosFicheCR){
 		
 		//COULEUR ARRIERE-PLAN DU PANEL
 		this.bgColor = Color.decode("#77aadd");
@@ -82,8 +75,8 @@ public class V_choixVisiteur extends JPanel{
 		this.choixVisiteur = new JComboBox<String>();
 		
 		
-		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
-			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
+		for(int i=0; i<infosFicheCR.size();i++){
+			Visiteur visiteur = infosFicheCR.get(i);
 			this.choixVisiteur.addItem(visiteur.getNom());
 		}
 		this.choixVisiteur.setPreferredSize(new Dimension(150,20));
@@ -97,19 +90,11 @@ public class V_choixVisiteur extends JPanel{
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
 		
-		//Recupere le nom selectionné
-		this.nomVisiteur = (String) choixVisiteur.getSelectedItem();
-		
-		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
-			
-			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
-			this.idVisiteur = visiteur.getId();	
-		}
 		
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
-		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
-			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
-			this.choixMois.addItem(mois.getUnMois());
+		for(int i=0; i<infosFicheCR.size();i++){
+			Visiteur visiteur = infosFicheCR.get(i);
+			this.choixMois.addItem(visiteur.getMois());
 		}
 		
 		//Espace entre les labels est les bouttons
@@ -128,6 +113,10 @@ public class V_choixVisiteur extends JPanel{
 		this.add(lblTitre);
 		this.add(lblDate);
 		
+		if(this.choixVisiteur.getSelectedItem()==null){
+			btnValider.setEnabled(false);
+			this.add(this.msg);
+		}
 		
 		//AJOUT DES COMPOSANT DANS LE FORMAULAIRE "panelForm"
 		this.panelForm.add(lblChoixVisiteur);
@@ -142,24 +131,6 @@ public class V_choixVisiteur extends JPanel{
 		//AJOUT DU FORMULAIRE DANS LE PANEL
 		this.add(panelForm);
 		
-		/**
-		 * Action liste deroulante visiteur
-		 * @author hzoubert
-		 */
-		choixVisiteur.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//Recupere le nom selectionné
-				nomVisiteur = (String) choixVisiteur.getSelectedItem();
-				
-				for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
-					
-					Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
-					idVisiteur = visiteur.getId();	
-				}
-			}
-		});
 	}
 
 		/**
@@ -201,11 +172,6 @@ public class V_choixVisiteur extends JPanel{
 			return btnValider;
 		}
 
-		/**
-		 * @return le msg
-		 */
-		public static JLabel getMsg() {
-			return msg;
-		}
+
 	
 }

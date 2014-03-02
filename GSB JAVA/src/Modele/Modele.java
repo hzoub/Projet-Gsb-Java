@@ -108,7 +108,7 @@ public class Modele {
 					String id = rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
+					lesVisiteurs.add(new Visiteur(id, nom, prenom,null));	
 				}
 			} 
 			catch (SQLException e) {
@@ -141,13 +141,14 @@ public class Modele {
 			ArrayList<Visiteur>lesVisiteurs = new ArrayList<Visiteur>();
 			
 			try {
-				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='CR'AND mois='"+moisEnCour+"' ORDER BY id");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT distinct id, nom, prenom,mois FROM visiteur,fichefrais WHERE visiteur.id = fichefrais.idVisiteur AND comptable=0 AND idEtat='CR'AND mois='"+moisEnCour+"' ORDER BY id");
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String id = rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
+					String mois = rs.getString("mois");
+					lesVisiteurs.add(new Visiteur(id, nom, prenom,mois));	
 				}
 			} 
 			catch (SQLException e) {
@@ -166,37 +167,37 @@ public class Modele {
 			return lesVisiteurs ;
 		}
 		
-		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
-			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
-			/*Collection les visiteurs*/
-			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
-			try {
-				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String mois = rs.getString("mois");
-					MoisFiche.add(new Mois(mois));
-					
-					
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{	
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return MoisFiche ;
-		}
+//		public static  ArrayList<Mois> getMoisFicheCR(String idVisiteur) {
+//			String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+//			/*Collection les visiteurs*/
+//			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
+//			try {
+//				
+//				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='CR' AND mois='"+moisEnCour+"' ");
+//				ResultSet rs = st.executeQuery(); 
+//				
+//				while(rs.next()){
+//					
+//					String mois = rs.getString("mois");
+//					MoisFiche.add(new Mois(mois));
+//					
+//					
+//				}
+//			} 
+//			catch (SQLException e) {
+//				System.out.println(e);
+//			}
+//			finally{	
+//				   try{
+//					   /*fermeture de la connexion*/
+//					   dbconnect().close();
+//				   }
+//				   catch(Exception e){
+//					   e.printStackTrace();
+//				   }
+//				 }
+//			return MoisFiche ;
+//		}
 		
 /*-------------------------------------SUIVIE--------------------------------------------*/		
 		/**
@@ -204,37 +205,37 @@ public class Modele {
 		 *@author 
 		 *@return 
 		 */
-		public static  ArrayList<Mois> getMoisFicheVA(String idVisiteur) {
-			//String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
-			/*Collection les visiteurs*/
-			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
-			try {
-				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='VA' ");
-				ResultSet rs = st.executeQuery(); 
-				
-				while(rs.next()){
-					
-					String mois = rs.getString("mois");
-					MoisFiche.add(new Mois(mois));
-					
-					
-				}
-			} 
-			catch (SQLException e) {
-				System.out.println(e);
-			}
-			finally{	
-				   try{
-					   /*fermeture de la connexion*/
-					   dbconnect().close();
-				   }
-				   catch(Exception e){
-					   e.printStackTrace();
-				   }
-				 }
-			return MoisFiche ;
-		}	
+//		public static  ArrayList<Mois> getMoisFicheVA(String idVisiteur) {
+//			//String moisEnCour = new SimpleDateFormat("yMM", Locale.FRANCE).format(new Date());
+//			/*Collection les visiteurs*/
+//			ArrayList<Mois> MoisFiche = new ArrayList<Mois>();
+//			try {
+//				
+//				PreparedStatement st = dbconnect().prepareStatement("SELECT mois FROM fichefrais WHERE idVisiteur='"+idVisiteur+"' AND idEtat='VA' ");
+//				ResultSet rs = st.executeQuery(); 
+//				
+//				while(rs.next()){
+//					
+//					String mois = rs.getString("mois");
+//					MoisFiche.add(new Mois(mois));
+//					
+//					
+//				}
+//			} 
+//			catch (SQLException e) {
+//				System.out.println(e);
+//			}
+//			finally{	
+//				   try{
+//					   /*fermeture de la connexion*/
+//					   dbconnect().close();
+//				   }
+//				   catch(Exception e){
+//					   e.printStackTrace();
+//				   }
+//				 }
+//			return MoisFiche ;
+//		}	
 		
 		
 		/**
@@ -253,7 +254,8 @@ public class Modele {
 					String id = rs.getString("id");
 					String nom = rs.getString("nom");
 					String prenom = rs.getString("prenom");
-					lesVisiteurs.add(new Visiteur(id, nom, prenom));	
+					String mois = rs.getString("mois");
+					lesVisiteurs.add(new Visiteur(id, nom, prenom,mois));	
 				}
 			} 
 			catch (SQLException e) {
@@ -284,7 +286,7 @@ public class Modele {
 				ResultSet rs = st.executeQuery(); 
 				while(rs.next()){
 					String id = rs.getString("id");
-					lesVisiteurs.add(new Visiteur(id, null, null));	
+					lesVisiteurs.add(new Visiteur(id, null, null,null));	
 				}
 			} 
 			catch (SQLException e) {
@@ -431,7 +433,7 @@ public class Modele {
 					
 					String nomC = rs.getString("nom");
 					String prenomC = rs.getString("prenom");
-					NomPrenom.add(new Visiteur(null, nomC, prenomC));
+					NomPrenom.add(new Visiteur(null, nomC, prenomC,null));
 				}
 			} 
 			
@@ -491,7 +493,7 @@ public class Modele {
 			
 			try {
 				
-				PreparedStatement st = dbconnect().prepareStatement("SELECT idVisiteur,nom,prenom,dateModif,montantValide,idEtat FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND etat.id='VA'");
+				PreparedStatement st = dbconnect().prepareStatement("SELECT idVisiteur,nom,prenom,mois,dateModif,montantValide,idEtat FROM etat, visiteur, fichefrais WHERE visiteur.id=fichefrais.idVisiteur AND fichefrais.idEtat=etat.id AND etat.id='VA'");
 				ResultSet rs = st.executeQuery(); 
 				
 				while(rs.next()){
@@ -502,8 +504,9 @@ public class Modele {
 					Date  date = rs.getDate("dateModif");
 					float montantValide = rs.getFloat("montantValide");
 					String idEtat = rs.getString("idEtat");
+					String mois = rs.getString("mois");
 					
-					lesInfos.add(new infosFicheVa(id,nom, prenom, date, idEtat, montantValide));	
+					lesInfos.add(new infosFicheVa(id,nom, prenom,mois, date, idEtat, montantValide));	
 				}
 			} 
 			catch (SQLException e) {
@@ -547,7 +550,9 @@ public class Modele {
 					String prenom = rs.getString("prenom");
 					int montant = rs.getInt("montantValide");
 					String etat = rs.getString("idEtat");
-					lesSuivis.add(new Suivi(id, nom, prenom,date,montant,etat));	
+					String mois = rs.getString("mois");
+					
+					lesSuivis.add(new Suivi(id, nom, prenom,mois,date,montant,etat));	
 				}
 			} 
 			catch (SQLException e) {

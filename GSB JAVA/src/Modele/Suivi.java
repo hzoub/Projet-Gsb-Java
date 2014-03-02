@@ -6,8 +6,8 @@ public class Suivi extends Visiteur {
 	private String etat;
 	private float montant ;
 	
-	public Suivi (String id , String nom , String prenom ,String date ,  float montant , String etat ) {
-		super(id,nom,prenom);
+	public Suivi (String id , String nom , String prenom ,String mois, String date ,  float montant , String etat ) {
+		super(id,nom,prenom,mois);
 		this.date = date ;
 		this.montant = montant ;
 		this.etat = etat ;

@@ -1,10 +1,9 @@
 package Vue;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.JTable;
-import Modele.Modele;
 import Modele.Suivi;
-
 /**
  * @author Aguiar F
  *@version 1.0
@@ -24,7 +23,7 @@ public class V_suivi extends JPanel{
     
     
        
-     public  V_suivi() {
+     public  V_suivi(ArrayList<Suivi> leSuivi) {
     	
     	 /*
  		 * Couleur arriere-plan de la fenetre
@@ -48,15 +47,15 @@ public class V_suivi extends JPanel{
        String[]entetes = {"Id","Nom","Prenom","Date","Montant Valide","Etat"}; {
        
        //Définition de la taille du tableau
-       this.donnees = new Object[Modele.getSuivi().size()][entetes.length];
+       this.donnees = new Object[leSuivi.size()][entetes.length];
        
        //Ajout des données dans le tableau JTable
        this.tab = new JTable(donnees, entetes);
       
        
             //Boucle qui parcours la fonction getSuivi() 
-            for (int i=0 ; i<Modele.getSuivi().size();i++){
-            		Suivi suivi = Modele.getSuivi().get(i);
+            for (int i=0 ; i<leSuivi.size();i++){
+            		Suivi suivi = leSuivi.get(i);
                     
                     this.donnees[i][0] = suivi.getId();
                     this.donnees[i][1] = suivi.getNom();

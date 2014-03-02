@@ -4,6 +4,7 @@ import Modele.*;
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 /**
  * Affiche la liste des visiteur ayant une fiche validées
  * @author Fraizy Brandon
@@ -20,7 +21,7 @@ public class V_ficheValidee extends JPanel {
 	
 	private Color bgColor;
 	private JPanel pan;
-    public V_ficheValidee(){
+    public V_ficheValidee(ArrayList<infosFicheVa> lesInfos){
     	
     	
     	/*
@@ -41,14 +42,14 @@ public class V_ficheValidee extends JPanel {
     	String[]entetes = {"Id","Nom","Prenom","Date modification","Montant validé","Etat"};
     	
     	//Définir la taille du tableau
-    	this.donnees = new Object[Modele.getFicheValidees().size()][entetes.length];
+    	this.donnees = new Object[lesInfos.size()][entetes.length];
     	
     
     	 this.tableau = new JTable(donnees, entetes);
   
-		for (int i=0 ; i<Modele.getFicheValidees().size();i++){
+		for (int i=0 ; i<lesInfos.size();i++){
 			
-			infosFicheVa ficheVa = Modele.getFicheValidees().get(i);
+			infosFicheVa ficheVa = lesInfos.get(i);
 			
 			this.donnees[i][0] = ficheVa.getId();
 			this.donnees[i][1] = ficheVa.getNom();

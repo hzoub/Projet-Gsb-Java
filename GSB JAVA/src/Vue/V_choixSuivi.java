@@ -1,9 +1,15 @@
 package Vue;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-import Modele.*;
+import Modele.Visiteur;
 /**
  * Affiche les visiteurs ayant une fiche dont l'id de l'etat est <b>"VA"</b> 
  * c'est à dire <b>"Validée et mise en paiement"</b> et le mois dont la fiche
@@ -29,16 +35,13 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 	private  static JButton btnValider;
 	private static JButton btnSuiviComplet ;
 
-	private String nomVisiteur;
-	private String idVisiteur;
-	
 	
 
 	/**
 	 * Constructeur V_ficheFrais
 	 * @param visiteur 
 	 */
-	public V_choixSuivi(){
+	public V_choixSuivi(ArrayList<Visiteur> infosFicheVA){
 		
 		//COULEUR ARRIERE-PLAN DU PANEL
 		this.bgColor = Color.decode("#77aadd");
@@ -66,8 +69,8 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		
 		
 		
-		for(int i=0; i<Modele.getVisiteursFicheVA().size();i++){
-			Visiteur visiteur = Modele.getVisiteursFicheVA().get(i);
+		for(int i=0; i<infosFicheVA.size();i++){
+			Visiteur visiteur = infosFicheVA.get(i);
 
 			this.choixVisiteur.addItem(visiteur.getNom());
 		}
@@ -81,21 +84,12 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		this.choixMois = new JComboBox<String>();
 		this.choixMois.setPreferredSize(new Dimension(150,20));
 		
-		//Recupere le nom selectionné
-		nomVisiteur = (String) choixVisiteur.getSelectedItem();
-		
-		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
-			
-			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
-			idVisiteur = visiteur.getId();	
-		}
-		
-		this.choixMois.removeAllItems();
+
 		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
-		for(int i=0; i<Modele.getMoisFicheVA(idVisiteur).size();i++){
-			Mois mois = Modele.getMoisFicheVA(idVisiteur).get(i);
+		for(int i=0; i<infosFicheVA.size();i++){
+			Visiteur visiteur = infosFicheVA.get(i);
 			
-			this.choixMois.addItem(mois.getUnMois());
+			this.choixMois.addItem(visiteur.getMois());
 		}
 		
 	
@@ -135,18 +129,32 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 		this.add(panelForm);
 	}
 	
-	/**
-	 * @return le visiteur
-	 */
-	public String getChoixVisiteur() {
-		String visiteur = choixVisiteur.getSelectedItem().toString();
-		return visiteur;
-	}
-
-	public String  getChoixMois() {
-		String mois =  (String) choixMois.getSelectedItem();
-		return mois;
-	}
+		/**
+		 * @return le visiteur
+		 */
+		public String getChoixVisiteur() {
+			String visiteur = choixVisiteur.getSelectedItem().toString();
+			return visiteur;
+		}
+	
+		public String  getChoixMois() {
+			String mois =  (String) choixMois.getSelectedItem();
+			return mois;
+		}
+		
+		/**
+		 * @return la liste deroulante visiteur
+		 */
+		public JComboBox<String> getLstVisiteur() {
+			return choixVisiteur;
+		}
+		
+		/**
+		 * @return la liste deroulante mois
+		 */
+		public JComboBox<String>  getLstMois() {
+			return choixMois;
+		}
 
 
 		/**
@@ -165,6 +173,8 @@ public class V_choixSuivi extends JPanel implements ActionListener {
 			return btnSuiviComplet ;
 			
 		}
+
+		
 
 		
 }

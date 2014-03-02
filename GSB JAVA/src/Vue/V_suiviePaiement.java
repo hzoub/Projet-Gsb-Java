@@ -35,6 +35,8 @@ public class V_suiviePaiement extends JPanel {
 		    private String idVisiteur;
 
 		    private JLabel saut ;
+		    
+		    private ImageIcon iconSuccess ;
 
 		    /**
 		     * Constructeur
@@ -72,6 +74,7 @@ public class V_suiviePaiement extends JPanel {
 									"</h2>");
 			this.date.setPreferredSize(new Dimension(700,30));
 			
+			this.iconSuccess = new ImageIcon("images/success.png");
 			/**
 			 * Cette fonction recupére l'idVisiteur en fonction de son nom
 			 * @author Zoubert Hanem
@@ -189,7 +192,7 @@ public class V_suiviePaiement extends JPanel {
 					
 					if(verifValidFiche==1){
 						
-						JOptionPane.showMessageDialog(null,"La fiche de frais du visiteur "+visiteur+" a bien été mise en paiement","Remboursement",JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null,"La fiche de frais du visiteur "+visiteur+" a bien été mise en paiement","Remboursement",JOptionPane.INFORMATION_MESSAGE,iconSuccess);
 						
 						for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
 							Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);

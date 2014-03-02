@@ -1,11 +1,8 @@
 package Vue;
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import Modele.Modele;
-import Modele.Mois;
 import Modele.Visiteur;
 /**
  * Accueil de l'application affiche la vue <b>V_afficherVisiteur</b>
@@ -79,7 +76,7 @@ public class V_accueil extends JFrame {
 		/**
 		 * Panel choixVisiteur
 		 */
-		this.panChoixVis = new V_choixVisiteur();
+		this.panChoixVis = new V_choixVisiteur(Modele.getVisiteursFicheCR());
 
 		
 		/**
@@ -88,24 +85,17 @@ public class V_accueil extends JFrame {
 		this.panAccueil = new JPanel();
 		this.panAccueil.setBackground(bgColor);
 		
-	
-		
-		/**
-		 * Panel fiche validées
-		 */
-		this.panFicheValidee = new V_ficheValidee();
-		this.panFicheValidee.setBackground(bgColor);
 		
 		/**
 		 * Panel suivi
 		 */
-		this.panSuiviV = new V_suivi();
+		this.panSuiviV = new V_suivi(Modele.getSuivi());
 		this.panSuiviV.setBackground(bgColor);
 		
 		/**
 		 * Panel choixSuivi
 		 */
-		this.panChoixSuivi = new V_choixSuivi();
+		this.panChoixSuivi = new V_choixSuivi(Modele.getVisiteursFicheVA());
 		
 		/*
 		 * MENU BAR
@@ -200,50 +190,20 @@ public class V_accueil extends JFrame {
 		 * Cette action permet d'ouvrir le panel "ficheFrais"
 		 * @author Zoubert hanem
 		 */
-		V_choixVisiteur.getBtnValider().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-	
-				panFicheFrais = new V_validerFiche(panChoixVis.getChoixVisiteur(),panChoixVis.getChoixMois());
-				panFicheFrais.setBackground(bgColor);
-				setContentPane(panFicheFrais);
-				setVisible(true);
-			}
-		});
+		V_choixVisiteur.getBtnValider().addActionListener(new ActionBtnValiderPanChoixVis());
 		
 		/**
 		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
 		 *
 		 * @author 
 		 */
-		V_choixSuivi.getBtnValider().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				/**
-				 * Panel recap
-				 */
-				
-				panSuiviePaiement = new V_suiviePaiement(panChoixSuivi.getChoixVisiteur(),panChoixSuivi.getChoixMois());
-				panSuiviePaiement.setBackground(bgColor);
-				setContentPane(panSuiviePaiement);
-				setVisible(true);
-			}
-		});
+		V_choixSuivi.getBtnValider().addActionListener(new ActionBtnValiderPanChoixSuvi());
 		/**
 		 * ACTION boutton "BtnValider" de la classe V_choixSuivi
 		 *
 		 * @author 
 		 */
-		V_choixSuivi.getBtnSuiviComplet().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				setContentPane(panSuiviV);
-				setVisible(true);
-			}
-		});
+		V_choixSuivi.getBtnSuiviComplet().addActionListener(new ActionBtnSuiviComplet());
 	}
 	
 	/**
@@ -258,7 +218,8 @@ public class V_accueil extends JFrame {
 			/*
 			 * Remplace le panel "panAccueil" par le panel "choixVis"
 			 */
-			updateV_choixVisiteur();
+			panChoixVis = new V_choixVisiteur(Modele.getVisiteursFicheCR());
+			V_choixVisiteur.getBtnValider().addActionListener(new ActionBtnValiderPanChoixVis());
 			setContentPane(panChoixVis);
 			setVisible(true);
 		}
@@ -288,7 +249,12 @@ public class V_accueil extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			/**
+			 * Panel choixSuivi
+			 */
+			panChoixSuivi = new V_choixSuivi(Modele.getVisiteursFicheVA());
+			V_choixSuivi.getBtnValider().addActionListener(new ActionBtnValiderPanChoixSuvi());
+			V_choixSuivi.getBtnSuiviComplet().addActionListener(new ActionBtnSuiviComplet());
 			setContentPane(panChoixSuivi);
 			setVisible(true);
 		}
@@ -304,6 +270,11 @@ public class V_accueil extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
+			/**
+			 * Panel fiche validées
+			 */
+			panFicheValidee = new V_ficheValidee(Modele.getFicheValidees());
+			panFicheValidee.setBackground(bgColor);
 			setContentPane(panFicheValidee);
 			setVisible(true);
 		}
@@ -328,53 +299,45 @@ public class V_accueil extends JFrame {
 		
 	}
 	
-	/**
-	 * Met à jour le panel V_choixVisiteur
-	 * @author Zoubert Hanem.
-	 */
-	public void updateV_choixVisiteur(){
+	class ActionBtnValiderPanChoixVis implements ActionListener{
 
-		//Vide la liste deroulante choixVisiteur
-		panChoixVis.getListeVisiteur().removeAllItems();
-		
-		for(int i=0; i<Modele.getVisiteursFicheCR().size();i++){
-			Visiteur visiteur = Modele.getVisiteursFicheCR().get(i);
-			
-			//Ajoute les nouvelles donnée dans liste deroulante
-			panChoixVis.getListeVisiteur().addItem(visiteur.getNom());
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			panFicheFrais = new V_validerFiche(panChoixVis.getChoixVisiteur(),panChoixVis.getChoixMois());
+			panFicheFrais.setBackground(bgColor);
+			setContentPane(panFicheFrais);
+			setVisible(true);
 		}
 		
-		panChoixVis.getListeMois().removeAllItems();
-		//Recupere le nom selectionné
-		String nomVisiteur = (String) panChoixVis.getListeVisiteur().getSelectedItem();
-		String idVisiteur = null;
-		
-		for (int i = 0; i <Modele.getIdVisiteur(nomVisiteur).size(); i++) {
-			
-			Visiteur visiteur = Modele.getIdVisiteur(nomVisiteur).get(i);
-			idVisiteur = visiteur.getId();	
+	}
+	
+	class ActionBtnValiderPanChoixSuvi implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			/**
+			 * Panel recap
+			 */
+			panSuiviePaiement = new V_suiviePaiement(panChoixSuivi.getChoixVisiteur(),panChoixSuivi.getChoixMois());
+			panSuiviePaiement.setBackground(bgColor);
+			setContentPane(panSuiviePaiement);
+			setVisible(true);
 		}
 		
-		//Affiche le mois de la fiche du visiteur selectioné dans une liste déroulante
-		for(int i=0; i<Modele.getMoisFicheCR(idVisiteur).size();i++){
-			Mois mois = Modele.getMoisFicheCR(idVisiteur).get(i);
-			panChoixVis.getListeMois().addItem(mois.getUnMois());
+	}
+	
+	class ActionBtnSuiviComplet implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			/**
+			 * Panel suivi
+			 */
+			panSuiviV = new V_suivi(Modele.getSuivi());
+			panSuiviV.setBackground(bgColor);
+			setContentPane(panSuiviV);
+			setVisible(true);
 		}
 		
-		/**
-		 * Si la liste est vide ,désactive le bouton valider du panel V_choixVisiteur
-		 * et affiche un message
-		 */
-		if(panChoixVis.getListeVisiteur().getSelectedItem()==null){
-			
-			panChoixVis.add(V_choixVisiteur.getMsg());
-			V_choixVisiteur.getBtnValider().setEnabled(false);
-			
-		}
-		else{
-			
-			panChoixVis.remove(V_choixVisiteur.getMsg());
-			V_choixVisiteur.getBtnValider().setEnabled(true);
-		}
 	}
 }

@@ -8,9 +8,9 @@ public class infosFicheVa extends Visiteur {
 	private String etat;
 	private float montant ;
 	
-	public infosFicheVa(String id, String nom, String prenom, Date date, String etat, float montant) {
+	public infosFicheVa(String id, String nom, String prenom,String mois, Date date, String etat, float montant) {
 		
-		super(id, nom, prenom);
+		super(id, nom, prenom,mois);
 		
 		this.date = date;
 		this.etat = etat;
