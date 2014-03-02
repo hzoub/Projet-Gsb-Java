@@ -31,7 +31,7 @@ public class V_accueil extends JFrame {
 	//PANELS
 	private JPanel panAccueil;
 	
-	private V_etatFrais panFicheFrais;
+	private V_validerFiche panFicheFrais;
 	private V_afficherVisiteur panListeVisiteurs;
 	private V_choixVisiteur panChoixVis;
 	private V_ficheValidee panFicheValidee;
@@ -205,7 +205,7 @@ public class V_accueil extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 	
-				panFicheFrais = new V_etatFrais(panChoixVis.getChoixVisiteur(),panChoixVis.getChoixMois());
+				panFicheFrais = new V_validerFiche(panChoixVis.getChoixVisiteur(),panChoixVis.getChoixMois());
 				panFicheFrais.setBackground(bgColor);
 				setContentPane(panFicheFrais);
 				setVisible(true);

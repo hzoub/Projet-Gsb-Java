@@ -12,7 +12,7 @@ import Modele.*;
  *
  */
 @SuppressWarnings("serial")
-public class V_etatFrais extends JPanel{
+public class V_validerFiche extends JPanel{
 	
 		private JLabel nomVmedicale;
 		private JLabel date;
@@ -48,7 +48,7 @@ public class V_etatFrais extends JPanel{
 	     * @param visiteur
 	     * @param mois
 	     */
-	public V_etatFrais(String visiteur, final String mois){
+	public V_validerFiche(final String visiteur, final String mois){
 		
 		/**
 		 * 
@@ -197,10 +197,7 @@ public class V_etatFrais extends JPanel{
 		this.bntValider.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-					
-				int verif = JOptionPane.showConfirmDialog(null,"Confirmez-vous la validation cette fiche ?","Validation",JOptionPane.YES_NO_OPTION);
+			public void actionPerformed(ActionEvent e) {				
 				
 				if(jtfJustif.getText().isEmpty()){
 					
@@ -209,9 +206,9 @@ public class V_etatFrais extends JPanel{
 				
 				else{
 				
-				nbJustificatifs = Integer.parseInt(jtfJustif.getText());
-				System.out.println(nbJustificatifs);
-				if(verif==0){
+					nbJustificatifs = Integer.parseInt(jtfJustif.getText());
+					System.out.println(nbJustificatifs);
+	
 					/**
 					 * Récapitulatif avant la validation de la fiche
 					 */
@@ -231,7 +228,7 @@ public class V_etatFrais extends JPanel{
 						
 						if(verifValidFiche==1){
 							
-							JOptionPane.showMessageDialog(null,"La fiche","Validation",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"La fiche frais du visiteur "+visiteur+" a bien été validée","Validation",JOptionPane.INFORMATION_MESSAGE);
 								
 							for(int i=0; i<Modele.getEtatActuel(idVisiteur, mois).size();i++){
 								Etat etat = Modele.getEtatActuel(idVisiteur, mois).get(i);
@@ -244,20 +241,16 @@ public class V_etatFrais extends JPanel{
 						}
 						else{
 							
-							JOptionPane.showMessageDialog(null,"Validation échouée","Erreur",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,"Validation échouée","Erreur",JOptionPane.ERROR_MESSAGE);
 						}
 						
 					}
 					else{
 						System.out.println("Validation de la fiche annulée");
 					}
-					
-			
-				}//fin verif
-				
+						
 				}//fin else nbjustif
 					
-				
 			 }//fin actionPerformed
 			
 		});
