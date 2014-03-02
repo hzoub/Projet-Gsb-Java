@@ -120,11 +120,12 @@ public class V_accueil extends JFrame {
 		/*
 		 * ITEMS
 		 */
-		this.validerFiche = new JMenuItem("Valider fiche");
-		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs");
+		this.validerFiche = new JMenuItem("Valider fiche",new ImageIcon("images/valider.png"));
+		
+		this.listeDesVisiteur = new JMenuItem("Liste des visiteurs",new ImageIcon("images/lstVisiteur.png"));
 		this.suivi = new JMenuItem("Suivi paiement");
-		this.infosFicheVa = new JMenuItem("Fiche Validée(s)");
-		this.deconnexion = new JMenuItem("Déconnexion");
+		this.infosFicheVa = new JMenuItem("Fiche Validée(s)",new ImageIcon("images/ficheVa.png"));
+		this.deconnexion = new JMenuItem("Déconnexion",new ImageIcon("images/deco.png"));
 
 		
 		
