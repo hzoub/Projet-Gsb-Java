@@ -62,10 +62,12 @@ public class Modele {
 				login = rs.getString(1);
 				mdp_2 = rs.getString(2);
 				
-				if (mdp_2.equals(mdp)){
+				if (mdp_2.equals(mdp) && login.equals(login)){
 					
 				result = true;
 				}
+				
+			
 				
 				else{
 					
