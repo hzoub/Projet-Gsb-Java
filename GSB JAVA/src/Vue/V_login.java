@@ -146,11 +146,11 @@ public class V_login extends JFrame implements ActionListener {
 			 * @author zoubert hanem
 			 */
 			if(jtfId.getText().isEmpty()){
-				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre identifiant","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 			
 			else if (jtfMdp.getText().isEmpty()){
-				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre mot de passe","Erreur",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Veuillez-saisir votre mot de passe","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 			
 			/**
@@ -160,7 +160,7 @@ public class V_login extends JFrame implements ActionListener {
 			 * @author zoubert hanem
 			 */
 			else if (result==false){
-				JOptionPane.showMessageDialog(null,"Indentifiant ou mot de passe incorrect","Erreur",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"Indentifiant ou mot de passe incorrect","Erreur",JOptionPane.ERROR_MESSAGE);
 			}
 			else{
 				this.dispose();
