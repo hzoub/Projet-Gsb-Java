@@ -13,10 +13,12 @@ public class TestGsbApp {
 	String id;
 	@Before
 	public void setUp() throws Exception {
+		
 	}
 
 	@Test
 	public void testConnexion() {
+		
 		String login = "hzoubert";
 		String mdp ="1234";		
 		boolean result = true;
@@ -26,13 +28,14 @@ public class TestGsbApp {
 
 	@Test
 	public void testGetIdVisiteur() {
-	for(int i=0; i<Modele.getIdVisiteur("Zoubert").size(); i++){
-				
-				Visiteur visiteur = Modele.getIdVisiteur("Zoubert").get(i);
-				id = visiteur.getId();
-			}
-			//On verifie si l'id a21 est correct
-			assertEquals("L'Id du visiteur est invalide","a21",id);
+		
+		for(int i=0; i<Modele.getIdVisiteur("Zoubert").size(); i++){
+			
+			Visiteur visiteur = Modele.getIdVisiteur("Zoubert").get(i);
+			id = visiteur.getId();
+		}
+		//On verifie si l'id a21 est correct
+		assertEquals("L'Id du visiteur est invalide","a21",id);
 	}
 
 	@Test
