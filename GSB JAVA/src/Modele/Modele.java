@@ -516,7 +516,7 @@ public class Modele {
 		 * @param nbJustificatifs
 		 * @return nbLignes
 		 */
-		public static  int validerFicheFrais(String mois,String idVis,float montant,int nbJustificatifs) {	
+		public static  int validerFicheFrais(String mois,String idVis,Object montant,int nbJustificatifs) {	
 			int nbLignes = 0;
 			try {
 				PreparedStatement st = dbconnect().prepareStatement("UPDATE fichefrais SET idEtat='VA', montantValide='"+montant+"' , nbJustificatifs='"+nbJustificatifs+"' WHERE mois='"+mois+"' AND idVisiteur='"+idVis+"'");

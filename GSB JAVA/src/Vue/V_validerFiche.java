@@ -229,7 +229,7 @@ public class V_validerFiche extends JPanel{
 
 					if(verifRecap==0){
 						
-						int verifValidFiche = Modele.validerFicheFrais(mois,idVisiteur,(float) tblElHorFofais.getValueAt(0,2),nbJustificatifs);
+						int verifValidFiche = Modele.validerFicheFrais(mois,idVisiteur,tblElHorFofais.getValueAt(0,2),nbJustificatifs);
 						
 						if(verifValidFiche==1){
 							
