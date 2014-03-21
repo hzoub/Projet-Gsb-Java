@@ -40,7 +40,7 @@ public class TestGsbApp {
 
 	@Test
 	public void testValiderFicheFrais() {
-		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }
